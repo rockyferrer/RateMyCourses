@@ -1,0 +1,23 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar {
+    background-color: #3e464c;
+}
+
+#login {
+    float: right;
+}
+
+
+.bar {
+    position: relative;
+}
+
+.search {
+    position: absolute;
+    top: 50%;
+    margin-top: 5px;
+}

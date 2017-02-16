@@ -1,23 +1,40 @@
-* {
-    padding: 0px;
-    margin: 0px;
-}
-
-.navbar {
+.course-section {
     background-color: #3e464c;
+    margin: 0px 0 10px 0;
+    padding: 0;
 }
 
-#login {
+
+/* General section style*/
+
+#course-info {
+    height: 30rem;
+}
+
+
+/* Course description style */
+
+#course-info .panel-primary {
+    background-color: #000;
+    border-color: #000;
+    padding: 0;
+    margin: 0;
+}
+
+#course-info .panel-heading {
+    background-color: #000;
+    border-color: #000;
+    padding-top: 2em;
+    padding-bottom: 1.75em;
+}
+
+#course-info .panel-title {
+    font-size: 5rem;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.course-avg-score {
     float: right;
-}
-
-
-.bar {
-    position: relative;
-}
-
-.search {
-    position: absolute;
-    top: 50%;
-    margin-top: 5px;
 }
