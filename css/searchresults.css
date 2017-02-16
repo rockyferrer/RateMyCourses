@@ -1,0 +1,25 @@
+.results {
+    background-color: #3e464c;
+    margin: 10px 0 10px 0;
+}
+
+#department-results {
+    height: 15em;
+}
+
+#course-results {
+    /* TODO: REMOVE THIS */
+    height: 100em;
+}
+
+.course-result {
+    padding: 1em 3em;
+    background-color: #6b6a6a;
+    border: solid 0.25em;
+    border-color: #374046;
+}
+
+.course-result:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
