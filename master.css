@@ -1,0 +1,30 @@
+body {
+    background-color: #374046;
+    color: #fff;
+}
+
+.navbar {
+    background-color: #1e1e1e;
+    margin: 0;
+    height: 10rem;
+    padding-bottom: 0px;
+}
+
+.course-section {
+    background-color: #3e464c;
+    margin: 0px 0 10px 0;
+    padding: 1em 4em 1rem 4rem;
+}
+
+#course-info {
+    height: 30rem;
+}
+
+#course-info .panel-primary {
+    background-color: #000;
+    border-color: #000;
+}
+
+#course-info .panel-title {
+    font-size: 5rem;
+}
