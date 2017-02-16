@@ -1,0 +1,23 @@
+body {
+    background-color: #374046;
+    color: #fff;
+}
+
+.course-section {
+    background-color: #3e464c;
+    margin: 0px 0 10px 0;
+    padding: 1em 4em 1rem 4rem;
+}
+
+#course-info {
+    height: 30rem;
+}
+
+#course-info .panel-primary {
+    background-color: #000;
+    border-color: #000;
+}
+
+#course-info .panel-title {
+    font-size: 5rem;
+}

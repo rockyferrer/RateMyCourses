@@ -3,41 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/course.css">
+
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="css/master.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-liquid">
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="col-md-3">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">RateMyCourses</a>
-                    </div>
+    <div class="container">
+        <div class="navbar">
+            <h1>RateMyCourses</h1>
+        </div>
+        <div id="course-info" class="row col-md-12 course-section">
+            <div class="panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">CSC309</h2>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                    <h2>CSC309</h2>
+                    <h3>5/5</h3>
                 </div>
 
-                <div class="col-md-6">
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-3">
-                    <button type="button" class="btn navbar-btn" id="login">Log in / Register</button>
-                </div>
             </div>
-        </nav>
+        </div>
+        <div id="course-ratings" class="row col-md-12 course-section">
+            <p>Row 2</p>
+        </div>
     </div>
 
 </body>
