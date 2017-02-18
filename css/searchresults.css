@@ -20,7 +20,6 @@
     border-color: #374046;
     color: white;
     text-decoration: none;
-    width: 100%;
 }
 
 .department-result:hover {
@@ -82,5 +81,25 @@
     float: left;
     display: block;
     text-align: left;    
+}
+
+
+@media(min-width:576px){
+
+}
+@media(min-width:768px){
+	.course-result{
+		padding: 2rem 5rem;
+	}
+
+	.cour-result h4{
+		font-size: 
+	}
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
 }
 
