@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> RateMyCourses|UofT - Login</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/master.js"></script>
+	<script src="js/login.js"></script>
+
+    <link href="css/master.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h1>RateMyCourses</h1>
+        </div>
+		<form>
+			<h2>Login/Register</h2>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control input-lg" placeholder="person@mail.net">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control input-lg" placeholder="******">
+			</div>
+			<div class="form-group register-field">
+				<label for="pwd">Confirm Password:</label>
+				<input type="password" class="form-control input-lg" placeholder="******">
+			</div>
+			<div class="form-group register-field">
+				<label for="dept">Choose your main department:</label>
+				<select class="form-control input-lg">
+					<option>Computer Science</option>
+					<option>Mathematics</option>
+					<option>Statistics</option>
+					<option>Linguistics</option>
+					<option>Equity</option>
+				</select>
+			</div>
+			<div class="checkbox">
+   				<label><input type="checkbox">Remember me</label>
+ 			</div>
+			<button type="submit" class="btn btn-def btn-block">Login</button>
+			<button type="submit" class="btn btn-def btn-block" id="register-btn">Register</button>
+		</form>
+    </div>
+	
+</body>
+
+</html>
