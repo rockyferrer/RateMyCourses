@@ -92,8 +92,8 @@
 		padding: 2rem 5rem;
 	}
 
-	.cour-result h4{
-		font-size: 
+	.course-code{
+		font-size: 5rem;
 	}
 }
 @media(min-width:992px){
