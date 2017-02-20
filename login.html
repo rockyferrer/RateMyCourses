@@ -15,8 +15,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="js/master.js"></script>
-	<script src="js/login.js"></script>
+    <script src="js/master.js"></script>
+    <script src="js/login.js"></script>
 
     <link href="css/master.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
@@ -27,38 +27,38 @@
         <div class="navbar">
             <h1>RateMyCourses</h1>
         </div>
-		<form>
-			<h2>Login/Register</h2>
-			<div class="form-group">
-				<label for="email">Email:</label>
-				<input type="email" class="form-control input-lg" placeholder="person@mail.net">
-			</div>
-			<div class="form-group">
-				<label for="pwd">Password:</label>
-				<input type="password" class="form-control input-lg" placeholder="******">
-			</div>
-			<div class="form-group register-field">
-				<label for="pwd">Confirm Password:</label>
-				<input type="password" class="form-control input-lg" placeholder="******">
-			</div>
-			<div class="form-group register-field">
-				<label for="dept">Choose your main department:</label>
-				<select class="form-control input-lg">
-					<option>Computer Science</option>
-					<option>Mathematics</option>
-					<option>Statistics</option>
-					<option>Linguistics</option>
-					<option>Equity</option>
+        <form>
+            <h2>Login/Register</h2>
+            <div class="form-group row">
+                <label for="email">Email:</label>
+
+                <input type="email" class="form-control input-lg" placeholder="person@mail.net">
+            </div>
+            <div class="form-group row">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control input-lg" placeholder="******">
+            </div>
+            <div class="form-group register-field row">
+                <label for="pwd">Confirm Password:</label>
+                <input type="password" class="form-control input-lg" placeholder="******">
+            </div>
+            <div class="form-group register-field row">
+                <label for="select-dept">Department:</label>
+                <select id="select-dept">
+   					<option selected>Choose...</option>
+					<option value="1">Computer Science</option>
+					<option value="2">Mathematics</option>
+					<option value="3">Statistics</option>
 				</select>
-			</div>
-			<div class="checkbox">
-   				<label><input type="checkbox">Remember me</label>
- 			</div>
-			<button type="submit" class="btn btn-def btn-block">Login</button>
-			<button type="submit" class="btn btn-def btn-block" id="register-btn">Register</button>
-		</form>
+            </div>
+            <div class="checkbox row col-sm-offset-2 col-sm-10 ">
+                <label><input type="checkbox">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-def btn-block row col-sm-4 text-center">Login</button>
+            <button type="submit" class="btn btn-def btn-block row col-sm-offset-4 col-sm-4 text-center" id="register-btn">Register</button>
+        </form>
     </div>
-	
+
 </body>
 
 </html>

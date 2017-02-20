@@ -1,0 +1,38 @@
+.form-group {
+    padding: 0 1rem;
+}
+
+.btn {
+    background-color: #6b6a6a;
+    padding: 1rem 4rem;
+    margin: 0;
+    font-size: 3rem;
+    color: white;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: white;
+    color: black;
+}
+
+#select-dept {
+    color: black;
+}
+
+.register-field {
+    display: none;
+}
+
+@media(min-width:576px) {}
+
+@media(min-width:768px) {
+    .form-group {
+        padding: 0 25%;
+    }
+    .btn {}
+}
+
+@media(min-width:992px) {}
+
+@media(min-width:1200px) {}
