@@ -14,11 +14,11 @@
 
 /* Course description style */
 
-#course-info .panel-primary {
-    background-color: #000;
+.panel-main {
     border-color: #000;
     padding: 0;
     margin: 0;
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 #course-info .panel-heading {
@@ -33,6 +33,12 @@
     padding: 0;
     margin: 0;
     display: inline;
+}
+
+#course-info .tags li{
+    display: inline;
+    padding: 5px;
+    background-color: #000;
 }
 
 .course-avg-score {
