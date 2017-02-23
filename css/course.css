@@ -44,3 +44,24 @@
 .course-avg-score {
     float: right;
 }
+
+/**
+ * Custom CSS rating symbol
+ * https://github.com/dreyescat/bootstrap-rating
+ * */
+
+.symbol {
+    display: inline-block;
+    border-radius: 50%;
+    border: 5px double white;
+    width: 14px;
+    height: 14px;
+}
+
+.symbol-empty {
+    background-color: #ccc;
+}
+
+.symbol-filled {
+    background-color: black;
+}
