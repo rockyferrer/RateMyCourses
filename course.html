@@ -15,16 +15,45 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
     <link href="css/master.css" rel="stylesheet">
     <link href="css/course.css" rel="stylesheet">
 </head>
 
 <body>
 
+    <div class="container-liquid">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="col-md-2">
+                    <div class="navbar-header">
+                        <!---<img id="logo" src="logo.png" alt="RateMyCourses UofT" href="#">-->
+                    </div>
+                </div>
+
+                <div class="col-md-7 col-md-offset-1">
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-2">
+                    <a href="login.html" type="button" class="btn navbar-btn" id="login">Log in / Register</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
     <div class="container">
-        <div class="navbar">
-            <h1>RateMyCourses</h1>
-        </div>
         <div class="row">
             <div id="course-info" class="panel-main col-md-12 course-section">
                 <div class="panel-heading">
