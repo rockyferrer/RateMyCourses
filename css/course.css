@@ -18,12 +18,9 @@
     border-color: #000;
     padding: 0;
     margin: 0;
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
 #course-info .panel-heading {
-    background-color: #000;
-    border-color: #000;
     padding-top: 2em;
     padding-bottom: 1.75em;
 }
@@ -37,10 +34,31 @@
 
 #course-info .tags li{
     display: inline;
-    padding: 5px;
+    padding: 1rem;
     background-color: #000;
 }
 
 .course-avg-score {
     float: right;
+}
+
+.description {
+    padding: 0;
+    margin: 0;
+}
+
+.overall {
+    font-size: 7rem;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.score{
+    text-align: center;
+}
+
+.score-desc{
+    padding: 0;
+    margin: 0;
 }
