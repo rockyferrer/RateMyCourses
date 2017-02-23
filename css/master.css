@@ -16,6 +16,7 @@ body {
     border-color: #374046;
     color: white;
     text-decoration: none;
+	overflow: hidden;
 }
 
 .navbar {
