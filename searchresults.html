@@ -22,129 +22,38 @@
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 	
-	<script src="js/myApp.js"></script>
-	<script src="js/myCtrl.js"></script>
-
+	<script src="js/searchresults.js"></script>
 
     <link href="css/master.css" rel="stylesheet">
     <link href="css/searchresults.css" rel="stylesheet">
 </head>
 
-<body>
+<body data-ng-app="searchresults" >
+	<nav ng-include="'header.html'"></nav>
     <div class="container">
-        <div class="navbar">
-            <h1>RateMyCourses</h1>
-        </div>
         <!-- Department results -->
-        <section class="row">
-            <article id="department-results" class="results col-sm-12">
-                <h2 class="section-header">Department results...</h2>
-                <article class="btn department-result col-xs-12 col-sm-4">
-                    <h3> Computer Science</h3>
-                </article>
-                <article class="btn department-result col-xs-12 col-sm-4">
-                    <h3> Computer Science</h3>
-                </article>
-                <article class="btn department-result col-xs-12 col-sm-4">
-                    <h3> Computer Science</h3>
-                </article>
+        <section data-ng-controller="departmentresults" id="department-results" class="row results col-sm-12">
+
+            <h2 class="section-header">Department results...</h2>
+            <article ng-repeat="d in departments" class="btn custom-article department-result col-xs-12 col-sm-4">
+                <h3>{{ d }}</h3>
             </article>
         </section>
 
         <!-- Course results -->
-        <section id="course-results" class="row col-md-12 custom-section">
+        <section data-ng-controller="courseresults" id="course-results" class="row col-md-12 custom-section scrollable-menu">
                 <h2 class="section-header">Course results...</h2>
-                <article ng-app="myApp" ng-controller="myCtrl" class="btn course-result custom-article">
+				<article data-ng-repeat="c in courses" class="btn course-result custom-article">
 					<div class="row">
-                    	<h3 class="course-code">{{ courseCode }}</h3> 
-						<h4>{{ courseTitle }}</h4>
+                    	<h3 class="course-code">{{ c.courseCode }}</h3> 
+						<h4>{{ c.courseTitle }}</h4>
 					</div>
 					<div class="row">
-                    	<p class="department">Department: {{ department }}</p>
-						<p class="avg-score text-right">{{ score }}/5</p>
+                    	<p class="department">Department: {{ c.department }}</p>
+						<p class="avg-score text-right">{{ c.rating }}/5</p>
 					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC369</h3> 
-						<h4>Operating Systems</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC301</h3> 
-						<h4>Introduction to Sofware Engineering</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC309</h3> 
-						<h4>Programming on the Web</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC369</h3> 
-						<h4>Operating Systems</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC301</h3> 
-						<h4>Introduction to Sofware Engineering</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC309</h3> 
-						<h4>Programming on the Web</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC369</h3> 
-						<h4>Operating Systems</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC301</h3> 
-						<h4>Introduction to Sofware Engineering</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-               
+                </article>			
+            
         </section>
 
     </div>
