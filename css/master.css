@@ -1,5 +1,32 @@
 body {
-	font-family: 'Lato', sans-serif;
     background-color: #374046;
     color: #fff;
+}
+
+.custom-section{
+	background-color: #3e464c;
+    margin: 1rem 0 1rem 0;
+	padding: 0.1rem 0.5rem 1rem 0.5rem;
+}
+
+.custom-article{
+	padding: 1rem 2rem;
+    background-color: #6b6a6a;
+    border: solid 0.25rem;
+    border-color: #374046;
+    color: white;
+    text-decoration: none;
+}
+
+@media(min-width:576px){
+
+}
+@media(min-width:768px){
+
+}
+@media(min-width:992px){
+
+}
+@media(min-width:1200px){
+
 }

@@ -14,12 +14,7 @@
 
 
 .department-result {
-    padding: 1rem 2rem;
-    background-color: #6b6a6a;
-    border: solid 0.25rem;
-    border-color: #374046;
-    color: white;
-    text-decoration: none;
+
 }
 
 .department-result:hover {
@@ -32,12 +27,7 @@
 /* Course Results Section */
 
 .course-result {
-    padding: 1rem 2rem;
-    background-color: #6b6a6a;
-    border: solid 0.25rem;
-    border-color: #374046;
-    color: white;
-    text-decoration: none;
+
     width: 100%;
 }
 
