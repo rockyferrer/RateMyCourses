@@ -5,26 +5,32 @@
     <title>RateMyCourses|UofT - Profile Page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootsrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Custom CSS -->
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/profile.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 
+<<<<<<< HEAD
 <body data-ng-app="">
     <nav data-ng-include="'header.html'"></nav>
 
     <div class="container-liquid">
 
+=======
+<body data-ng-app="profile">
+    <nav data-ng-include="'header.html'"></nav>
+	    
+	<div class="container">
+	
+>>>>>>> 7246fefefa7813deaa96eb2f8249b1bdc6b53c52
         <div class="col-md-3"></div>
 
         <div class="col-md-6">
             <section class="custom-section">
                 <h2>Your Profile</h2>
                 <form class="form-horizontal">
-
                     <div class="form-group">
                         <label class="control-label col-sm-4">Email:</label>
                         <div class="col-sm-8">
@@ -64,41 +70,47 @@
                                 <a class="save">Save</a>
                             </p>
                         </div>
-                        <div class="row">
-        	            	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
-        		            <select data-ng-controller="faculties" class="select-dept required-field">
-        	   					<option selected>Choose...</option>
-        						<option data-ng-repeat="f in faculty_list">{{ f }}</option>
-        					</select>
-        				</div>
-                        <div class="row">
-        		            <label class="control-label col-sm-4" for="select-dept">Department 1:</label>
-        		            <select data-ng-controller="departments" class="select-dept required-field">
-        	   					<option selected>Choose...</option>
-        						<option data-ng-repeat="d in department_list">{{ d }}</option>
-        					</select>
-        				</div>
-        				<div class="row">
-        	            	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
-        		            <select data-ng-controller="departments" class="select-dept">
-        	   					<option selected>Optional</option>
-        						<option data-ng-repeat="d in department_list">{{ d }}</option>
-        					</select>
-        				</div>
-        				<div class="row">
-        	            	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
-        		            <select data-ng-controller="departments" class="select-dept">
-        	   					<option selected>Optional</option>
-        						<option data-ng-repeat="d in department_list">{{ d }}</option>
-        					</select>
-        				</div>
+						<div class="row">
+					    	<label for="select-dept">Faculty:</label>
+						    <select data-ng-controller="faculties" class="select-dept required-field">
+			   					<option selected>Choose...</option>
+								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
+							</select>
+						</div>
+						<div class="row">
+						    <label for="select-dept">Department 1:</label>
+						    <select data-ng-controller="departments" class="select-dept required-field">
+			   					<option selected>Choose...</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
+						<div class="row">
+					    	<label for="select-dept">Department 2:</label>
+						    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
+						<div class="row">
+					    	<label for="select-dept">Department 3:</label>
+						    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
                     </div>
                 </form>
             </section>
         </div>
         <div class="col-md-3"></div>
     </div>
-
+	<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<!-- jQuery functions and Angular modules -->
     <script src="js/profile.js"></script>
 </body>
 
