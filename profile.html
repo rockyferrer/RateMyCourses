@@ -13,7 +13,7 @@
 </head>
 
 <body ng-app="">
-	<nav ng-include="'header.html'"></nav>
+    <nav ng-include="header.html"></nav>
 
     <div class="container-liquid">
 
@@ -41,11 +41,17 @@
                                 <span id="password">********</span>
                                 <a type="button" id="changePwd">Change Password</a>
                                 <a type="text" id="savePwd">Save Password</a>
-                            </p>
 
-                            <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
-                            <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
-                            <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
+                            </p>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
+                            </div>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
+                            </div>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
+                            </div>
 
                         </div>
                         <label class="control-label col-sm-4" for="email">School:</label>
@@ -76,7 +82,6 @@
                             </p>
                         </div>
                     </div>
-
                 </form>
             </section>
         </div>
