@@ -12,19 +12,13 @@
     <link rel="stylesheet" href="css/profile.css">
 </head>
 
-<<<<<<< HEAD
+
 <body data-ng-app="">
     <nav data-ng-include="'header.html'"></nav>
 
     <div class="container-liquid">
 
-=======
-<body data-ng-app="profile">
-    <nav data-ng-include="'header.html'"></nav>
-	    
-	<div class="container">
-	
->>>>>>> 7246fefefa7813deaa96eb2f8249b1bdc6b53c52
+
         <div class="col-md-3"></div>
 
         <div class="col-md-6">
@@ -71,28 +65,28 @@
                             </p>
                         </div>
 						<div class="row">
-					    	<label for="select-dept">Faculty:</label>
+					    	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
 						    <select data-ng-controller="faculties" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
 						</div>
 						<div class="row">
-						    <label for="select-dept">Department 1:</label>
+						    <label class="control-label col-sm-4" for="select-dept">Department 1:</label>
 						    <select data-ng-controller="departments" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
 						</div>
 						<div class="row">
-					    	<label for="select-dept">Department 2:</label>
+					    	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
 						    <select data-ng-controller="departments" class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
 						</div>
 						<div class="row">
-					    	<label for="select-dept">Department 3:</label>
+					    	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
 						    <select data-ng-controller="departments" class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
