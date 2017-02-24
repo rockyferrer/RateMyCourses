@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> RateMyCourses|UofT</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans%7CDroid+Sans%7CLato" rel="stylesheet">
+    <!-- Custom css -->
+    <link href="css/master.css" rel="stylesheet">
+    <link href="css/userlanding.css" rel="stylesheet">
+</head>
+
+<body data-ng-app="userlanding">
+    <nav data-ng-include="'header.html'"></nav>
+    <!-- Course results -->
+    <section data-ng-controller="recommended" id="recommended" class="row col-md-8 custom-section">
+        <h2 class="section-header">Recommended Courses</h2>
+        <article data-ng-repeat="c in courses" class="btn course-result custom-article">
+            <div class="row">
+                <h3 class="course-code">{{ c.courseCode }}</h3>
+                <h4>{{ c.courseTitle }}</h4>
+            </div>
+            <div class="row">
+                <p class="department">Department: {{ c.department }}</p>
+                <p class="avg-score text-right">{{ c.rating }}/5</p>
+                <br>
+                <p class="department">Avg class size estimate: {{c.size}}</p>
+                <br>
+                <p class="department">Tags {{ c.tags }}</p>
+            </div>
+        </article>
+
+    </section>
+
+    <div class="col-md-4">
+        <section data-ng-controller="history" id="history" class="row col-md-12 custom-section">
+            <h2 class="section-header">History</h2>
+            <article data-ng-repeat="c in courses" class="btn course-result-compact custom-article">
+                <div class="row">
+                    <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
+                    <h4>{{ c.courseTitle }}</h4>
+                </div>
+                <div class="row">
+                    <p class="department">Department: {{ c.department }}</p>
+                    <p class="avg-score text-right">{{ c.rating }}/5</p>
+                </div>
+            </article>
+
+        </section>
+
+        <section data-ng-controller="rated" id="rated" class="row col-md-12 custom-section">
+            <h2 class="section-header">Courses You've Rated</h2>
+            <article data-ng-repeat="c in courses" class="btn course-result-compact custom-article">
+                <div class="row">
+                    <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
+                    <h4>{{ c.courseTitle }}</h4>
+                </div>
+                <div class="row">
+                    <p class="department">Department: {{ c.department }}</p>
+                    <p class="avg-score text-right">{{ c.rating }}/5</p>
+                </div>
+            </article>
+
+        </section>
+    </div>
+    
+
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- Angular modules -->
+    <script src="js/userlanding.js"/>
+
+</body>
