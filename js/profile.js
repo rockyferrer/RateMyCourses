@@ -34,3 +34,25 @@ $(document).ready(function() {
     });
 
 });
+
+var app = angular.module("profile", []);
+
+app.controller("departments", function($scope) {
+	$scope.department_list = [
+		"Computer Science",
+		"Mathematics",
+		"Business",
+		"Statistics",
+		"Life Sciences"
+	]
+});
+
+app.controller("faculties", function($scope) {
+	$scope.faculty_list = [
+		"Arts and Sciences",
+		"Applied Sciences and Engineering",
+		"Education",
+		"Law",
+		"Dentistry"
+	]
+});
