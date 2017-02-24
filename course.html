@@ -33,7 +33,9 @@
             <div class="container-fluid">
                 <div class="col-md-2">
                     <div class="navbar-header">
+                        <a href="home.html">
                         <!---<img id="logo" src="logo.png" alt="RateMyCourses UofT" href="#">-->
+                        </a>
                     </div>
                 </div>
 
@@ -91,9 +93,24 @@
         <div class="row">
             <section class="well" id="course-ratings">
                 <div class="section-title">54 Ratings</div>
+                
+                <div class="row">
+                    <section class="new-rating col-md-12">
+                        <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
+                        <div class="row">
+                            <label class="col-md-5 course-aspects" for="aspects-difficulty">Level of difficulty: </label>
+                            <input type="hidden" class="rating col-md-7"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                        <div class="row">
+                            <label class="col-md-5 course-aspects" for="aspects-workload">Workload: </label>
+                            <input type="hidden" class="rating col-md-7"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </section>
+                </div>
             </section>
+
         </div>
     </div>
-
+    <script src="js/course.js"></script>
 </body>
 </html>

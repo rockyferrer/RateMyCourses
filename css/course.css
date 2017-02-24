@@ -62,6 +62,7 @@
     height: 36px;
     line-height: 36px;
     font-size: 20px;
+    font-weight: bold;
     text-align: center;
     padding-left: 1em;
     padding-right: 1em;
@@ -80,14 +81,18 @@
     display: inline-block;
     border-radius: 50%;
     border: 5px double white;
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
 }
 
 .symbol-empty {
-    background-color: #ccc;
+    background-color: #cccccc;
 }
 
 .symbol-filled {
-    background-color: black;
+    background-color: #337ab7;
+}
+
+.label-default {
+    background-color: #3e464c;
 }
