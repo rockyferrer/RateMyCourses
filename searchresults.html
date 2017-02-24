@@ -10,21 +10,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Droid+Sans|Lato" rel="stylesheet">
-    
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <!-- Angular JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	
-	<script src="js/myApp.js"></script>
-	<script src="js/myCtrl.js"></script>
 
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
     <link href="css/master.css" rel="stylesheet">
     <link href="css/searchresults.css" rel="stylesheet">
@@ -52,38 +45,9 @@
         </section>
 
         <!-- Course results -->
-        <section id="course-results" class="row col-md-12 custom-section">
+        <section class="row">
+            <article id="course-results" class="col-md-12 results">
                 <h2 class="section-header">Course results...</h2>
-                <article ng-app="myApp" ng-controller="myCtrl" class="btn course-result custom-article">
-					<div class="row">
-                    	<h3 class="course-code">{{ courseCode }}</h3> 
-						<h4>{{ courseTitle }}</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: {{ department }}</p>
-						<p class="avg-score text-right">{{ score }}/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC369</h3> 
-						<h4>Operating Systems</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
-                <article class="btn course-result">
-					<div class="row">
-                    	<h3 class="course-code">CSC301</h3> 
-						<h4>Introduction to Sofware Engineering</h4>
-					</div>
-					<div class="row">
-                    	<p class="department">Department: Computer Science</p>
-						<p class="avg-score text-right">5/5</p>
-					</div>
-                </article>
                 <article class="btn course-result">
 					<div class="row">
                     	<h3 class="course-code">CSC309</h3> 
@@ -144,7 +108,47 @@
 						<p class="avg-score text-right">5/5</p>
 					</div>
                 </article>
+                <article class="btn course-result">
+					<div class="row">
+                    	<h3 class="course-code">CSC309</h3> 
+						<h4>Programming on the Web</h4>
+					</div>
+					<div class="row">
+                    	<p class="department">Department: Computer Science</p>
+						<p class="avg-score text-right">5/5</p>
+					</div>
+                </article>
+                <article class="btn course-result">
+					<div class="row">
+                    	<h3 class="course-code">CSC369</h3> 
+						<h4>Operating Systems</h4>
+					</div>
+					<div class="row">
+                    	<p class="department">Department: Computer Science</p>
+						<p class="avg-score text-right">5/5</p>
+					</div>
+                </article>
+                <article class="btn course-result">
+					<div class="row">
+                    	<h3 class="course-code">CSC301</h3> 
+						<h4>Introduction to Sofware Engineering</h4>
+					</div>
+					<div class="row">
+                    	<p class="department">Department: Computer Science</p>
+						<p class="avg-score text-right">5/5</p>
+					</div>
+                </article>
+
+
+
+
+
+
+
+
+
                
+            </article>
         </section>
 
     </div>

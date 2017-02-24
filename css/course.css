@@ -20,6 +20,10 @@
     margin: 0;
 }
 
+.panel-name{
+    float: right;
+}
+
 #course-info .panel-heading {
     padding-top: 2em;
     padding-bottom: 1.75em;
@@ -32,10 +36,19 @@
     display: inline;
 }
 
+.tags{
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    background-color: 
+}
+
 #course-info .tags li{
     display: inline;
-    padding: 1rem;
-    background-color: #000;
+    float: left;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color: rgba(55, 64, 70, 0.4);/*rgba(230, 74, 25, 0.3)rgba(121, 85, 72, 0.5);*/
 }
 
 .course-avg-score {
@@ -45,20 +58,35 @@
 .description {
     padding: 0;
     margin: 0;
+    font-size: 15px;
+}
+
+.score-value{
+    font-size: 5rem;
+    padding: 10px;
+    margin: 5px;
+    display: inline-block;
+    text-shadow: 3px 3px rgba(97, 97, 97, 0.5);
 }
 
 .overall {
     font-size: 7rem;
-    padding: 0;
-    margin: 0;
-    display: inline;
 }
 
 .score{
     text-align: center;
+    padding-bottom: 1rem;
 }
 
 .score-desc{
     padding: 0;
     margin: 0;
+}
+
+.good-score{
+    background-color: rgba(35, 221, 88, 0.3);
+}
+
+.avg-score{
+    background-color: rgba(255, 193, 7, 0.7);
 }
