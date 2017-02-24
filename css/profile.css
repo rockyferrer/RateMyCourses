@@ -3,18 +3,27 @@
     color: #000;
 }
 
-.pwdInput {
-    display: none;
+select {
     color: #000;
-
 }
 
+.select-dept {
+    margin-top: 0.9rem;
+    margin-left: 1.7rem;
+}
+
+input.pwdInput {
+    margin-left: 1.5rem;
+    display: none;
+    color: #000;
+}
 
 .save, #savePwd{
     display: none;
+    cursor: default;
 }
 
-a {
+.edit, #changePwd {
     cursor: default;
 }
 
@@ -22,10 +31,16 @@ h2, #buttons {
     text-align: center;
 }
 
-.control-label {
+.control-label, .form-control-static {
     font-size: 125%;
 }
 
-.form-control-static {
-    font-size: 125%;
+@media(min-width:576px) {}
+
+@media(min-width:768px) {
+
 }
+
+@media(min-width:992px) {}
+
+@media(min-width:1200px) {}
