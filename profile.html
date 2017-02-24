@@ -63,24 +63,34 @@
                                 <a type="text" class="save">Save</a>
                             </p>
                         </div>
-                        <label class="control-label col-sm-4" for="email">Faculty:</label>
-                        <div class="col-sm-8">
-                            <p class="form-control-static">
-                                <input type="text" class="input">
-                                <span id="faculty">Arts & Science</span>
-                                <a type="text" class="edit">Edit</a>
-                                <a type="text" class="save">Save</a>
-                            </p>
-                        </div>
-                        <label class="control-label col-sm-4" for="email">Department:</label>
-                        <div class="col-sm-8">
-                            <p class="form-control-static">
-                                <input type="text" class="input">
-                                <span id="dept">Computer Science</span>
-                                <a type="text" class="edit">Edit</a>
-                                <a type="text" class="save">Save</a>
-                            </p>
-                        </div>
+                        <div class="row">
+        	            	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
+        		            <select data-ng-controller="faculties" class="select-dept required-field">
+        	   					<option selected>Choose...</option>
+        						<option data-ng-repeat="f in faculty_list">{{ f }}</option>
+        					</select>
+        				</div>
+                        <div class="row">
+        		            <label class="control-label col-sm-4" for="select-dept">Department 1:</label>
+        		            <select data-ng-controller="departments" class="select-dept required-field">
+        	   					<option selected>Choose...</option>
+        						<option data-ng-repeat="d in department_list">{{ d }}</option>
+        					</select>
+        				</div>
+        				<div class="row">
+        	            	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
+        		            <select data-ng-controller="departments" class="select-dept">
+        	   					<option selected>Optional</option>
+        						<option data-ng-repeat="d in department_list">{{ d }}</option>
+        					</select>
+        				</div>
+        				<div class="row">
+        	            	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
+        		            <select data-ng-controller="departments" class="select-dept">
+        	   					<option selected>Optional</option>
+        						<option data-ng-repeat="d in department_list">{{ d }}</option>
+        					</select>
+        				</div>
                     </div>
                 </form>
             </section>

@@ -3,6 +3,15 @@
     color: #000;
 }
 
+select {
+    color: #000;
+}
+
+.select-dept {
+    margin-top: 1rem;
+    margin-left: 1.7rem;
+}
+
 input.pwdInput {
     margin-left: 1.5rem;
     display: none;
