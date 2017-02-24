@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> RateMyCourses|UofT - Computer Science Department</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Droid+Sans|Lato" rel="stylesheet">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	
+	<script src="js/department.js"></script>
+
+    <link href="css/master.css" rel="stylesheet">
+    <link href="css/department.css" rel="stylesheet">
+</head>
+
+<body data-ng-app="department">
+
+	<nav ng-include="'header.html'"></nav>
+
+    <div class="container">
+  		<!-- Department title -->
+		<h1> Computer Science </h1>		
+		
+        <!-- Suggested courses -->
+        <section data-ng-controller="suggestedCourses" id="suggested-courses" class="row col-md-8 custom-section">
+            <h2 class="section-header">Suggested Courses</h2>
+			<article data-ng-repeat="c in courses | limitTo:getLimit()" class="btn course suggested-course custom-article">
+				<div class="row">
+                	<h3 class="course-code">{{ c.courseCode }}</h3> 
+					<h4>{{ c.courseTitle }}</h4>
+				</div>
+				<div class="row">
+					<p class="avg-score text-right">{{ c.rating }}/5</p>
+				</div>
+            </article>			
+        </section>
+
+		<!-- All courses -->
+		<section data-ng-controller="allCourses" id="all-courses" class="row col-md-4 custom-section">
+			<h2 class="section-header">All Courses</h2>
+			<article data-ng-repeat="c in courses" class="btn course custom-article ">
+				<span><h4 class="course-code"> {{ c.courseCode }} </h4>
+				<h4> - {{ c.courseTitle }} </h4></span>
+			</article>
+		</section>
+    </div>
+</body>
+</html>
