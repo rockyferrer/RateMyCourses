@@ -1,21 +1,17 @@
+/* Main page elements */
+
 .results {
     background-color: #3e464c;
     margin: 1rem 0 1rem 0;
-	padding: 0.1rem 0.5rem 1rem 0.5rem;
-	
+    padding: 0.1rem 0.5rem 1rem 0.5rem;
 }
 
-.section-header{
-	padding-left: 1rem;
+.section-header {
+    padding-left: 1rem;
 }
 
 
 /* Department Results Section */
-
-
-.department-result {
-
-}
 
 .department-result:hover {
     background-color: #ffffff;
@@ -27,7 +23,6 @@
 /* Course Results Section */
 
 .course-result {
-
     width: 100%;
 }
 
@@ -39,57 +34,49 @@
 
 .course-result h3 {
     float: left;
-	margin: 0;
-	padding: 0;
-	font-weight: bold;
-	
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
 }
 
 .course-result h4 {
     float: right;
-	margin: 0;
+    margin: 0;
 }
 
 .course-result p {
-    
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .avg-score {
     float: right;
-	text-align: right;
+    text-align: right;
     display: block;
     padding: 1rem 0 0 0;
     margin: 0;
-	font-weight: bold;
-	font-size: 3rem;
-	color: #00ff00;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #00ff00;
 }
 
 .department {
     float: left;
     display: block;
-    text-align: left;    
+    text-align: left;
 }
 
+@media(min-width:576px) {}
 
-@media(min-width:576px){
-
-}
-@media(min-width:768px){
-	.course-result{
-		padding: 2rem 5rem;
-	}
-
-	.course-code{
-		font-size: 5rem;
-	}
-}
-@media(min-width:992px){
-
-}
-@media(min-width:1200px){
-
+@media(min-width:768px) {
+    .course-result {
+        padding: 2rem 5rem;
+    }
+    .course-code {
+        font-size: 5rem;
+    }
 }
 
+@media(min-width:992px) {}
+
+@media(min-width:1200px) {}

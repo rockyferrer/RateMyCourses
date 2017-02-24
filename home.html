@@ -18,29 +18,17 @@
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
+	<!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/header.css">
 </head>
 
-<body>
-    <div class="container-liquid">
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="col-md-3">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">RateMyCourses</a>
-                    </div>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-3">
-                    <a href="login.html" type="button" class="btn navbar-btn" id="login">Log in / Register</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <!-- This is the search bar, its essentially just extracted from the nav bar -->
+<body data-ng-app="">
+	<nav ng-include="'homepage-header.html'"></nav>
+    
+    <!-- Logo and search bar -->
 
     <div class="container">
         <div class="row col-xs-12"><img id="header-logo" src="cover-logo.png" alt="RateMyCourses"></div>
