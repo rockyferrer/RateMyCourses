@@ -1,6 +1,9 @@
 var app = angular.module("searchresults", []);
-
+/**
+ * Stores the course results of the query.
+ */
 app.controller("courseresults", function($scope) {
+	// Dummy data
 	$scope.courses = [
 		{
 			"courseCode" : "CSC309",
@@ -26,7 +29,11 @@ app.controller("courseresults", function($scope) {
 	]
 });
 
+/**
+ * Stores department results of the query.
+ */
 app.controller("departmentresults", function($scope) {
+	// Dummy data
 	$scope.departments = [
 		"Computer Science", "Mathematics", "Statistics"
 	]
