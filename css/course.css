@@ -5,7 +5,7 @@
 }
 
 
-/* General section style*/
+/* General section style */
 
 #course-info {
     height: 30rem;
@@ -96,6 +96,7 @@
     position: relative;
     border: #000;
     height: 500px;
+    margin-top: 3rem;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     border-radius: 1px;
 }
@@ -113,8 +114,6 @@
     padding-right: 1em;
     border: 1px solid #000;
     border-radius: 2px;
-/*    border-top-left-radius: 2px;
-    border-top-right-radius: 2px; */
     position: absolute;
     top: -18px;
     left: 18px;
@@ -134,10 +133,22 @@
 }
 
 .aspect-container label {
-    width: calc(100% - 122px);
+    width: calc(100% - 121px);
 }
 .rating-container {
     display: inline-block;
+}
+
+
+
+#enrollment-date {
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+.enrollment-date-container input, .enrollment-date-container option {
+    display: inline-block;
+    width: 12rem;
+    color: #555;
 }
 
 /**
@@ -164,3 +175,13 @@
 .label-default {
     background-color: #465058;
 }
+
+
+@media(min-width:576px) {
+    #enrollment-date {
+        min-width: 260px;
+        margin-bottom: 2rem;
+        float: right;
+    }
+}
+

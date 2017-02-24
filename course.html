@@ -122,6 +122,10 @@
 
             </section>
         </div>
+
+
+
+
         <br>
         <br>
         <br>
@@ -130,16 +134,53 @@
         <br>
         <br>
         <br>
+
+
         <!-- Add rating and ratings-->
         <div class="row">
             <section class="well" id="course-ratings">
-                <div class="section-title">54 Ratings</div>
-                
+                <div class="section-title">54 Ratings</div>  
                     <div id="new-rating">
                         <div class="panel-heading">
                             <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
                         </div>
                         <div class="course-aspects">
+                            <div class="enrollment-date-container">
+                                <label for="enrollment-date">When did you take this course?</label>
+                                <div id="enrollment-date">
+                                    <input list="enrollment-year" placeholder="Enter year">
+                                    <datalist id="enrollment-year">
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                    </datalist>
+                                    <input list="enrollment-term" placeholder="Enter term">
+                                    <datalist id="enrollment-term">
+                                        <option value="Fall">Fall</option>
+                                        <option value="Spring">Spring</option>
+                                        <option value="Summer">Summer</option>
+                                    </datalist>
+                                </div>
+                            </div>
+
                             <div class="aspect-container">
                                 <label for="aspects-difficulty">Level of difficulty:</label>
                                 <div class="rating-container">
@@ -170,7 +211,6 @@
                         </div>
                     </div>
             </section>
-
         </div>
 
     </div>
