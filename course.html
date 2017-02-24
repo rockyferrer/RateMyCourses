@@ -61,70 +61,124 @@
 
     <div class="container">
         <div class="row">
-            <div id="course-info" class="panel-main col-md-12 course-section">
+            <section id="course-info" class="custom-section panel-main col-md-12 course-section">
+                
                 <div class="panel-heading">
                     <h2 class="panel-title">CSC309</h2>
-                    <h2 class="panel-title course-avg-score">5/5</h2><br>
-                    <p class="course-avg-score">(54 ratings)</p>
+                    <h4>Programming on the Web</h4>
                 </div>
 
-                <div class="panel-body">
-                    Avg class size estimate: 300 students <br>
-                    Tags: <br>
-                    <div class="tag-block">
-                        <ul class="tags">
-                            <li>Cool</li>
-                            <li>Fun</li>
-                            <li>Great TAs</li>
-                            <li>Exclusive Tag For Best Course Ever</li>
-                        </ul>
+                <article class="custom-article panel-body">
+                    <div class="description col-md-6">
+                        Department: Computer Science <br>
+                        Avg class size estimate: 300 students <br>
+                        Tags: <br>
+                        <div class="col-md-9">
+                            <ul class="tags">
+                                <li>Cool</li>
+                                <li>Fun</li>
+                                <li>Great TAs</li>
+                                <li>Exclusive Tag For Best Course Ever</li>
+                                <li>Fair</li>
+                                <li>Great Professor</li>
+                                <li>Lots of Smiles</li>
+                                <li>Spicy</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
 
+                    <div class="description col-md-6 course-avg-score">
+                        <div class="score col-md-12">
+                            <p class="col-md-12 score-desc">Overall Score:</p>
+                            <!-- class="panel-title course-avg-score"-->
+                            <div class="col-md-12 score-div">
+                                <h2 class="good-score overall score-value">5.0</h2>
+                            </div>
+                            <p class="col-md-12 score-desc">(54 ratings)</p>
+                        </div>
+                        <div class="score col-md-4">
+                            <p class="col-md-12 score-desc">Difficulty:</p>
+                            <!-- class="panel-title course-avg-score"-->
+                            <div class="col-md-12 score-div">
+                                <h2 class="avg-score score-value">2.5</h2>
+                            </div>
+                        </div>
+                        <div class="score col-md-4">
+                            <p class="col-md-12 score-desc">Workload:</p>
+                            <!-- class="panel-title course-avg-score"-->
+                            <div class="col-md-12">
+                                <h2 class="avg-score score-value">2.5</h2>
+                            </div>
+                        </div>
+                        <div class="score col-md-4">
+                            <p class="col-md-12 score-desc">Learning Experience:</p>
+                            <!-- class="panel-title course-avg-score"-->
+                            <div class="col-md-12">
+                                <h2 class="good-score score-value">5.0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
         </div>
-    </div>
-
-    <br>
-    <br>
-
-    <!-- Add rating and ratings-->
-    <div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- Add rating and ratings-->
         <div class="row">
             <section class="well" id="course-ratings">
                 <div class="section-title">54 Ratings</div>
                 
-<!--                <div class="row"> -->
                     <div id="new-rating">
-<!--                        <section id="new-rating" col-md-12"> -->
-                            <div class="panel-heading">
-                                <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-difficulty">Level of difficulty: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-workload">Workload: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-experience">Learning experience: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-overall">Overall: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        <div class="panel-heading">
+                            <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
+                        </div>
+                        <div class="course-aspects">
+                            <div class="aspect-container">
+                                <label for="aspects-difficulty">Level of difficulty:</label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                                 </div>
                             </div>
-<!--                        </section> -->
+
+                            <div class="aspect-container">
+                                <label for="aspects-workload">Workload: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+
+                            <div class="aspect-container">
+                                <label for="aspects-experience">Learning experience: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+
+                            <div class="aspect-container">
+                                <label for="aspects-overall">Overall: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-<!--                </div> -->
             </section>
 
         </div>
+
     </div>
+
+    <br>
+    <br>
+
+    
     <script src="js/course.js"></script>
 </body>
 </html>
