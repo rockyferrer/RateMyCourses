@@ -66,12 +66,20 @@
     text-align: center;
     padding-left: 1em;
     padding-right: 1em;
-    border-radius-top-left: 2px;
-    border-radius-top-right: 2px;
+    border: 1px solid #000;
+    border-radius: 2px;
+/*    border-top-left-radius: 2px;
+    border-top-right-radius: 2px; */
     position: absolute;
     top: -18px;
+    left: 18px;
 }
 
+#new-rating {
+    margin-top: 5px;
+    border-radius: 3px;
+    background-color: #465058;
+}
 /**
  * Custom CSS rating symbol
  * https://github.com/dreyescat/bootstrap-rating
@@ -94,5 +102,5 @@
 }
 
 .label-default {
-    background-color: #3e464c;
+    background-color: #465058;
 }
