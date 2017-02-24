@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    //functionality for the edit button
     $('.edit').click(function() {
         var inputSiblingEl = $(this).siblings("input.input");
         var spanSiblingEl = $(this).siblings("span");
@@ -9,6 +10,7 @@ $(document).ready(function() {
         $(this).siblings("a.save").show();
     });
 
+    //functionality for the save button
     $('.save').click(function() {
         var inputSiblingEl = $(this).siblings("input.input");
         var spanSiblingEl = $(this).siblings("span");
@@ -19,6 +21,7 @@ $(document).ready(function() {
         $(this).siblings("a.edit").show();
     });
 
+    //functionality for the change password button
     $('#changePwd').click(function() {
         $('#password').hide();
         $('.pwdInput').show();
@@ -26,6 +29,7 @@ $(document).ready(function() {
         $('#savePwd').show();
     });
 
+    //functionality for the save password button
     $('#savePwd').click(function() {
         $('#password').show();
         $('.pwdInput').hide();
