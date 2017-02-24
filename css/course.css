@@ -58,11 +58,13 @@
 
 #course-ratings .section-title {
     background-color: #000;
-    width: 130px;
+    width: auto;
     height: 36px;
     line-height: 36px;
     font-size: 20px;
     text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
     border-radius-top-left: 2px;
     border-radius-top-right: 2px;
     position: absolute;
