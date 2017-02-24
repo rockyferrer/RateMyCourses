@@ -65,7 +65,7 @@
 }
 
 .overall {
-    font-size: 7rem;
+    font-size: 15rem;
 }
 
 .score{
@@ -145,4 +145,14 @@
 
 .label-default {
     background-color: #465058;
+}
+
+.overall-score{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sub-ratings{
+    float: right;
 }
