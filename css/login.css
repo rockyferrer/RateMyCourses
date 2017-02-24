@@ -2,7 +2,17 @@
     padding: 0 1rem;
 }
 
-.btn {
+
+.select-dept {
+    color: black;
+}
+
+.register-field {
+    display: none;
+}
+
+
+.login-btn {
     background-color: #6b6a6a;
     padding: 1rem 4rem;
     margin: 0;
@@ -11,17 +21,13 @@
     text-decoration: none;
 }
 
-.btn:hover {
+.login-btn:hover {
     background-color: white;
     color: black;
 }
 
-#select-dept {
-    color: black;
-}
-
-.register-field {
-    display: none;
+#create-account{
+	display: none;
 }
 
 @media(min-width:576px) {}
@@ -30,7 +36,6 @@
     .form-group {
         padding: 0 25%;
     }
-    .btn {}
 }
 
 @media(min-width:992px) {}
