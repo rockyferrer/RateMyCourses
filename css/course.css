@@ -5,7 +5,7 @@
 }
 
 
-/* General section style*/
+/* General section stylei */
 
 #course-info {
     height: 30rem;
@@ -22,7 +22,7 @@
 }
 
 #course-info .panel-heading {
-    background-color: #000;
+   background-color: #000;
     border-color: #000;
     padding-top: 2em;
     padding-bottom: 1.75em;
@@ -43,6 +43,30 @@
 
 .course-avg-score {
     float: right;
+}
+
+/* Course Ratings section style */
+#course-ratings {
+    background-color: #3e464c;
+    position: relative;
+    border: #000;
+    height: 500px;
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    border-radius: 1px;
+}
+
+
+#course-ratings .section-title {
+    background-color: #000;
+    width: 130px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 20px;
+    text-align: center;
+    border-radius-top-left: 2px;
+    border-radius-top-right: 2px;
+    position: absolute;
+    top: -18px;
 }
 
 /**
