@@ -94,33 +94,40 @@
             <section class="well" id="course-ratings">
                 <div class="section-title">54 Ratings</div>
                 
-<!--                <div class="row"> -->
                     <div id="new-rating">
-<!--                        <section id="new-rating" col-md-12"> -->
-                            <div class="panel-heading">
-                                <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-difficulty">Level of difficulty: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-workload">Workload: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-experience">Learning experience: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-5 course-aspects" for="aspects-overall">Overall: </label>
-                                    <input type="hidden" class="rating col-md-7"  id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        <div class="panel-heading">
+                            <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
+                        </div>
+                        <div class="course-aspects">
+                            <div class="aspect-container">
+                                <label for="aspects-difficulty">Level of difficulty:</label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                                 </div>
                             </div>
-<!--                        </section> -->
+
+                            <div class="aspect-container">
+                                <label for="aspects-workload">Workload: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+
+                            <div class="aspect-container">
+                                <label for="aspects-experience">Learning experience: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+
+                            <div class="aspect-container">
+                                <label for="aspects-overall">Overall: </label>
+                                <div class="rating-container">
+                                    <input type="hidden" class="rating"  id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-<!--                </div> -->
             </section>
 
         </div>
