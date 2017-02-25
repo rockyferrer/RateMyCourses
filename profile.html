@@ -2,94 +2,118 @@
 <html lang="en">
 
 <head>
+    <title>RateMyCourses|UofT - Profile Page</title>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> RateMyCourses|UofT - Login</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<!-- Custom CSS -->
-	<link href="css/profile.css" rel="stylesheet">
-    <link href="css/master.css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/profile.css">
 </head>
 
-<body data-ng-app="profile">
-	<nav ng-include="'header.html'"></nav>
-	<div class="container">
-		<div class="col-md-2"></div>
-		<section class="custom-section col-md-8">
-			<h2>Your Profile</h2>
-			<!-- Email -->
-			<form class="row form-group">
-				<label class="control-label col-sm-4">Email:</label>
-				<input type="text" class="input">
-                <span id="email">rocky.ferrer@mail.utoronto.ca</span>
-                <a class="edit">Edit</a>
-                <a class="save">Save</a>
-			</form>
-			<!-- Password -->
-			<form class="row form-group">
-				<label class="control-label col-sm-4">Password:</label>
-				<p class="form-control-static">
-                    <input type="text" class="input">
-                    <span id="password">********</span>
-                    <a class="edit">Edit</a>
-                	<a class="save">Save</a>
-                </p>
-                <div class="row">
-                    <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
-                </div>
-                <div class="row">
-                    <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
-                </div>
-                <div class="row">
-                    <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
-                </div>
-			</form>
-			<!-- Faculty -->
-			<form class="row form-group">
-				<label class="control-label col-sm-4">Faculty:</label>
-			    <select data-ng-controller="faculties" class="select-dept required-field">
-   					<option selected>Choose...</option>
-					<option data-ng-repeat="f in faculty_list">{{ f }}</option>
-				</select>		
-			</form>
-			<!-- Departments -->
-			<form class="row form-group">
-			    <label for="select-dept" class="control-label col-sm-4">Department 1:</label>
-			    <select data-ng-controller="departments" class="select-dept required-field">
-   					<option selected>Choose...</option>
-					<option data-ng-repeat="d in department_list">{{ d }}</option>
-				</select>
-			</form>
-			<form class="row form-group">
-		    	<label for="select-dept" class="control-label col-sm-4">Department 2:</label>
-			    <select data-ng-controller="departments" class="select-dept">
-   					<option selected>Optional</option>
-					<option data-ng-repeat="d in department_list">{{ d }}</option>
-				</select>
-			</form>
-			<form class="row form-group">
-		    	<label for="select-dept" class="control-label">Department 3:</label>
-			    <select data-ng-controller="departments" class="select-dept">
-   					<option selected>Optional</option>
-					<option data-ng-repeat="d in department_list">{{ d }}</option>
-				</select>
-			</form>
-		</section>
-	</div>
+
+<body data-ng-app="">
+    <nav data-ng-include="'header.html'"></nav>
+
+    <div class="container-liquid">
+
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6">
+            <section class="custom-section">
+                <h2>Your Profile</h2>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <!-- Email -->
+                        <label class="control-label col-sm-4">Email:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">
+                                <input type="text" class="input">
+                                <span id="email">rocky.ferrer@mail.utoronto.ca</span>
+                                <a class="edit">Edit</a>
+                                <a class="save">Save</a>
+                            </p>
+                        </div>
+                        <!-- Password -->
+                        <label class="control-label col-sm-4">Password:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">
+                                <input type="text" class="input">
+                                <span id="password">********</span>
+                                <a id="changePwd">Change Password</a>
+                                <a id="savePwd">Save Password</a>
+
+                            </p>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
+                            </div>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
+                            </div>
+                            <div class="row">
+                                <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
+                            </div>
+
+                        </div>
+                        <!-- School -->
+                        <label class="control-label col-sm-4" for="email">School:</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-static">
+                                <input type="text" class="input">
+                                <span id="school">University of Toronto</span>
+                                <a class="edit">Edit</a>
+                                <a class="save">Save</a>
+                            </p>
+                        </div>
+                        <!-- Faculty -->
+						<div class="row">
+					    	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
+						    <select data-ng-controller="faculties" class="select-dept required-field">
+			   					<option selected>Choose...</option>
+								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
+							</select>
+						</div>
+                        <!-- Departments -->
+						<div class="row">
+						    <label class="control-label col-sm-4" for="select-dept">Department 1:</label>
+						    <select data-ng-controller="departments" class="select-dept required-field">
+			   					<option selected>Choose...</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
+						<div class="row">
+					    	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
+						    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
+						<div class="row">
+					    	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
+						    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+						</div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 	<!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
+	<!-- Latest compiled Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<!-- jQuery functions and Angular modules -->	
-	<script src="js/profile.js"></script>
+	<!-- jQuery functions and Angular modules -->
+    <script src="js/profile.js"></script>
 </body>
 
 </html>
