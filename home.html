@@ -16,10 +16,28 @@
 </head>
 
 <body data-ng-app="">
-	<nav data-ng-include="'homepage-header.html'"></nav>
+    <!-- Header -->
+    <div class="container-liquid">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="col-md-2">
+                    <div class="navbar-header">
+                        <a  href="home.html"> <img id="logo" src="logo.png" alt="RateMyCourses UofT"> </a>
+                    </div>
+                </div>
+
+                <div class="col-md-7 col-md-offset-1">
+                    
+                </div>
+
+                <div class="col-md-2">
+                    <a href="login.html" class="btn navbtn navbar-btn" id="login">Log in / Register</a>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <!-- Logo tagline and search bar -->
-
     <div class="container">
         <div class="row col-xs-12">
 			<img id="header-logo" src="cover-logo.png" alt="RateMyCourses">
