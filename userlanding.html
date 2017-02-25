@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> RateMyCourses|UofT</title>
+    <title> RateMyCourses|UofT - Welcome</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
 <body data-ng-app="userlanding">
     <nav data-ng-include="'header.html'"></nav>
     <!-- Course results -->
-    <section data-ng-controller="recommended" id="recommended" class="row col-md-8 custom-section">
+    <section data-ng-controller="suggestedcourses" id="recommended" class="row col-md-8 custom-section">
         <h2 class="section-header">Recommended Courses</h2>
         <article data-ng-repeat="c in courses" class="btn course-result custom-article">
             <div class="row">
@@ -30,9 +30,9 @@
                 <p class="department">Department: {{ c.department }}</p>
                 <p class="avg-score text-right">{{ c.rating }}/5</p>
                 <br>
-                <p class="department">Avg class size estimate: {{c.size}}</p>
+                <!--p class="department">Avg class size estimate: {{c.size}}</p>
                 <br>
-                <p class="department">Tags {{ c.tags }}</p>
+                <!p class="department">Tags {{ c.tags }}</p-->
             </div>
         </article>
 
@@ -71,13 +71,13 @@
     </div>
     
 
-        <!-- jQuery library -->
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <!-- Angular modules -->
-    <script src="js/userlanding.js"/>
+    <!--Angular Models-->
+    <script src="js/userlanding.js"></script>
 
 </body>
