@@ -88,12 +88,6 @@
     background-color: rgba(255, 193, 7, 0.7);
 }
 
-.overall-score{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 .sub-ratings{
     float: right;
 }
