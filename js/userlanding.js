@@ -7,22 +7,26 @@ app.controller("suggestedcourses", function($scope) {
 			"courseCode" : "CSC309",
 			"courseTitle" : "Programming on the Web",
 			"department" : "Computer Science",
-			"rating" : "5"
+			"rating" : "5",
+			"size" : "300"
 		},{
 			"courseCode" : "CSC369",
 			"courseTitle" : "Operating Systems",
 			"department" : "Computer Science",
-			"rating" : "5"
+			"rating" : "5",
+			"size" : "200"
 		},{
 			"courseCode" : "CSC301",
 			"courseTitle" : "Introduction to Software Engineering",
 			"department" : "Computer Science",
-			"rating" : "5"
+			"rating" : "5",
+			"size" : "300"
 		},{
 			"courseCode" : "CSC302",
 			"courseTitle" : "Introduction to Software Engineering",
 			"department" : "Computer Science",
-			"rating" : "5"
+			"rating" : "5",
+			"size" : "250"
 		}
 	]
 });
