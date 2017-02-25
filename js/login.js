@@ -8,6 +8,7 @@ $(document).ready(function() {
 	    $(".register-field").toggle();
 	    $("#login-btn").toggle();
 		$("#create-account").toggle();
+		$("#forgot-btn").toggle();
 		if($(".required-field").css("required")){
 			$(".required-field").css("required", "false");
 		}else{
