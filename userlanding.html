@@ -18,22 +18,27 @@
 
 <body data-ng-app="userlanding">
     <nav data-ng-include="'header.html'"></nav>
-    <!-- Course results -->
+
+    <!-- Suggested courses -->
     <section data-ng-controller="suggestedcourses" id="recommended" class="row col-md-8 custom-section">
         <h2 class="section-header">Recommended Courses</h2>
+        
+        <!-- Format of a course in the suggested courses box -->
         <article data-ng-repeat="c in courses" class="btn course-result custom-article">
+            <!-- Course code and title -->
             <div class="row">
                 <h3 class="course-code">{{ c.courseCode }}</h3>
                 <h4>{{ c.courseTitle }}</h4>
             </div>
+
+            <!-- Course details -->
             <div class="row">
                 <p class="department">Department: {{ c.department }}</p>
                 <p class="avg-score text-right">{{ c.rating }}/5</p>
                 <br>
-                <!--p class="department">Avg class size estimate: {{c.size}}</p>
-                <br>
-                <!p class="department">Tags {{ c.tags }}</p-->
+                <p class="department">Avg class size estimate: {{c.size}}</p>
             </div>
+
         </article>
 
     </section>
@@ -41,11 +46,17 @@
     <div class="col-md-4">
         <section data-ng-controller="history" id="history" class="row col-md-12 custom-section">
             <h2 class="section-header">History</h2>
+
+            <!-- Format of a course in the history box -->
             <article data-ng-repeat="c in courses" class="btn course-result-compact custom-article">
+                
+                <!-- Course code and title -->
                 <div class="row">
                     <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
                     <h4>{{ c.courseTitle }}</h4>
                 </div>
+                
+                <!-- Course details -->
                 <div class="row">
                     <p class="department">Department: {{ c.department }}</p>
                     <p class="avg-score text-right">{{ c.rating }}/5</p>
@@ -56,11 +67,17 @@
 
         <section data-ng-controller="rated" id="rated" class="row col-md-12 custom-section">
             <h2 class="section-header">Courses You've Rated</h2>
+            
+            <!-- Format of a course in the rated courses box -->
             <article data-ng-repeat="c in courses" class="btn course-result-compact custom-article">
+                
+                <!-- Course code and title -->
                 <div class="row">
                     <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
                     <h4>{{ c.courseTitle }}</h4>
                 </div>
+
+                <!-- Course details -->
                 <div class="row">
                     <p class="department">Department: {{ c.department }}</p>
                     <p class="avg-score text-right">{{ c.rating }}/5</p>
