@@ -1,6 +1,6 @@
 .course-section {
     background-color: #3e464c;
-    margin: 0px 0 10px 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -34,7 +34,7 @@
 .tags{
     padding: 0;
     margin: 0;
-    margin-top: 10px;
+    margin-top: 1rem;
     background-color: 
 }
 
@@ -53,7 +53,7 @@
 .description {
     padding: 0;
     margin: 0;
-    font-size: 15px;
+    font-size: 1.5rem;
 }
 
 .score-value{
@@ -61,7 +61,7 @@
     padding: 5px;
     margin: 1px;
     display: inline-block;
-    text-shadow: 3px 3px rgba(97, 97, 97, 0.5);
+    text-shadow: 0.2rem 0.2rem rgba(97, 97, 97, 0.5);
 }
 
 .score{
