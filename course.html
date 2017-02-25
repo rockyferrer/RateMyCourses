@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> RateMyCourses|UofT - CSC309</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,9 +17,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Latest compiled and minified jQuery plugin that provides rating control -->
-    <link rel= "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rating/1.4.0/bootstrap-rating.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rating/1.4.0/bootstrap-rating.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rating/1.4.0/bootstrap-rating.min.js"></script>
-    
+
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
@@ -28,56 +27,19 @@
     <link href="css/course.css" rel="stylesheet">
 </head>
 
-<body>
-<!--    <div class="container-fluid"> -->
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="col-md-2">
-                    <div class="navbar-header">
-                        <a href="home.html">
-                        <!---<img id="logo" src="logo.png" alt="RateMyCourses UofT" href="#">-->
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-md-7 col-md-offset-1">
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="login.html" type="button" class="btn navbar-btn" id="login">Log in / Register</a>
-                </div>
-            </div>
-        </nav>
-<!--    </div> -->
-
+<body data-ng-app="course">
     <div class="container">
-
-        <!-- Course Description -->
         <div class="row">
             <section id="course-info" class="custom-section panel-main col-md-12 course-section">
-                
-                <!-- Course code and title -->
+
                 <div class="panel-heading">
                     <h2 class="panel-title">CSC309</h2>
                     <h4>Programming on the Web</h4>
                 </div>
 
-                <!-- Course details -->
                 <article class="custom-article panel-body">
                     <div class="description col-md-6">
-                        Department: Computer Science <br>
-                        Avg class size estimate: 300 students <br>
-                        Tags: <br>
+                        Department: Computer Science <br> Avg class size estimate: 300 students <br> Tags: <br>
                         <div class="col-md-9">
                             <ul class="tags">
                                 <li>Cool</li>
@@ -94,12 +56,10 @@
                         </div>
                     </div>
 
-                    <!-- Course rating averages -->
                     <div class="description col-xs-12 col-md-6 course-avg-score">
                         <div class="score overall-score col-md-8">
-                            <!-- Score type -->
                             <p class="col-md-12 score-desc">Overall Experience:</p>
-                            <!-- Number score -->
+                            <!-- class="panel-title course-avg-score"-->
                             <div class="col-md-12 score-div">
                                 <h2 class="good-score overall score-value">5.0</h2>
                             </div>
@@ -107,25 +67,22 @@
                         </div>
                         <div class="col-xs-12 col-md-4 sub-ratings">
                             <div class="score col-xs-4 col-md-12">
-                                <!-- Score type -->
                                 <p class="col-md-12 score-desc">Difficulty:</p>
-                                <!-- Number score -->
+                                <!-- class="panel-title course-avg-score"-->
                                 <div class="col-md-12 score-div">
                                     <h2 class="avg-score score-value">2.5</h2>
                                 </div>
                             </div>
                             <div class="score col-xs-4 col-md-12">
-                                <!-- Score type -->
                                 <p class="col-md-12 score-desc">Workload:</p>
-                                <!-- Number score -->
+                                <!-- class="panel-title course-avg-score"-->
                                 <div class="col-md-12">
                                     <h2 class="avg-score score-value">2.5</h2>
                                 </div>
                             </div>
                             <div class="score col-xs-4 col-md-12">
-                                <!-- Score type -->
                                 <p class="col-md-12 score-desc">Learning Exp:</p>
-                                <!-- Number score -->
+                                <!-- class="panel-title course-avg-score"-->
                                 <div class="col-md-12">
                                     <h2 class="good-score score-value">5.0</h2>
                                 </div>
@@ -137,110 +94,74 @@
             </section>
         </div>
 
-        <br>
-        <br>
 
         <!-- Add rating and ratings-->
-        <div class="row">
-            <section class="well" id="course-ratings">
-                <div class="section-title">54 Ratings</div>  
-                    <article id="new-rating">
-                        <div class="panel-heading">
-                            <p><h3>How do you rate <span class="courseID">CSC309</span>?</h3></p>
+        <section data-ng-controller="ratings" class="row custom-section">
+            <article data-ng-repeat="r in rating" class="custom-article">
+                <h2>Rating</h2>
+                <div class="form-group">
+                    <div class="aspect-container">
+                        <label for="aspects-difficulty">Level of difficulty:</label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                         </div>
-                        <br>
-                        <div class="course-aspects">
-                            <div class="enrollment-date-container">
-                                <label for="enrollment-date">When did you take this course?</label>
-                                <div id="enrollment-date">
-                                    <input list="enrollment-year" placeholder="Enter year">
-                                    <datalist id="enrollment-year">
-                                        <option value="2017">2017</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2009">2009</option>
-                                        <option value="2008">2008</option>
-                                        <option value="2007">2007</option>
-                                        <option value="2006">2006</option>
-                                        <option value="2005">2005</option>
-                                        <option value="2004">2004</option>
-                                        <option value="2003">2003</option>
-                                        <option value="2002">2002</option>
-                                        <option value="2001">2001</option>
-                                        <option value="2000">2000</option>
-                                        <option value="1999">1999</option>
-                                        <option value="1998">1998</option>
-                                        <option value="1997">1997</option>
-                                    </datalist>
-                                    <input list="enrollment-term" placeholder="Enter term">
-                                    <datalist id="enrollment-term">
-                                        <option value="Fall">Fall</option>
-                                        <option value="Spring">Spring</option>
-                                        <option value="Summer">Summer</option>
-                                    </datalist>
-                                </div>
-                            </div>
+                    </div>
 
-                            <div class="aspect-container">
-                                <label for="aspects-difficulty">Level of difficulty:</label>
-                                <div class="rating-container">
-                                    <input type="hidden" class="rating"  id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                            </div>
-
-                            <div class="aspect-container">
-                                <label for="aspects-workload">Workload: </label>
-                                <div class="rating-container">
-                                    <input type="hidden" class="rating"  id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                            </div>
-
-                            <div class="aspect-container">
-                                <label for="aspects-experience">Learning experience: </label>
-                                <div class="rating-container">
-                                    <input type="hidden" class="rating"  id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                            </div>
-
-                            <div class="aspect-container">
-                                <label for="aspects-overall">Overall: </label>
-                                <div class="rating-container">
-                                    <input type="hidden" class="rating"  id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                                </div>
-                            </div>
-
-                            <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
-                            <div id="tags-selection">
-                                <ul class="tags">
-                                    <li value="Cool">Cool</li>
-                                    <li value="Fun">Fun</li>
-                                    <li value="Great TAs">Great TAs</li>
-                                    <li value="Exclusive Tag For Best Course Ever">Exclusive Tag For Best Course Ever</li>
-                                    <li value="Fair">Fair</li>
-                                    <li value="Great Professor">Great Professor</li>
-                                    <li value="Lots of Smiles">Lots of Smiles</li>
-                                    <li value="Spicy">Spicy</li>
-                                    <li value="Kahoot">Kahoot</li>
-                                    <li value="Please Give Me a Good Mark">Please Give Me a Good Mark</li>
-                                </ul>
-                            </div>
-
+                    <div class="aspect-container">
+                        <label for="aspects-workload">Workload: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                         </div>
-                    </article>
-            </section>
-        </div>
+                    </div>
 
+                    <div class="aspect-container">
+                        <label for="aspects-experience">Learning experience: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+
+                    <div class="aspect-container">
+                        <label for="aspects-overall">Overall: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+                </div>
+
+                <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
+                <div id="tags-selection" class="row">
+                    <ul class="tags">
+                        <li class="tag">Cool</li>
+                        <li>Fun</li>
+                        <li>Great TAs</li>
+                        <li>Exclusive Tag For Best Course Ever</li>
+                        <li>Fair</li>
+                        <li>Great Professor</li>
+                        <li>Lots of Smiles</li>
+                        <li>Spicy</li>
+                        <li>Kahoot</li>
+                        <li>Please Give Me a Good Mark</li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 comment">
+                        <h4>Comment:</h4>
+                        <p>{{ r.comment }}</p>
+                    </div>
+
+                    <div class="col-md-6 helpful">
+                        <h4>Helpful?</h4>
+                        <a class="glyphicon glyphicon-thumbs-up btn helpful-btn"></a>
+                        <a class="glyphicon glyphicon-thumbs-down btn helpful-btn"></a>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
-
-    <br>
-    <br>
-
-    
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="js/course.js"></script>
 </body>
+
 </html>
