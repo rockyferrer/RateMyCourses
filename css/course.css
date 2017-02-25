@@ -109,15 +109,6 @@
     left: 18px;
 }
 
-#new-rating {
-    margin-top: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 3px;
-    border-radius: 3px;
-    background-color: #465058;
-}
-
 .course-aspects {
     height: 500px;
 }
@@ -148,6 +139,37 @@
 
 #tags-selection .tags li:hover {
     background-color: #337ab7;
+}
+
+#new-rating {
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 3px;
+    border-radius: 3px;
+    background-color: #465058;
+}
+
+.add-field {
+    display: none;
+}
+
+#add-rating-btn {
+    width: 10rem;
+    colour: white;
+    background-color: black;
+}
+
+#comment-box {
+    color: black;
+}
+
+#done-btn {
+    width: 10rem;
+    colour: white;
+    background-color: black;
+    margin-top: 6rem;
+    margin-left: 20rem;
 }
 
 
