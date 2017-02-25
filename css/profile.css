@@ -1,8 +1,35 @@
+/* Profile page header */
+h2 {
+    text-align: center;
+}
+
+/* Input fields */
 .input {
     display: none;
     color: #000;
 }
 
+input.pwdInput {
+    margin-left: 1.5rem;
+    display: none;
+    color: #000;
+}
+
+/* Save and edit buttons*/
+.save, #savePwd{
+    display: none;
+    cursor: default;
+}
+
+.edit, #changePwd {
+    cursor: default;
+}
+.save-select {
+    cursor: default;
+    font-size: 125%;
+}
+
+/* Faculties and departments */
 select {
     color: #000;
 }
@@ -12,35 +39,7 @@ select {
     margin-left: 1.7rem;
 }
 
-input.pwdInput {
-    margin-left: 1.5rem;
-    display: none;
-    color: #000;
-}
-
-.save, #savePwd{
-    display: none;
-    cursor: default;
-}
-
-.edit, #changePwd {
-    cursor: default;
-}
-
-h2, #buttons {
-    text-align: center;
-}
-
-.control-label, .form-control-static, .save-select {
+/* Font sizes */
+.control-label, .form-control-static {
     font-size: 125%;
 }
-
-@media(min-width:576px) {}
-
-@media(min-width:768px) {
-
-}
-
-@media(min-width:992px) {}
-
-@media(min-width:1200px) {}
