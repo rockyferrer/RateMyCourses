@@ -38,7 +38,8 @@
     background-color: 
 }
 
-#course-info .tags li{
+/* #course-info .tags li { */
+.tags li {
     display: inline;
     float: left;
     padding: 0.5rem;
@@ -102,7 +103,7 @@
     background-color: #3e464c;
     position: relative;
     border: #000;
-    height: 500px;
+/*    height: 500px; */
     margin-top: 3rem;
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
     border-radius: 1px;
@@ -135,6 +136,9 @@
     background-color: #465058;
 }
 
+.course-aspects {
+    height: 500px;
+}
 .aspect-container {
     width: 100%;
 }
@@ -156,6 +160,10 @@
     display: inline-block;
     width: 12rem;
     color: #555;
+}
+
+#tags-selection .tags li:hover {
+    background-color: #337ab7;
 }
 
 /**
