@@ -65,7 +65,7 @@
 }
 
 .overall {
-    font-size: 7rem;
+    font-size: 15rem;
 }
 
 .score{
@@ -86,6 +86,16 @@
 
 .avg-score{
     background-color: rgba(255, 193, 7, 0.7);
+}
+
+.overall-score{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sub-ratings{
+    float: right;
 }
 
 #course-ratings {
@@ -172,7 +182,6 @@
 .label-default {
     background-color: #465058;
 }
-
 
 @media(min-width:576px) {
     #enrollment-date {
