@@ -28,7 +28,7 @@
 
 </head>
 
-<body ng-app="login">
+<body data-ng-app="login">
     <!-- Header -->
     <div class="container-liquid">
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -62,41 +62,41 @@
         <form>
             <h2>Login/Register</h2>
             <div class="form-group row">
-                <label for="email">Email:</label>
+                <label>Email:</label>
                 <input type="email" class="form-control input-lg" placeholder="person@mail.net" required>
             </div>
             <div class="form-group row">
-                <label for="pwd">Password:</label>
+                <label>Password:</label>
                 <input type="password" class="form-control input-lg" placeholder="******" required>
             </div>
             <div class="form-group register-field row">
-                <label for="pwd">Confirm Password:</label>
+                <label>Confirm Password:</label>
                 <input type="password" class="form-control input-lg required-field" placeholder="******">
             </div>
             <div class="form-group register-field">
 				<div class="row">
-	            	<label for="select-dept">Faculty:</label>
+	            	<label>Faculty:</label>
 		            <select data-ng-controller="faculties" class="select-dept required-field">
 	   					<option selected>Choose...</option>
 						<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 					</select>
 				</div>
 				<div class="row">
-		            <label for="select-dept">Department 1:</label>
+		            <label>Department 1:</label>
 		            <select data-ng-controller="departments" class="select-dept required-field">
 	   					<option selected>Choose...</option>
 						<option data-ng-repeat="d in department_list">{{ d }}</option>
 					</select>
 				</div>
 				<div class="row">
-	            	<label for="select-dept">Department 2:</label>
+	            	<label>Department 2:</label>
 		            <select data-ng-controller="departments" class="select-dept">
 	   					<option selected>Optional</option>
 						<option data-ng-repeat="d in department_list">{{ d }}</option>
 					</select>
 				</div>
 				<div class="row">
-	            	<label for="select-dept">Department 3:</label>
+	            	<label>Department 3:</label>
 		            <select data-ng-controller="departments" class="select-dept">
 	   					<option selected>Optional</option>
 						<option data-ng-repeat="d in department_list">{{ d }}</option>
