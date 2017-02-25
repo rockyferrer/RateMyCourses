@@ -16,6 +16,8 @@ $(document).ready(function() {
 		
 	});
 
+	$('#nav-header').load('header.html');
+
 });
 
 /** Angular **/

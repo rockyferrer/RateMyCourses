@@ -41,7 +41,7 @@
         <!-- All courses -->
         <section data-ng-controller="allCourses" id="all-courses" class="row col-md-4 custom-section">
             <h2 class="section-header">All Courses</h2>
-            <article data-ng-repeat="c in courses" class="btn course custom-article ">
+            <article data-ng-repeat="c in courses | orderBy:'courseCode'" class="btn course custom-article ">
                 <div>
                     <h4 class="course-code"> {{ c.courseCode }} </h4>
                     <h4> - {{ c.courseTitle }} </h4>

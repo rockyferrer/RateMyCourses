@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-	<!-- Custom CSS -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/master.css">
     <link rel="stylesheet" href="css/profile.css">
 </head>
@@ -17,12 +17,8 @@
 
 <body data-ng-app="profile">
     <nav data-ng-include="'header.html'"></nav>
-
     <div class="container-liquid">
-
-
         <div class="col-md-3"></div>
-
         <div class="col-md-6">
             <section class="custom-section">
                 <h2>Your Profile</h2>
@@ -60,50 +56,57 @@
                             </div>
 
                         </div>
-                        
+
                         <!-- Faculty -->
-						<div class="row">
-					    	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
-						    <select data-ng-controller="faculties" class="select-dept required-field">
+                        <div class="row">
+                            <label class="control-label col-sm-4">Faculty:</label>
+                            <select data-ng-controller="faculties" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
-						</div>
+                            <a class="save-select">Save</a>
+                        </div>
                         <!-- Departments -->
-						<div class="row">
-						    <label class="control-label col-sm-4" for="select-dept">Department 1:</label>
-						    <select data-ng-controller="departments" class="select-dept required-field">
+                        <div class="row">
+                            <label class="control-label col-sm-4">Department 1:</label>
+                            <select data-ng-controller="departments" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
-						</div>
-						<div class="row">
-					    	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
-						    <select data-ng-controller="departments" class="select-dept">
+                            <a class="save-select">Save</a>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-4">Department 2:</label>
+                            <select data-ng-controller="departments" class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
-						</div>
-						<div class="row">
-					    	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
-						    <select data-ng-controller="departments" class="select-dept">
+                            <a class="save-select">Save</a>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-4">Department 3:</label>
+                            <select data-ng-controller="departments" class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
-						</div>
+                            <a class="save-select">Save</a>
+                        </div>
                     </div>
                 </form>
+                <div class="text-center">
+                    <button class="btn btn-primary">Delete Account</button>
+                </div>
             </section>
         </div>
         <div class="col-md-3"></div>
     </div>
-	<!-- jQuery library -->
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<!-- Latest compiled Bootstrap JavaScript -->
+    <!-- Latest compiled Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- Angular JS -->
+    <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<!-- jQuery functions and Angular modules -->
+    <!-- jQuery functions and Angular modules -->
     <script src="js/profile.js"></script>
 </body>
 
