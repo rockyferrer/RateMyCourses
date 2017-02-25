@@ -60,7 +60,7 @@
                             </div>
 
                         </div>
-                        
+
                         <!-- Faculty -->
 						<div class="row">
 					    	<label class="control-label col-sm-4" for="select-dept">Faculty:</label>
@@ -68,6 +68,7 @@
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
+                            <a class="save-select">Save</a>
 						</div>
                         <!-- Departments -->
 						<div class="row">
@@ -76,6 +77,7 @@
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
+                            <a class="save-select">Save</a>
 						</div>
 						<div class="row">
 					    	<label class="control-label col-sm-4" for="select-dept">Department 2:</label>
@@ -83,6 +85,7 @@
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
+                            <a class="save-select">Save</a>
 						</div>
 						<div class="row">
 					    	<label class="control-label col-sm-4" for="select-dept">Department 3:</label>
@@ -90,6 +93,7 @@
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
+                            <a class="save-select">Save</a>
 						</div>
                     </div>
                 </form>
