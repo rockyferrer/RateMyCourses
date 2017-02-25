@@ -97,6 +97,71 @@
 
         <!-- Add rating and ratings-->
         <section data-ng-controller="ratings" class="row custom-section">
+            <article id="add-rating" class="row custom-article">
+                <button type="submit" id="add-rating-btn" class="btn btn-def col-md-12 text-center">Add Rating</button> <br></br>
+
+                <div class="form-group add-field">
+                    <div class="aspect-container">
+                        <label for="aspects-difficulty">Level of difficulty:</label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+
+                    <div class="aspect-container">
+                        <label for="aspects-workload">Workload: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+
+                    <div class="aspect-container">
+                        <label for="aspects-experience">Learning experience: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+
+                    <div class="aspect-container">
+                        <label for="aspects-overall">Overall: </label>
+                        <div class="rating-container">
+                            <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                        </div>
+                    </div>
+                </div>
+
+                <label for="tags-selection" class="add-field">Select up to 3 tags that best describe this course:</label>
+                <div id="tags-selection" class="row add-field">
+                    <ul class="tags">
+                        <li class="tag">Cool</li>
+                        <li>Fun</li>
+                        <li>Great TAs</li>
+                        <li>Exclusive Tag For Best Course Ever</li>
+                        <li>Fair</li>
+                        <li>Great Professor</li>
+                        <li>Lots of Smiles</li>
+                        <li>Spicy</li>
+                        <li>Kahoot</li>
+                        <li>Please Give Me a Good Mark</li>
+                    </ul>
+                </div>
+                <div class="row add-field">
+                    <div class="col-md-6 comment">
+                        <h4>Comment:</h4>
+                        <form>
+
+                            <input type="text" name="comment" size="40" id="comment-box"><br>
+
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 done">
+                        <button type="submit" id="done-btn" class="btn btn-def text-center">Done</button>
+                    </div>
+                </div>
+
+            </article>
+
             <article data-ng-repeat="r in rating" class="custom-article">
                 <h2>Rating</h2>
                 <div class="form-group">
