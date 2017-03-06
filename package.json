@@ -1,0 +1,19 @@
+{
+  "name": "team23-ratemycourses",
+  "version": "1.0.0",
+  "description": "CSC309 Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csc309-spring2017/Team23-RateMyCourses/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^4.8.6"
+  }
+}
