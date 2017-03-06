@@ -1,0 +1,15 @@
+{
+  "name": "sample-data-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes data from cobalt api for use as sample data",
+  "main": "scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^4.8.6",
+    "request": "^2.80.0"
+  }
+}
