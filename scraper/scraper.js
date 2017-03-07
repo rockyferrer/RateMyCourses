@@ -9,9 +9,6 @@ var course = models.Course;
 var url = 'https://cobalt.qas.im/api/1.0/courses/filter' + '?key=' + key + "&q=department:\"Computer Science&limit=10";
 
 var db = mongoose.connect(MONGODB);
-request(url, function(error, reponse, body){
-	parseJSON(body);
-});
 
 var data = [];
 
@@ -81,28 +78,6 @@ gracefulShutdown = function (msg, callback) {
     })
 };
 
-function save(dataObj){
-    try{
-        var newCourse = new course({
-		courseCode: 'CSCXXX',
-		title: result.name,
-		department: 'Computer Science',
-		description: result.description,
-		popularTags: [],
-		classSize: 9999, //TODO: Fix this
-		ratings: []
-	});
-      
-        newBuilding.save(function(err){
-            if(err){
-                console.log(err);
-            }
-            else{
-                console.log('Sucess!');
-            }
-        });
-    }
-    catch (err){
-        console.log("Undefined behaviour: " + err);
-    }
-}
+request(url, function(error, response, body){
+	parseJSON(body);
+});
