@@ -20,4 +20,4 @@ Run `node scraper.js` (while inside `scraper/`) to scrape the data. See console 
 
 You will need to do `Ctrl-C` to exit the scraper once it is done.
 
-Use `use Team23-RateMyCourses` and then `db.courses.find().pretty()` to confirm the data was loaded.
+Use `use Team23-RateMyCourses` and then `db.courses.find().pretty()` in the MongoDB console to confirm the data was loaded.
