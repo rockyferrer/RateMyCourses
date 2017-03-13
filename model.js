@@ -17,6 +17,15 @@ var tagSchema = new mongoose.Schema({
 });
 
 var ratingSchema = new mongoose.Schema({
+    user: {type: String, required: true},
+    datePosted: {type: Date, default: Date.now, required},
+    dateTaken: {type: Date, default: Date.now, required},
+    difficulty: {type: Number},
+    workload: {type: Number},
+    learningExp: {type: Number},
+    overall: {type: Number},
+    prof: {type: String},
+    tags: [String],
     comment: { type: String, required: true }
 });
 
