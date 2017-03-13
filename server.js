@@ -26,7 +26,7 @@ var Course = mongoose.connection.model('Course', models.courseSchema);
 var Department = mongoose.connection.model('Department', models.departmentSchema);
 
 //Set up static path so /img will be treated as assets/img
-app.use(express.static(__dirname + '/assets'));
+app.use(express.static(__dirname + '/public'));
 // Use HTTP port
 app.listen(8080, function() {
     console.log("Listening on port 8080.")
@@ -97,18 +97,33 @@ function getDepartmentCourses(req, res) {
     );
 }
 
+function getAllDepartments(req, res) {
+    res.send("NEED TO IMPLEMENT");
+}
+
+function getAllFaculties(req, res) {
+    res.send("NEED TO IMPLEMENT");
+}
+
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
     req.department = department;
     next();
 });
 
-app.get('/courses', getCourses);
+// API Endpoints
 app.get('/dept/:department', getDepartment);
-
-
+app.get('/api/dept/all', getAllDepartments);
+app.get('/api/faculties/all', getAllFaculties);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
-// Angular default request
-app.get('*', function(req, res) {
+
+// Angular (Normal) endpoints
+app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+
+app.get('/login', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/courses', getCourses);
