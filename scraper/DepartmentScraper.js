@@ -2,23 +2,23 @@ var request = require('request');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 var models = require('../model.js');
-var courseSchema = models.courseSchema;
-var Course;
+var departmentSchema = models.departmentSchema;
+var Department;
 
 var key = '9iDLLnSQRMwapjbMs5Yb7tnwyqAxK5ud';
-var url = 'https://cobalt.qas.im/api/1.0/courses/' + '?key=' + key + "&skip=100&limit=100";
+var url = 'https://cobalt.qas.im/api/1.0/courses/filter' + '?key=' + key + "&q=department:\"Computer Science&limit=100";
 
-function CourseScraper(db, skip) {
-    this.url = 'https://cobalt.qas.im/api/1.0/courses/&key=' + key + "&skip=" + skip + "&limit=100";
+function DepartmentScraper(db) {
+    this.departments = [];
     this.db = db;
     this.requestData;
-    Course = db.connection.model('Course', courseSchema);
+    Department = db.connection.model('Department', departmentchema);
     this.init();
 }
 
-util.inherits(CourseScraper, EventEmitter);
+util.inherits(DepartmentScraper, EventEmitter);
 
-CourseScraper.prototype.init = function() {
+DepartmentScraper.prototype.init = function() {
     var self = this;
     self.on('requestComplete', function() {
         self.parseAndSave();
@@ -26,11 +26,11 @@ CourseScraper.prototype.init = function() {
     self.on('parsingComplete', function() {
         self.db.connection.close();
     })
-    self.requestCourses();
+    self.requestDepartments();
 
 };
 
-CourseScraper.prototype.requestCourses = function() {
+DepartmentScraper.prototype.requestDepartments = function() {
     var self = this;
     console.log("Requesting: " + url);
     request(url, function(error, response, body) {
@@ -44,34 +44,29 @@ CourseScraper.prototype.requestCourses = function() {
     });
 };
 
-CourseScraper.prototype.parseAndSave = function() {
+DepartmentScraper.prototype.parseAndSave = function() {
     var self = this;
     var c;
-
+    var count = 0;
     self.data.forEach(function(value) {
-        var size = 0;
-        if (value.meeting_sections && value.meeting_sections[0]) {
-            size = value.meeting_sections[0].size;
-        }
         c = new Course({
             courseCode: value.code,
             title: value.name,
             department: value.department,
             description: value.description,
             popularTags: [],
-            classSize: size,
+            classSize: value.meeting_sections[0].size,
             ratings: []
         });
-        console.log(c.courseCode + ' - ' + c.title);
         c.save(function(err) {
             if (err) {
                 console.log('Error saving to db:' + err);
             } else {
-                console.log('Done');
+                console.log('Sucess!');
             }
         });
     });
     //self.emit('parsingComplete');
 }
 
-module.exports = CourseScraper;
+module.exports = DepartmentScraper;
