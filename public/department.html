@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="col-md-2">
                     <div class="navbar-header">
-                        <a  href="home.html"> <img id="logo" src="logo.png" alt="RateMyCourses UofT"> </a>
+                        <a href="home.html"> <img id="logo" src="logo.png" alt="RateMyCourses UofT"> </a>
                     </div>
                 </div>
 
@@ -47,9 +47,9 @@
         </nav>
     </div>
 
-    <div class="container">
+    <div class="container" data-ng-controller="mainController">
         <!-- Department title -->
-        <h1> Computer Science </h1>
+        <h1> {{ title }} </h1>
 
         <!-- Suggested courses -->
         <section data-ng-controller="suggestedCourses" id="suggested-courses" class="row col-md-8 custom-section">
@@ -57,7 +57,7 @@
             <article data-ng-repeat="c in courses | limitTo:getLimit()" class="btn course suggested-course custom-article">
                 <div class="row">
                     <h3 class="course-code">{{ c.courseCode }}</h3>
-                    <h4>{{ c.courseTitle }}</h4>
+                    <h4>{{ c.title }}</h4>
                 </div>
                 <div class="row">
                     <p class="avg-score text-right">{{ c.rating }}/5</p>
@@ -71,7 +71,7 @@
             <article data-ng-repeat="c in courses | orderBy:'courseCode'" class="btn course custom-article ">
                 <div>
                     <h4 class="course-code"> {{ c.courseCode }} </h4>
-                    <h4> - {{ c.courseTitle }} </h4>
+                    <h4> - {{ c.title }} </h4>
                 </div>
             </article>
         </section>

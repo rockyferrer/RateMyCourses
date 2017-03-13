@@ -23,6 +23,7 @@ mongoose.connection.on('disconnected', function() {
 // Create mongoose schemas
 // TODO: Add the other schemas once defined
 var Course = mongoose.connection.model('Course', models.courseSchema);
+var Department = mongoose.connection.model('Department', models.departmentSchema);
 
 //Set up static path so /img will be treated as assets/img
 app.use(express.static(__dirname + '/assets'));
@@ -71,8 +72,43 @@ function getCourses(req, res) {
 
 };
 
+function getDepartment(req, res) {
+    Department.findOne({ name: req.param.department },
+        function(err, department) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.sendFile(__dirname + '/assets/department.html');
+            }
+        }
+    );
+}
+
+function getDepartmentCourses(req, res) {
+    console.log(req.department);
+    Course.find({ department: req.department },
+        function(err, courses) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(courses);
+            }
+        }
+    );
+}
+
+// TODO: Add error checking
+app.param('department', function(req, res, next, department) {
+    req.department = department;
+    next();
+});
+
 app.get('/courses', getCourses);
+app.get('/dept/:department', getDepartment);
+
+
+app.get('/api/dept/:department/courses', getDepartmentCourses);
 // Angular default request
 app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/assets/home.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
