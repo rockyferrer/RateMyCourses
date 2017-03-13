@@ -9,7 +9,7 @@ var key = '9iDLLnSQRMwapjbMs5Yb7tnwyqAxK5ud';
 var url = 'https://cobalt.qas.im/api/1.0/courses/' + '?key=' + key + "&skip=100&limit=100";
 
 function CourseScraper(db, skip) {
-    this.url = 'https://cobalt.qas.im/api/1.0/courses/&key=' + key + "&skip=" + skip + "&limit=100";
+    this.url = 'https://cobalt.qas.im/api/1.0/courses/?key=' + key + "&skip=" + skip + "&limit=100";
     this.db = db;
     this.requestData;
     Course = db.connection.model('Course', courseSchema);
@@ -32,8 +32,8 @@ CourseScraper.prototype.init = function() {
 
 CourseScraper.prototype.requestCourses = function() {
     var self = this;
-    console.log("Requesting: " + url);
-    request(url, function(error, response, body) {
+    console.log("Requesting: " + this.url);
+    request(this.url, function(error, response, body) {
         if (error) {
             console.log("Error on cobalt request.");
         } else {
@@ -47,7 +47,10 @@ CourseScraper.prototype.requestCourses = function() {
 CourseScraper.prototype.parseAndSave = function() {
     var self = this;
     var c;
-
+	if(self.data == undefined){
+		console.log("Error at: " + self.count);
+		return;
+	}
     self.data.forEach(function(value) {
         var size = 0;
         if (value.meeting_sections && value.meeting_sections[0]) {
@@ -67,7 +70,7 @@ CourseScraper.prototype.parseAndSave = function() {
             if (err) {
                 console.log('Error saving to db:' + err);
             } else {
-                console.log('Done');
+                //console.log('Done');
             }
         });
     });

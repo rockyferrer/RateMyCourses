@@ -26,9 +26,10 @@ var Course = mongoose.connection.model('Course', models.courseSchema);
 var Department = mongoose.connection.model('Department', models.departmentSchema);
 var Tag = mongoose.connection.model('Tag', models.tagSchema);
 var Rating = mongoose.connection.model('Rating', models.ratingSchema);
-var User = mongoose.connection.model('User', models.userSchema);
+// TODO: Mongoose throws an error for user
+//var User = mongoose.connection.model('User', models.userSchema);
 
-//Set up static path so /img will be treated as assets/img
+//Set up static path so /js will be treated as public/js
 app.use(express.static(__dirname + '/public'));
 // Use HTTP port
 app.listen(8080, function() {

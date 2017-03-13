@@ -10,7 +10,7 @@ mongoose.Promise = Promise;
 
 var CourseScraper = require('./CourseScraper');
 
-for (var i = 0; i < 200; i += 100) {
+for (var i = 0; i < 7000; i += 100) {
     new CourseScraper(db, i);
 }
 

@@ -3,5 +3,6 @@ angular.module('rateMyCourses', [
     'appRoutes',
     'MainCtrl',
     'LoginCtrl', 'LoginService',
-    'DepartmentCtrl', 'DepartmentService'
+    'DepartmentCtrl', 'DepartmentService',
+    'CourseCtrl', 'CourseService'
 ]);

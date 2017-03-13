@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
-// TODO: Change types to schema
+// TODO: Do we want faculty?
 
 var courseSchema = new mongoose.Schema({
     courseCode: { type: String, required: true },
     title: { type: String, required: true },
     department: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String },
     popularTags: [String],
     classSize: { type: Number },
     ratings: [String]
@@ -35,14 +35,13 @@ var departmentSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-	uid: {type: int, required: true},
 	fname: {type: String, required: true},
 	lname: {type: String, required: true},
 	department: {type: [String]},
 	faculty: {type: String},
 	email: {type: String, required: true},
 	password: {type: String, required: true},
-	admin: {type: boolean, required: true},
+	admin: {type: Boolean, required: true},
 	coursesViewed: {type: [String]},
 	coursesRated: {type: [String]}
 });
