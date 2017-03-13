@@ -24,7 +24,6 @@ var departmentSchema = new mongoose.Schema({
     name: { type: String, required: true }
 });
 
-<<<<<<< HEAD
 var userSchema = new mongoose.Schema({
 	uid: {type: int, required: true},
 	fname: {type: String, required: true},
@@ -37,12 +36,10 @@ var course = mongoose.model('Course', courseSchema);
 var tag = mongoose.model('Tag', tagSchema);
 var rating = mongoose.model('Rating', ratingSchema);
 var department = mongoose.model('Department', departmentSchema);
-=======
 //var course = mongoose.connection.model('Course', courseSchema);
 //var tag = mongoose.connection.model('Tag', tagSchema);
 //var rating = mongoose.connection.model('Rating', ratingSchema);
 //var department = mongoose.connection.model('Department', departmentSchema);
->>>>>>> 3dd8890a8615566cbd1e05ce4637527948c84ec1
 
 
 module.exports = {
