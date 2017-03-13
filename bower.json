@@ -1,0 +1,25 @@
+{
+  "name": "team23-ratemycourses",
+  "description": "CSC309 Project",
+  "main": "server.js",
+  "authors": [
+    "Team23"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ansermino/Team23-RateMyCourses",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "css": "https://fonts.googleapis.com/css?family=Lato",
+    "jquery": "^3.1.1"
+  }
+}

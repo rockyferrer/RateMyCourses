@@ -1,7 +1,19 @@
-var app = angular.module('department', []);
+var app = angular.module("department", []);
+
+/*
+var app = angular.module("department", [], function($locationProvider) {
+    $locationProvider.html5Mode({ enabled: true, requireBase: false });
+});*/
+
+var department = "Computer Science"
+
+app.controller('mainController', function($scope, $location) {
+    $scope.title = 'title';
+    console.log($location.path());
+})
 
 
-app.controller('suggestedCourses', function($scope) {
+app.controller('suggestedCourses', function($scope, $http) {
 
     /**
      * Determines the number of suggested courses to show based on page width.
@@ -11,12 +23,20 @@ app.controller('suggestedCourses', function($scope) {
     $scope.getLimit = function() {
         if (window.innerWidth < 768) {
             return 3;
-        } else return 5;
+        } else return 10;
         console.log(window.innerWidth);
     };
 
+    $http.get('/api/dept/' + department + '/courses')
+        .success(function(data) {
+            $scope.courses = data
+        })
+        .error(function(data) {
+            console.log('Could not get department: ' + data)
+        });
+
     // Dummy data	
-    $scope.courses = [{
+    /*$scope.courses = [{
         "courseCode": "CSC309",
         "courseTitle": "Programming on the Web",
         "rating": "5"
@@ -40,14 +60,23 @@ app.controller('suggestedCourses', function($scope) {
         "courseCode": "CSC302",
         "courseTitle": "Introduction to Software Engineering",
         "rating": "5"
-    }]
+    }]*/
 });
 
 /**
  * Stores list of all courses in the department.
  */
-app.controller('allCourses', function($scope) {
-    $scope.courses = [{
+app.controller('allCourses', function($scope, $http) {
+
+    $http.get('/api/dept/Computer%20Science/courses')
+        .success(function(data) {
+            $scope.courses = data
+        })
+        .error(function(data) {
+            console.log('Could not get department: ' + data)
+        });
+
+    /*$scope.courses = [{
         "courseCode": "CSC301",
         "courseTitle": "Intro to Software Design"
     }, {
@@ -83,5 +112,5 @@ app.controller('allCourses', function($scope) {
     }, {
         "courseCode": "CSC369",
         "courseTitle": "Operating Systems"
-    }]
+    }]*/
 });
