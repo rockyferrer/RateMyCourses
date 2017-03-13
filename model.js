@@ -26,6 +26,7 @@ var ratingSchema = new mongoose.Schema({
     overall: {type: Number, required: true},
     prof: {type: String},
     tags: [String],
+    helpfulness: {type: Number, required: true},
     comment: { type: String, required: true }
 });
 
