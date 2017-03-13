@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 var courseSchema = new mongoose.Schema({
     courseCode: { type: String, required: true },
     title: { type: String, required: true },
-    department: { type: String, require: true },
-    description: { type: String, require: true },
+    department: { type: String, required: true },
+    description: { type: String, required: true },
     popularTags: [String],
     classSize: { type: Number },
     ratings: [String]
@@ -18,12 +18,12 @@ var tagSchema = new mongoose.Schema({
 
 var ratingSchema = new mongoose.Schema({
     user: {type: String, required: true},
-    datePosted: { type: Date, default: Date.now, required },
-    dateTaken: {type: Date, default: Date.now, required},
-    difficulty: {type: Number},
-    workload: {type: Number},
-    learningExp: {type: Number},
-    overall: {type: Number},
+    datePosted: { type: Date, default: Date.now, required: true },
+    dateTaken: {type: Date, default: Date.now, required: true},
+    difficulty: {type: Number, required: true},
+    workload: {type: Number, required: true},
+    learningExp: {type: Number, required: true},
+    overall: {type: Number, required: true},
     prof: {type: String},
     tags: [String],
     comment: { type: String, required: true }
