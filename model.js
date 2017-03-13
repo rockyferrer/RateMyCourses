@@ -18,7 +18,7 @@ var tagSchema = new mongoose.Schema({
 
 var ratingSchema = new mongoose.Schema({
     user: {type: String, required: true},
-    datePosted: {type: Date, default: Date.now, required},
+    datePosted: { type: Date, default: Date.now, required },
     dateTaken: {type: Date, default: Date.now, required},
     difficulty: {type: Number},
     workload: {type: Number},
