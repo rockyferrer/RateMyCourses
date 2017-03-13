@@ -28,8 +28,13 @@ var userSchema = new mongoose.Schema({
 	uid: {type: int, required: true},
 	fname: {type: String, required: true},
 	lname: {type: String, required: true},
-	department: {type: [String], required: true},
-	 
+	department: {type: [String]},
+	faculty: {type: String},
+	email: {type: String, required: true},
+	password: {type: String, required: true},
+	admin: {type: boolean, required: true},
+	coursesViewed: {type: [String]},
+	coursesRated: {type: [String]}
 });
 
 var course = mongoose.model('Course', courseSchema);
