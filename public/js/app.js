@@ -2,6 +2,6 @@ angular.module('rateMyCourses', [
     'ngRoute',
     'appRoutes',
     'MainCtrl',
-    'DepartmentCtrl', 'DepartmentService',
-    'LoginCtrl', 'LoginService'
+    'LoginCtrl', 'LoginService',
+    'DepartmentCtrl', 'DepartmentService'
 ]);

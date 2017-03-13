@@ -1,4 +1,4 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl']).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
     $routeProvider
 
@@ -18,6 +18,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/dept/:department', {
         templateUrl: 'views/department.html',
         controller: 'DepartmentController'
+    })
+
+    // Course Page
+    .when('/course/:courseCode', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseController'
     });
 
     $locationProvider.html5Mode(true);

@@ -3,10 +3,6 @@ var mongoose = require('mongoose');
 var models = require('../model.js');
 
 var MONGODB = 'mongodb://localhost/Team23-RateMyCourses';
-var key = '9iDLLnSQRMwapjbMs5Yb7tnwyqAxK5ud';
-var course = models.Course;
-
-var url = 'https://cobalt.qas.im/api/1.0/courses/filter' + '?key=' + key + "&q=department:\"Computer Science&limit=10";
 
 var db = mongoose.connect(MONGODB);
 mongoose.Promise = Promise;
@@ -14,7 +10,9 @@ mongoose.Promise = Promise;
 
 var CourseScraper = require('./CourseScraper');
 
-var cs = new CourseScraper(db, 'Computer Science');
+for (var i = 0; i < 200; i += 100) {
+    new CourseScraper(db, i);
+}
 
 // Logging methods
 mongoose.connection.on('connected', function() {

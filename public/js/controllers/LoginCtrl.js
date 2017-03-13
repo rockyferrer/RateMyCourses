@@ -1,6 +1,6 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, LoginService) {
+angular.module('LoginCtrl', []).controller('LoginController', function($scope, Login) {
 
-    //$scope.departments = LoginService.getAllDepartments();
-    //$scope.faculties = LoginService.getAllFaculties();
+    $scope.departments = Login.getAllDepartments();
+    $scope.faculties = Login.getAllFaculties();
 
 });
