@@ -47,10 +47,10 @@ CourseScraper.prototype.requestCourses = function() {
 CourseScraper.prototype.parseAndSave = function() {
     var self = this;
     var c;
-	if(self.data == undefined){
-		console.log("Error at: " + self.count);
-		return;
-	}
+    if (self.data == undefined || self.data.forEach == undefined) {
+        console.log("Error at: " + self.count);
+        return;
+    }
     self.data.forEach(function(value) {
         var size = 0;
         if (value.meeting_sections && value.meeting_sections[0]) {
@@ -60,21 +60,20 @@ CourseScraper.prototype.parseAndSave = function() {
             courseCode: value.code,
             title: value.name,
             department: value.department,
+            faculty: value.division,
             description: value.description,
             popularTags: [],
             classSize: size,
             ratings: []
         });
-        console.log(c.courseCode + ' - ' + c.title);
         c.save(function(err) {
             if (err) {
                 console.log('Error saving to db:' + err);
             } else {
-                //console.log('Done');
+                console.log(c.courseCode + ' - ' + c.title);
             }
         });
     });
-    //self.emit('parsingComplete');
 }
 
 module.exports = CourseScraper;

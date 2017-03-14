@@ -1,31 +1,37 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 
 var app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var MONGODB = 'mongodb://localhost/Team23-RateMyCourses';
 
 // Create mongo connection and setup event handlers
 mongoose.connect(MONGODB);
 var db = mongoose.connection;
-mongoose.connection.on('connected', function() {
+mongoose.Promise = global.Promise;
+db.on('connected', function() {
     console.log('Mongoose connected to ' + MONGODB);
 });
-mongoose.connection.on('error', function(error) {
+db.on('error', function(error) {
     console.log('Mongoose connection error: ' + error);
 });
-mongoose.connection.on('disconnected', function() {
+db.on('disconnected', function() {
     console.log('Mongoose disconnected.');
 });
 
 // Create mongoose schemas
 // TODO: Add the other schemas once defined
-var Course = mongoose.connection.model('Course', models.courseSchema);
-var Department = mongoose.connection.model('Department', models.departmentSchema);
-var Tag = mongoose.connection.model('Tag', models.tagSchema);
-var Rating = mongoose.connection.model('Rating', models.ratingSchema);
+var Course = db.model('Course', models.courseSchema);
+var Department = db.model('Department', models.departmentSchema);
+var Tag = db.model('Tag', models.tagSchema);
+var Rating = db.model('Rating', models.ratingSchema);
+var User = db.model('User', models.userSchema);
 // TODO: Mongoose throws an error for user
 //var User = mongoose.connection.model('User', models.userSchema);
 
@@ -35,6 +41,15 @@ app.use(express.static(__dirname + '/public'));
 app.listen(8080, function() {
     console.log("Listening on port 8080.")
 });
+
+// Setup session and cookies
+app.use(session({
+    secret: 'pla37SN4KMz9I2t3B4qZd9Nh82758BJx',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 
 /**
  * Returns matching courses.
@@ -102,12 +117,55 @@ function getDepartmentCourses(req, res) {
 }
 
 function getAllDepartments(req, res) {
-    res.send("NEED TO IMPLEMENT");
+    Course.find().distinct('department',
+        function(err, depts) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(depts);
+            }
+        }
+    );
 }
 
 function getAllFaculties(req, res) {
-    res.send("NEED TO IMPLEMENT");
+    Course.find().distinct('faculty',
+        function(err, faculties) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(faculties);
+            }
+        }
+    );
 }
+
+function userLogin(req, res) {
+    console.log(req.body);
+    res.end();
+}
+
+function userRegister(req, res) {
+    console.log(req.body);
+    var newUser = new User({
+        email: req.body.email,
+        password: req.body.password,
+        department: req.body.department1,
+        faculty: req.body.faculty,
+        admin: false
+    });
+    console.log(newUser);
+    newUser.save(function(error) {
+        if (error) {
+            console.log(error);
+            res.send(error);
+        } else {
+            console.log("Created a new user.");
+        }
+    });
+    res.end();
+}
+
 
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
@@ -116,18 +174,30 @@ app.param('department', function(req, res, next, department) {
 });
 
 // API Endpoints
-app.get('/dept/:department', getDepartment);
+
+//Department
+//app.get('/dept/:department', getDepartment);
 app.get('/api/dept/all', getAllDepartments);
-app.get('/api/faculties/all', getAllFaculties);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
+
+//Course
+
+
+//User
+app.post('/api/user/login', userLogin);
+app.post('/api/user/register', userRegister);
+
+// Misc
+app.get('/api/faculties/all', getAllFaculties);
+
+
+
 
 // Angular (Normal) endpoints
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-
 app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-
 app.get('/courses', getCourses);

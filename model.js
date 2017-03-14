@@ -6,6 +6,7 @@ var courseSchema = new mongoose.Schema({
     courseCode: { type: String, required: true },
     title: { type: String, required: true },
     department: { type: String, required: true },
+    faculty: { type: String, required: true },
     description: { type: String },
     popularTags: [String],
     classSize: { type: Number },
@@ -17,16 +18,16 @@ var tagSchema = new mongoose.Schema({
 });
 
 var ratingSchema = new mongoose.Schema({
-    user: {type: String, required: true},
+    user: { type: String, required: true },
     datePosted: { type: Date, default: Date.now, required: true },
-    dateTaken: {type: Date, default: Date.now, required: true},
-    difficulty: {type: Number, required: true},
-    workload: {type: Number, required: true},
-    learningExp: {type: Number, required: true},
-    overall: {type: Number, required: true},
-    prof: {type: String},
+    dateTaken: { type: Date, default: Date.now, required: true },
+    difficulty: { type: Number, required: true },
+    workload: { type: Number, required: true },
+    learningExp: { type: Number, required: true },
+    overall: { type: Number, required: true },
+    prof: { type: String },
     tags: [String],
-    helpfulness: {type: Number, required: true},
+    helpfulness: { type: Number, required: true },
     comment: { type: String, required: true }
 });
 
@@ -35,15 +36,13 @@ var departmentSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-	fname: {type: String, required: true},
-	lname: {type: String, required: true},
-	department: {type: [String]},
-	faculty: {type: String},
-	email: {type: String, required: true},
-	password: {type: String, required: true},
-	admin: {type: Boolean, required: true},
-	coursesViewed: {type: [String]},
-	coursesRated: {type: [String]}
+    department: { type: [String] },
+    faculty: { type: String },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    admin: { type: Boolean, required: true },
+    coursesViewed: { type: [String] },
+    coursesRated: { type: [String] }
 });
 
 var course = mongoose.model('Course', courseSchema);
@@ -60,5 +59,6 @@ module.exports = {
     courseSchema: courseSchema,
     tagSchema: tagSchema,
     ratingSchema: ratingSchema,
-    departmentSchema: departmentSchema
+    departmentSchema: departmentSchema,
+    userSchema: userSchema
 };
