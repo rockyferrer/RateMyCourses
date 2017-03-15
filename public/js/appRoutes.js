@@ -24,7 +24,7 @@ angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl']).confi
         })
 
     // Course Page
-    .when('/course/:courseCode', {
+    .when('/courses/:courseCode', {
         //title: 'RateMyCourses',
         templateUrl: 'views/course.html',
         controller: 'CourseController'

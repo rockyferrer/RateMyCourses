@@ -1,24 +1,24 @@
 {
-    "name": "team23-ratemycourses",
-    "version": "1.0.0",
-    "description": "CSC309 Project",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/csc309-spring2017/Team23-RateMyCourses/"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.17.1",
-        "cookie-parser": "^1.4.3",
-        "express": "^4.15.2",
-        "express-session": "^1.15.1",
-        "mongoose": "^4.9.0"
-
-    }
+  "name": "team23-ratemycourses",
+  "version": "1.0.0",
+  "description": "CSC309 Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csc309-spring2017/Team23-RateMyCourses/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "bower": "^1.8.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-session": "^1.15.1",
+    "mongoose": "^4.9.0"
+  }
 }

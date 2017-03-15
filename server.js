@@ -272,4 +272,6 @@ app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-//app.get('/courses', getCourses);
+app.get('/courses/:courseCode', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
