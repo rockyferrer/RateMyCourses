@@ -111,6 +111,28 @@ function getCourse(req, res) {
     }
 };
 
+/**
+ * Returns suggested courses based on department parameter
+ */
+function getSuggestedCourses(req, res) {
+    var dept = req.param.department;
+    if (dept) {
+        Course.find({department: dept}, function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    } else {
+        Course.find(function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    }
+};
+
 function getDepartment(req, res) {
     Department.findOne({ name: req.param.department },
         function(err, department) {
@@ -202,6 +224,7 @@ app.get('/api/dept/:department/courses', getDepartmentCourses);
 
 //Course
 app.get('/api/courses/:courseCode', getCourse);
+app.get('/api/dept/:department/suggested', getSuggestedCourses);
 
 //User
 app.post('/api/user/login', userLogin);
