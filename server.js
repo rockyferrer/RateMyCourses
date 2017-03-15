@@ -103,8 +103,8 @@ function getCourses(req, res) {
 };
 
 function getCourse(req, res) {
-    console.log("hi");
-    var code = req.query.courseCode;
+    console.log(req.body.courseCode);
+    var code = req.params.courseCode;
 
     Course.findOne({
         courseCode: code
