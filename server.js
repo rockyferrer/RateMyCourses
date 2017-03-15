@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 
 var MONGODB = 'mongodb://localhost/Team23-RateMyCourses';
@@ -47,7 +49,9 @@ app.use(session({
     secret: 'pla37SN4KMz9I2t3B4qZd9Nh82758BJx',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: {
+        secure: false
+    }
 }));
 
 
@@ -60,21 +64,28 @@ function getCourses(req, res) {
     var code = req.query.courseCode;
     var dept = req.query.department;
     if (code && dept) {
-        Course.find({ courseCode: req.query.courseCode, department: req.query.department }, function(err, courses) {
+        Course.find({
+            courseCode: req.query.courseCode,
+            department: req.query.department
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
             res.json(courses);
         });
     } else if (code) {
-        Course.find({ courseCode: code }, function(err, courses) {
+        Course.find({
+            courseCode: code
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
             res.json(courses);
         });
     } else if (dept) {
-        Course.find({ department: dept }, function(err, courses) {
+        Course.find({
+            department: dept
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
@@ -92,16 +103,19 @@ function getCourses(req, res) {
 };
 
 function getCourse(req, res) {
+    console.log("hi");
     var code = req.query.courseCode;
-    if (code) {
-        Course.findOne({ courseCode: code }, function(err, course) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            res.json(course);
-        });
-    }
+
+    Course.findOne({
+        courseCode: code
+    }, function(err, course) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        res.json(course);
+    });
 };
 
 /**
@@ -109,25 +123,21 @@ function getCourse(req, res) {
  */
 function getSuggestedCourses(req, res) {
     var dept = req.param.department;
-    if (dept) {
-        Course.find({department: dept}, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else {
-        Course.find(function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    }
+    Course.find({
+        department: dept
+    }, function(err, courses) {
+        if (err) {
+            res.send(err);
+            return;
+        }
+        res.json(courses);
+    });
 };
 
 function getDepartment(req, res) {
-    Department.findOne({ name: req.param.department },
+    Department.findOne({
+            name: req.param.department
+        },
         function(err, department) {
             if (err) {
                 res.send(err);
@@ -140,7 +150,9 @@ function getDepartment(req, res) {
 
 function getDepartmentCourses(req, res) {
     console.log(req.department);
-    Course.find({ department: req.department },
+    Course.find({
+            department: req.department
+        },
         function(err, courses) {
             if (err) {
                 res.send(err);
@@ -203,7 +215,9 @@ function userRegister(req, res) {
 
 function getUserInfo(req, res) {
     var user = req.param.userID;
-    User.findOne({_id: userID}, function(err, users) {
+    User.findOne({
+        _id: userID
+    }, function(err, users) {
         if (err) {
             res.send(err);
         }
@@ -215,6 +229,11 @@ function getUserInfo(req, res) {
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
     req.department = department;
+    next();
+});
+
+app.param('courseCode', function(req, res, next, courseCode) {
+    req.courseCode = courseCode;
     next();
 });
 
@@ -248,4 +267,4 @@ app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.get('/courses', getCourses);
+//app.get('/courses', getCourses);
