@@ -216,7 +216,7 @@ function userRegister(req, res) {
 function getUserInfo(req, res) {
     var user = req.param.userID;
     User.findOne({
-        _id: userID
+        _id: user
     }, function(err, users) {
         if (err) {
             res.send(err);
@@ -234,6 +234,11 @@ app.param('department', function(req, res, next, department) {
 
 app.param('courseCode', function(req, res, next, courseCode) {
     req.courseCode = courseCode;
+    next();
+});
+
+app.param('userID', function(req, res, next, userID) {
+    req.userID = userID;
     next();
 });
 
