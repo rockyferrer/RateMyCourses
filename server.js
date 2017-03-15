@@ -103,7 +103,7 @@ function getCourses(req, res) {
 };
 
 function getCourse(req, res) {
-    console.log(req.body.courseCode);
+    console.log(new Date().toLocaleTimeString() + req.params.courseCode);
     var code = req.params.courseCode;
 
     Course.findOne({
@@ -114,6 +114,7 @@ function getCourse(req, res) {
             res.send(err);
             return;
         }
+        console.log("Success");
         res.json(course);
     });
 };

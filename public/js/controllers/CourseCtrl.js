@@ -1,5 +1,7 @@
-angular.module('CourseCtrl', []).controller('CourseController', function($scope, Course) {
+angular.module('CourseCtrl', []).controller('CourseController', function($scope, $http, $routeParams, Course) {
 
-    $scope.course = Course.getCourse(courseCode);
+    $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
+        $scope.course = data.data;
+    });
 
 });
