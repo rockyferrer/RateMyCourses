@@ -112,7 +112,7 @@ function getCourse(req, res) {
 };
 
 /**
- * Returns suggested courses based on department parameter
+ * Responds with suggested courses based on department parameter
  */
 function getSuggestedCourses(req, res) {
     var dept = req.param.department;
@@ -208,9 +208,10 @@ function userRegister(req, res) {
     res.end();
 }
 
-function getUserInfo(req, res) {
-
-}
+// function getUserInfo(req, res) {
+//     var user = req.param.userID;
+//     User.findOne({})
+// }
 
 
 // TODO: Add error checking
@@ -231,6 +232,7 @@ app.get('/api/courses/:courseCode', getCourse);
 app.get('/api/dept/:department/suggested', getSuggestedCourses);
 
 //User
+app.get('/api/user/:userID', getUserInfo);
 app.post('/api/user/login', userLogin);
 app.post('/api/user/register', userRegister);
 
