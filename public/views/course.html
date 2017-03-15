@@ -1,192 +1,192 @@
-<div class="container">
-    <div class="row">
-        <section id="course-info" class="custom-section panel-main col-md-12 course-section">
+<link rel="stylesheet" href="css/course.css">
+<script src="js/course.js"></script>
+<div class="row">
+    <section id="course-info" class="custom-section panel-main col-md-12 course-section">
 
-            <div class="panel-heading">
-                <h2 class="panel-title">{{ course.courseCode }}</h2>
-                <h4>{{ course.title }}</h4>
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ course.courseCode }}</h2>
+            <h4>{{ course.title }}</h4>
+        </div>
+
+        <article class="custom-article panel-body">
+            <div class="description col-md-6">
+                Department: {{ course.department }} <br> Avg class size estimate: 300 students <br> Tags: <br>
+                <div class="col-md-9">
+                    <ul class="tags">
+                        <li>Cool</li>
+                        <li>Fun</li>
+                        <li>Great TAs</li>
+                        <li>Exclusive Tag For Best Course Ever</li>
+                        <li>Fair</li>
+                        <li>Great Professor</li>
+                        <li>Lots of Smiles</li>
+                        <li>Spicy</li>
+                        <li>Kahoot</li>
+                        <li>Please Give Me a Good Mark</li>
+                    </ul>
+                </div>
             </div>
 
-            <article class="custom-article panel-body">
-                <div class="description col-md-6">
-                    Department: {{ course.department }} <br> Avg class size estimate: 300 students <br> Tags: <br>
-                    <div class="col-md-9">
-                        <ul class="tags">
-                            <li>Cool</li>
-                            <li>Fun</li>
-                            <li>Great TAs</li>
-                            <li>Exclusive Tag For Best Course Ever</li>
-                            <li>Fair</li>
-                            <li>Great Professor</li>
-                            <li>Lots of Smiles</li>
-                            <li>Spicy</li>
-                            <li>Kahoot</li>
-                            <li>Please Give Me a Good Mark</li>
-                        </ul>
+            <div class="description col-xs-12 col-md-6 course-avg-score">
+                <div class="score overall-score col-md-8">
+                    <p class="col-md-12 score-desc">Overall Experience:</p>
+                    <div class="col-md-12 score-div">
+                        <h2 class="good-score overall score-value">5.0</h2>
                     </div>
+                    <p class="col-md-12 score-desc">(54 ratings)</p>
                 </div>
-
-                <div class="description col-xs-12 col-md-6 course-avg-score">
-                    <div class="score overall-score col-md-8">
-                        <p class="col-md-12 score-desc">Overall Experience:</p>
+                <div class="col-xs-12 col-md-4 sub-ratings">
+                    <div class="score col-xs-4 col-md-12">
+                        <p class="col-md-12 score-desc">Difficulty:</p>
                         <div class="col-md-12 score-div">
-                            <h2 class="good-score overall score-value">5.0</h2>
-                        </div>
-                        <p class="col-md-12 score-desc">(54 ratings)</p>
-                    </div>
-                    <div class="col-xs-12 col-md-4 sub-ratings">
-                        <div class="score col-xs-4 col-md-12">
-                            <p class="col-md-12 score-desc">Difficulty:</p>
-                            <div class="col-md-12 score-div">
-                                <h2 class="avg-score score-value">2.5</h2>
-                            </div>
-                        </div>
-                        <div class="score col-xs-4 col-md-12">
-                            <p class="col-md-12 score-desc">Workload:</p>
-                            <div class="col-md-12">
-                                <h2 class="avg-score score-value">2.5</h2>
-                            </div>
-                        </div>
-                        <div class="score col-xs-4 col-md-12">
-                            <p class="col-md-12 score-desc">Learning Exp:</p>
-                            <div class="col-md-12">
-                                <h2 class="good-score score-value">5.0</h2>
-                            </div>
+                            <h2 class="avg-score score-value">2.5</h2>
                         </div>
                     </div>
-                </div>
-            </article>
-
-        </section>
-    </div>
-
-
-    <!-- Add rating and ratings-->
-    <section data-ng-controller="ratings" class="row custom-section">
-        <article id="add-rating" class="row custom-article">
-            <button type="submit" id="add-rating-btn" class="btn btn-def col-md-12 text-center">Add Rating</button> <br></br>
-
-            <div class="form-group add-field">
-                <div class="aspect-container">
-                    <label for="aspects-difficulty">Level of difficulty:</label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <div class="score col-xs-4 col-md-12">
+                        <p class="col-md-12 score-desc">Workload:</p>
+                        <div class="col-md-12">
+                            <h2 class="avg-score score-value">2.5</h2>
+                        </div>
                     </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-workload">Workload: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <div class="score col-xs-4 col-md-12">
+                        <p class="col-md-12 score-desc">Learning Exp:</p>
+                        <div class="col-md-12">
+                            <h2 class="good-score score-value">5.0</h2>
+                        </div>
                     </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-experience">Learning experience: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-overall">Overall: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-            </div>
-
-            <label for="tags-selection" class="add-field">Select up to 3 tags that best describe this course:</label>
-            <div id="tags-selection" class="row add-field">
-                <ul class="tags">
-                    <li class="tag">Cool</li>
-                    <li>Fun</li>
-                    <li>Great TAs</li>
-                    <li>Exclusive Tag For Best Course Ever</li>
-                    <li>Fair</li>
-                    <li>Great Professor</li>
-                    <li>Lots of Smiles</li>
-                    <li>Spicy</li>
-                    <li>Kahoot</li>
-                    <li>Please Give Me a Good Mark</li>
-                </ul>
-            </div>
-            <div class="row add-field">
-                <div class="col-md-6 comment">
-                    <h4>Comment:</h4>
-                    <form>
-
-                        <input type="text" name="comment" size="40" id="comment-box"><br>
-
-                    </form>
-                </div>
-
-                <div class="col-md-6 done">
-                    <button type="submit" id="done-btn" class="btn btn-def text-center">Done</button>
-                </div>
-            </div>
-
-        </article>
-
-        <article data-ng-repeat="r in rating" class="custom-article">
-            <h2>Rating</h2>
-            <div class="form-group">
-                <div class="aspect-container">
-                    <label for="aspects-difficulty">Level of difficulty:</label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-workload">Workload: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-experience">Learning experience: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-overall">Overall: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-            </div>
-
-            <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
-            <div id="tags-selection" class="row">
-                <ul class="tags">
-                    <li>Cool</li>
-                    <li>Fun</li>
-                    <li>Great TAs</li>
-                    <li>Exclusive Tag For Best Course Ever</li>
-                    <li>Fair</li>
-                    <li>Great Professor</li>
-                    <li>Lots of Smiles</li>
-                    <li>Spicy</li>
-                    <li>Kahoot</li>
-                    <li>Please Give Me a Good Mark</li>
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col-md-6 comment">
-                    <h4>Comment:</h4>
-                    <p>{{ r.comment }}</p>
-                </div>
-
-                <div class="col-md-6 helpful">
-                    <h4>Helpful?</h4>
-                    <a class="glyphicon glyphicon-thumbs-up btn helpful-btn"></a>
-                    <a class="glyphicon glyphicon-thumbs-down btn helpful-btn"></a>
                 </div>
             </div>
         </article>
+
     </section>
 </div>
+
+
+<!-- Add rating and ratings-->
+<section class="row custom-section">
+    <article id="add-rating" class="row custom-article">
+        <button type="submit" id="add-rating-btn" class="btn btn-def col-md-12 text-center">Add Rating</button> <br></br>
+
+        <div class="form-group add-field">
+            <div class="aspect-container">
+                <label for="aspects-difficulty">Level of difficulty:</label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-workload">Workload: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-experience">Learning experience: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-overall">Overall: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+        </div>
+
+        <label for="tags-selection" class="add-field">Select up to 3 tags that best describe this course:</label>
+        <div id="tags-selection" class="row add-field">
+            <ul class="tags">
+                <li class="tag">Cool</li>
+                <li>Fun</li>
+                <li>Great TAs</li>
+                <li>Exclusive Tag For Best Course Ever</li>
+                <li>Fair</li>
+                <li>Great Professor</li>
+                <li>Lots of Smiles</li>
+                <li>Spicy</li>
+                <li>Kahoot</li>
+                <li>Please Give Me a Good Mark</li>
+            </ul>
+        </div>
+        <div class="row add-field">
+            <div class="col-md-6 comment">
+                <h4>Comment:</h4>
+                <form>
+
+                    <input type="text" name="comment" size="40" id="comment-box"><br>
+
+                </form>
+            </div>
+
+            <div class="col-md-6 done">
+                <button type="submit" id="done-btn" class="btn btn-def text-center">Done</button>
+            </div>
+        </div>
+
+    </article>
+
+    <article data-ng-repeat="r in rating" class="custom-article">
+        <h2>Rating</h2>
+        <div class="form-group">
+            <div class="aspect-container">
+                <label for="aspects-difficulty">Level of difficulty:</label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-workload">Workload: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-experience">Learning experience: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-overall">Overall: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+        </div>
+
+        <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
+        <div id="tags-selection" class="row">
+            <ul class="tags">
+                <li>Cool</li>
+                <li>Fun</li>
+                <li>Great TAs</li>
+                <li>Exclusive Tag For Best Course Ever</li>
+                <li>Fair</li>
+                <li>Great Professor</li>
+                <li>Lots of Smiles</li>
+                <li>Spicy</li>
+                <li>Kahoot</li>
+                <li>Please Give Me a Good Mark</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6 comment">
+                <h4>Comment:</h4>
+                <p>{{ r.comment }}</p>
+            </div>
+
+            <div class="col-md-6 helpful">
+                <h4>Helpful?</h4>
+                <a class="glyphicon glyphicon-thumbs-up btn helpful-btn"></a>
+                <a class="glyphicon glyphicon-thumbs-down btn helpful-btn"></a>
+            </div>
+        </div>
+    </article>
+</section>
