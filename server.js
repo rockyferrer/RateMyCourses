@@ -93,20 +93,19 @@ function getCourses(req, res) {
 
 function getCourse(req, res) {
     var code = req.query.courseCode;
-    var dept = req.query.department;
-    if (code && dept) {
-        Course.findOne({ courseCode: code, department: dept }, function(err, courses) {
+    if (code) {
+        Course.findOne({ courseCode: code }, function(err, course) {
             if (err) {
                 res.send(err);
             }
-            res.json(courses);
+            res.json(course);
         });
     } else {
-        Course.find(function(err, courses) {
+        Course.findOne(function(err, course) {
             if (err) {
                 res.send(err);
             }
-            res.json(courses);
+            res.json(course);
         });
     }
 };
@@ -210,7 +209,7 @@ function userRegister(req, res) {
 
 function getUserInfo(req, res) {
     var user = req.param.userID;
-    User.findOne({userID: user}, function(err, users) {
+    User.findOne({_id: userID}, function(err, users) {
         if (err) {
             res.send(err);
         }
