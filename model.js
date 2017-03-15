@@ -36,7 +36,6 @@ var departmentSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-    userID: {type: String, required: true},
     department: { type: [String] },
     faculty: { type: String },
     email: { type: String, required: true },

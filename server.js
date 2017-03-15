@@ -97,13 +97,7 @@ function getCourse(req, res) {
         Course.findOne({ courseCode: code }, function(err, course) {
             if (err) {
                 res.send(err);
-            }
-            res.json(course);
-        });
-    } else {
-        Course.findOne(function(err, course) {
-            if (err) {
-                res.send(err);
+                return;
             }
             res.json(course);
         });
