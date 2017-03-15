@@ -199,10 +199,9 @@ app.param('department', function(req, res, next, department) {
 //app.get('/dept/:department', getDepartment);
 app.get('/api/dept/all', getAllDepartments);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
-app.get('/api/courses/:courseCode', getCourse);
 
 //Course
-
+app.get('/api/courses/:courseCode', getCourse);
 
 //User
 app.post('/api/user/login', userLogin);
