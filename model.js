@@ -24,7 +24,7 @@ var ratingSchema = new mongoose.Schema({
     workload: {type: Number, required: true},
     learningExp: {type: Number, required: true},
     overall: {type: Number, required: true},
-    prof: {type: String},
+    prof: {type: String, required: true},
     tags: [String],
     helpfulness: {type: Number, required: true},
     comment: { type: String, required: true }
@@ -46,10 +46,12 @@ var userSchema = new mongoose.Schema({
 	coursesRated: {type: [String]}
 });
 
+//models for each schema
 var course = mongoose.model('Course', courseSchema);
 var tag = mongoose.model('Tag', tagSchema);
 var rating = mongoose.model('Rating', ratingSchema);
 var department = mongoose.model('Department', departmentSchema);
+//var user = mongoose.model('User', userSchema);
 //var course = mongoose.connection.model('Course', courseSchema);
 //var tag = mongoose.connection.model('Tag', tagSchema);
 //var rating = mongoose.connection.model('Rating', ratingSchema);

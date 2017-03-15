@@ -76,6 +76,26 @@ function getCourses(req, res) {
 
 };
 
+function getCourse(req, res) {
+    var code = req.query.courseCode;
+    var dept = req.query.department;
+    if (code && dept) {
+        Course.findOne({ courseCode: code, department: dept }, function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    } else {
+        Course.find(function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    }
+};
+
 function getDepartment(req, res) {
     Department.findOne({ name: req.param.department },
         function(err, department) {
@@ -120,6 +140,7 @@ app.get('/dept/:department', getDepartment);
 app.get('/api/dept/all', getAllDepartments);
 app.get('/api/faculties/all', getAllFaculties);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
+app.get('/api/courses/:courseCode', getCourse);
 
 // Angular (Normal) endpoints
 app.get('/', function(req, res) {
