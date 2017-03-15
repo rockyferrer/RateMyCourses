@@ -208,6 +208,10 @@ function userRegister(req, res) {
     res.end();
 }
 
+function getUserInfo(req, res) {
+
+}
+
 
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
