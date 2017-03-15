@@ -208,10 +208,15 @@ function userRegister(req, res) {
     res.end();
 }
 
-// function getUserInfo(req, res) {
-//     var user = req.param.userID;
-//     User.findOne({})
-// }
+function getUserInfo(req, res) {
+    var user = req.param.userID;
+    User.findOne({userID: user}, function(err, users) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(users);
+    });
+}
 
 
 // TODO: Add error checking
