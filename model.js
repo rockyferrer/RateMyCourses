@@ -45,10 +45,12 @@ var userSchema = new mongoose.Schema({
     coursesRated: { type: [String] }
 });
 
+//models for each schema
 var course = mongoose.model('Course', courseSchema);
 var tag = mongoose.model('Tag', tagSchema);
 var rating = mongoose.model('Rating', ratingSchema);
 var department = mongoose.model('Department', departmentSchema);
+//var user = mongoose.model('User', userSchema);
 //var course = mongoose.connection.model('Course', courseSchema);
 //var tag = mongoose.connection.model('Tag', tagSchema);
 //var rating = mongoose.connection.model('Rating', ratingSchema);
