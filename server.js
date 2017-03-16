@@ -189,8 +189,17 @@ function getAllFaculties(req, res) {
 }
 
 function userLogin(req, res) {
-    console.log(req.body);
-    res.end();
+    console.log(req.body.email + " - " + req.body.password);
+    if (validateUser(req.body.email, req.body.password)) {
+        res.status(200).end();
+    } else {
+        res.status(404).end();
+    }
+}
+
+//TODO: Implement
+function validateUser(email, password) {
+    return true;
 }
 
 function userRegister(req, res) {
@@ -272,7 +281,9 @@ app.get('/', function(req, res) {
 app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-
+app.get('/landing', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
 app.get('/courses/:courseCode', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });

@@ -13,8 +13,15 @@ angular.module('LoginService', []).factory('Login', ['$http', function($http) {
             return $http.get('/api/faculties/all');
         },
 
-        processLogin: function(formData) {
-            return $http.post('/api/user/login', formData);
+        processLogin: function($location, formData) {
+            return $http.post('/api/user/login', formData).then(
+                function(data) {
+                    if (data.status == 200) {
+                        console.log('success');
+                        $location = '/landing';
+                    }
+                }
+            );
         },
 
         processRegistration: function(formData) {
