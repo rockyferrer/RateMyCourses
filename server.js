@@ -5,6 +5,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 var pw = require('./password.js');
+var nonEndPointFunctions = require('./nonEndPointFunctions.js');
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -165,39 +166,6 @@ function getDepartmentCourses(req, res) {
     );
 }
 
-function getAllDepartments(req, res) {
-    Course.find().distinct('department',
-        function(err, depts) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(depts);
-            }
-        }
-    );
-}
-
-function getAllFaculties(req, res) {
-    Course.find().distinct('faculty',
-        function(err, faculties) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(faculties);
-            }
-        }
-    );
-}
-
-function userLogin(req, res) {
-    console.log(req.body.email + " - " + req.body.password);
-    if (validateUser(req.body.email, req.body.password)) {
-        res.status(200).end();
-    } else {
-        res.status(404).end();
-    }
-}
-
 //TODO: Implement
 function validateUser(email, password) {
     User.findOne({ "email": email }, function(err, user) {
@@ -217,23 +185,6 @@ function validateUser(email, password) {
     //console.log(req.body);
     //User.find({ "email": req.body.email, "password": req.body.email })
     //res.end();
-}
-
-// TODO: Implement multiple departments
-function userRegister(req, res) {
-    console.log(req.body);
-    var newUser = createUser(req.body);
-    console.log(newUser);
-    newUser.save(function(error, usr) {
-        if (error) {
-            console.log(error);
-            res.send(error);
-        } else {
-            console.log("Created a new user.");
-            req.session.user = usr;
-            res.status(200).end();
-        }
-    });
 }
 
 function createUser(data) {
@@ -260,7 +211,6 @@ function getUserInfo(req, res) {
         res.json(users);
     });
 }
-
 
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
@@ -298,9 +248,6 @@ app.post('/api/user/register', userRegister);
 
 // Misc
 app.get('/api/faculties/all', getAllFaculties);
-
-
-
 
 // Angular (Normal) endpoints
 app.get('/', function(req, res) {
