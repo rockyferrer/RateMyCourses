@@ -4,5 +4,6 @@ angular.module('rateMyCourses', [
     'MainCtrl',
     'LoginCtrl', 'LoginService',
     'DepartmentCtrl', 'DepartmentService',
-    'CourseCtrl', 'CourseService'
+    'CourseCtrl', 'CourseService',
+    'LandingCtrl', 'LandingService'
 ]);

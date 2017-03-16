@@ -1,17 +1,15 @@
 angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, Login) {
 
-    $scope.title = "RateMyCourses - Login"
-
     $http.get('/api/faculties/all').then(function(data) {
         $scope.faculty_list = data.data;
-    });
+    })
 
-    $http.get('/api/dept/all').then(function(data) {
+    .then($http.get('/api/dept/all').then(function(data) {
         $scope.department_list = data.data;
-    });
+    }));
 
     $scope.submitLogin = function() {
-        Login.processLogin($scope.loginForm)
+        Login.processLogin($scope.loginForm);
     };
 
     $scope.submitRegister = function() {
