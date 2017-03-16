@@ -162,6 +162,7 @@ function getAllFaculties(req, res) {
 
 function userLogin(req, res) {
     console.log(req.body);
+    User.find({ "email": req.body.email, "password": req.body.email })
     res.end();
 }
 
