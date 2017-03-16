@@ -1,4 +1,57 @@
-angular.module('CourseCtrl', []).controller('CourseController', function($scope, $http, $routeParams, Course) {
+var app = angular.module('CourseCtrl', []);
+
+// Star rating code taken from http://www.angulartutorial.net/2014/03/rating-stars-in-angular-js-using.html
+var ratingCtrl = app.controller('RatingCtrl', function($scope) {
+    $scope.rating = 5;
+    $scope.rateFunction = function(rating) {
+        console.log('Rating selected - ' + rating);
+    };
+});
+
+ratingCtrl.directive('starRating',
+    function() {
+        return {
+            restrict: 'A',
+            template: '<ul class="rating">' +
+                '	<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
+                '\u2605' +
+                '</li>' +
+                '</ul>',
+            scope: {
+                ratingValue: '=',
+                max: '=',
+                onRatingSelected: '&'
+            },
+            link: function(scope, elem, attrs) {
+                var updateStars = function() {
+                    scope.stars = [];
+                    for (var i = 0; i < scope.max; i++) {
+                        scope.stars.push({
+                            filled: i < scope.ratingValue
+                        });
+                    }
+                };
+
+                scope.toggle = function(index) {
+                    scope.ratingValue = index + 1;
+                    scope.onRatingSelected({
+                        rating: index + 1
+                    });
+                };
+
+                scope.$watch('ratingValue',
+                    function(oldVal, newVal) {
+                        if (newVal) {
+                            updateStars();
+                        }
+                    }
+                );
+            }
+        };
+    }
+);
+
+app.controller('CourseController', function($scope, $http, $routeParams, Course) {
 
     $scope.cssFilename = "course";
     $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
@@ -22,7 +75,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     /**
      * Checks if the currentTags array contains any nulls, used in processTag
-      */
+     */
     $scope.tagsContainsNulls = function() {
         for (var i = 0; i < $scope.currentTags.length; i++) {
             if ($scope.currentTags[i] == null) {
@@ -75,7 +128,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('Element ' + i + ' is '  + $scope.currentTags[i]);
+                console.log('Element ' + i + ' is ' + $scope.currentTags[i]);
             }
         } else {
             console.log('no tags chosen');
