@@ -40,6 +40,7 @@ var userSchema = new mongoose.Schema({
     faculty: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    salt: { type: String, required: true },
     admin: { type: Boolean, required: true },
     coursesViewed: { type: [String] },
     coursesRated: { type: [String] }

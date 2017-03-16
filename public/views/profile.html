@@ -1,142 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" data-ng-href="css/profile.css">
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+    <section class="custom-section">
+        <h2>Your Profile</h2>
 
-<head>
-    <title>RateMyCourses|UofT - Profile Page</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="css/profile.css">
-</head>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <!-- Email -->
+                <label class="control-label col-sm-4">Email:</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">
+                        <input type="text" class="input">
+                        <span id="email">rocky.ferrer@mail.utoronto.ca</span>
+                        <a class="edit">Edit</a>
+                        <a class="save">Save</a>
+                    </p>
+                </div>
+                <!-- Password -->
+                <label class="control-label col-sm-4">Password:</label>
+                <div class="col-sm-8">
+                    <p class="form-control-static">
+                        <input type="text" class="input">
+                        <span id="password">********</span>
+                        <a id="changePwd">Change Password</a>
+                        <a id="savePwd">Save Password</a>
 
-
-<body data-ng-app="profile">
-    <!-- Header -->
-    <div class="container-liquid">
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
-                <div class="col-md-2">
-                    <div class="navbar-header">
-                        <a  href="home.html"> <img id="logo" src="logo.png" alt="RateMyCourses UofT"> </a>
+                    </p>
+                    <div class="row">
+                        <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
                     </div>
+                    <div class="row">
+                        <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
+                    </div>
+                    <div class="row">
+                        <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
+                    </div>
+
                 </div>
 
-                <div class="col-md-7 col-md-offset-1">
-                    <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-2">
-                    <a href="login.html" class="btn navbtn navbar-btn" id="login">Log in / Register</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div class="container-liquid">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <section class="custom-section">
-                <h2>Your Profile</h2>
-
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <!-- Email -->
-                        <label class="control-label col-sm-4">Email:</label>
-                        <div class="col-sm-8">
-                            <p class="form-control-static">
-                                <input type="text" class="input">
-                                <span id="email">rocky.ferrer@mail.utoronto.ca</span>
-                                <a class="edit">Edit</a>
-                                <a class="save">Save</a>
-                            </p>
-                        </div>
-                        <!-- Password -->
-                        <label class="control-label col-sm-4">Password:</label>
-                        <div class="col-sm-8">
-                            <p class="form-control-static">
-                                <input type="text" class="input">
-                                <span id="password">********</span>
-                                <a id="changePwd">Change Password</a>
-                                <a id="savePwd">Save Password</a>
-
-                            </p>
-                            <div class="row">
-                                <input type="password" class="pwdInput" size="30" placeholder="Type your old password">
-                            </div>
-                            <div class="row">
-                                <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
-                            </div>
-                            <div class="row">
-                                <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
-                            </div>
-
-                        </div>
-
-                        <!-- Faculty -->
-                        <div class="row">
-                            <label class="control-label col-sm-4">Faculty:</label>
-                            <select data-ng-controller="faculties" class="select-dept required-field">
+                <!-- Faculty -->
+                <div class="row">
+                    <label class="control-label col-sm-4">Faculty:</label>
+                    <select data-ng-controller="faculties" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
-                            <a class="save-select">Save</a>
-                        </div>
-                        <!-- Departments -->
-                        <div class="row">
-                            <label class="control-label col-sm-4">Department 1:</label>
-                            <select data-ng-controller="departments" class="select-dept required-field">
+                    <a class="save-select">Save</a>
+                </div>
+                <!-- Departments -->
+                <div class="row">
+                    <label class="control-label col-sm-4">Department 1:</label>
+                    <select data-ng-controller="departments" class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
-                            <a class="save-select">Save</a>
-                        </div>
-                        <div class="row">
-                            <label class="control-label col-sm-4">Department 2:</label>
-                            <select data-ng-controller="departments" class="select-dept">
-			   					<option selected>Optional</option>
-								<option data-ng-repeat="d in department_list">{{ d }}</option>
-							</select>
-                            <a class="save-select">Save</a>
-                        </div>
-                        <div class="row">
-                            <label class="control-label col-sm-4">Department 3:</label>
-                            <select data-ng-controller="departments" class="select-dept">
-			   					<option selected>Optional</option>
-								<option data-ng-repeat="d in department_list">{{ d }}</option>
-							</select>
-                            <a class="save-select">Save</a>
-                        </div>
-                    </div>
-                </form>
-                <div class="text-center">
-                    <button class="btn btn-primary">Delete Account</button>
+                    <a class="save-select">Save</a>
                 </div>
-            </section>
+                <div class="row">
+                    <label class="control-label col-sm-4">Department 2:</label>
+                    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+                    <a class="save-select">Save</a>
+                </div>
+                <div class="row">
+                    <label class="control-label col-sm-4">Department 3:</label>
+                    <select data-ng-controller="departments" class="select-dept">
+			   					<option selected>Optional</option>
+								<option data-ng-repeat="d in department_list">{{ d }}</option>
+							</select>
+                    <a class="save-select">Save</a>
+                </div>
+            </div>
+        </form>
+        <div class="text-center">
+            <button class="btn btn-primary">Delete Account</button>
         </div>
-        <div class="col-md-3"></div>
-    </div>
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- Latest compiled Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- Angular JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <!-- jQuery functions and Angular modules -->
-    <script src="js/profile.js"></script>
-</body>
-
-</html>
+    </section>
+</div>
+<div class="col-md-3"></div>

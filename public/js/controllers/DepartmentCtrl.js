@@ -2,6 +2,6 @@ angular.module('DepartmentCtrl', []).controller('DeartmentController', function(
 
     $scope.allCourses = DepartmentService.getAllCourses($routeParams.department);
     $scope.suggestedCourses = DepartmentService.getAllCourses($routeParams.department);
-    $scope.title = $routeParams.department;
+    $scope.cssFilename = "department";
 
 });

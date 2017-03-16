@@ -1,17 +1,24 @@
 angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, Login) {
 
-    $scope.title = "RateMyCourses - Login"
-
     $http.get('/api/faculties/all').then(function(data) {
         $scope.faculty_list = data.data;
-    });
+    })
 
-    $http.get('/api/dept/all').then(function(data) {
+    .then($http.get('/api/dept/all').then(function(data) {
         $scope.department_list = data.data;
-    });
+    }));
 
     $scope.submitLogin = function() {
-        Login.processLogin($scope.loginForm)
+        Login.processLogin($scope.loginForm).then(
+            function(data) {
+                console.log(data);
+                if (data.status == 200) {
+                    console.log('success');
+                    $location.path('/user/landing');
+
+                }
+            }
+        );
     };
 
     $scope.submitRegister = function() {
@@ -22,8 +29,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
             department1: $scope.loginForm.department1,
             department2: $scope.loginForm.department2,
             department3: $scope.loginForm.department3
-        }
+        };
         Login.processRegistration(data);
-    }
-
+    };
 });

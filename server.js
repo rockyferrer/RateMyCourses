@@ -4,9 +4,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
+var pw = require('./password.js');
 
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 
 var MONGODB = 'mongodb://localhost/Team23-RateMyCourses';
@@ -47,7 +50,9 @@ app.use(session({
     secret: 'pla37SN4KMz9I2t3B4qZd9Nh82758BJx',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: {
+        secure: false
+    }
 }));
 
 
@@ -60,21 +65,28 @@ function getCourses(req, res) {
     var code = req.query.courseCode;
     var dept = req.query.department;
     if (code && dept) {
-        Course.find({ courseCode: req.query.courseCode, department: req.query.department }, function(err, courses) {
+        Course.find({
+            courseCode: req.query.courseCode,
+            department: req.query.department
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
             res.json(courses);
         });
     } else if (code) {
-        Course.find({ courseCode: code }, function(err, courses) {
+        Course.find({
+            courseCode: code
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
             res.json(courses);
         });
     } else if (dept) {
-        Course.find({ department: dept }, function(err, courses) {
+        Course.find({
+            department: dept
+        }, function(err, courses) {
             if (err) {
                 res.send(err);
             }
@@ -92,27 +104,42 @@ function getCourses(req, res) {
 };
 
 function getCourse(req, res) {
-    var code = req.query.courseCode;
-    var dept = req.query.department;
-    if (code && dept) {
-        Course.findOne({ courseCode: code, department: dept }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else {
-        Course.find(function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    }
+    console.log(new Date().toLocaleTimeString() + req.params.courseCode);
+    var code = req.params.courseCode;
+
+    Course.findOne({
+        courseCode: code
+    }, function(err, course) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        console.log("Success");
+        res.json(course);
+    });
+};
+
+/**
+ * Responds with suggested courses based on department parameter
+ */
+function getSuggestedCourses(req, res) {
+    var dept = req.param.department;
+    Course.find({
+        department: dept
+    }, function(err, courses) {
+        if (err) {
+            res.send(err);
+            return;
+        }
+        res.json(courses);
+    });
 };
 
 function getDepartment(req, res) {
-    Department.findOne({ name: req.param.department },
+    Department.findOne({
+            name: req.param.department
+        },
         function(err, department) {
             if (err) {
                 res.send(err);
@@ -125,7 +152,9 @@ function getDepartment(req, res) {
 
 function getDepartmentCourses(req, res) {
     console.log(req.department);
-    Course.find({ department: req.department },
+    Course.find({
+            department: req.department
+        },
         function(err, courses) {
             if (err) {
                 res.send(err);
@@ -161,30 +190,75 @@ function getAllFaculties(req, res) {
 }
 
 function userLogin(req, res) {
-    console.log(req.body);
-    User.find({ "email": req.body.email, "password": req.body.email })
-    res.end();
+    console.log(req.body.email + " - " + req.body.password);
+    if (validateUser(req.body.email, req.body.password)) {
+        res.status(200).end();
+    } else {
+        res.status(404).end();
+    }
 }
 
+//TODO: Implement
+function validateUser(email, password) {
+    User.findOne({ "email": email }, function(err, user) {
+        if (err) {
+            console.log("Error finding user.");
+            return false;
+        } else if (user == undefined) {
+            return false;
+        } else {
+            console.log(user);
+            //TODO: Add to cookie
+            return (pw.validatePassphrase(password,
+                user.salt, user.password));
+        }
+    });
+    return true;
+    //console.log(req.body);
+    //User.find({ "email": req.body.email, "password": req.body.email })
+    //res.end();
+}
+
+// TODO: Implement multiple departments
 function userRegister(req, res) {
     console.log(req.body);
-    var newUser = new User({
-        email: req.body.email,
-        password: req.body.password,
-        department: req.body.department1,
-        faculty: req.body.faculty,
-        admin: false
-    });
+    var newUser = createUser(req.body);
     console.log(newUser);
-    newUser.save(function(error) {
+    newUser.save(function(error, usr) {
         if (error) {
             console.log(error);
             res.send(error);
         } else {
             console.log("Created a new user.");
+            req.session.user = usr;
+            res.status(200).end();
         }
     });
-    res.end();
+}
+
+function createUser(data) {
+    var hash = pw.createNewHash(data.password);
+    var newUser = new User({
+        email: data.email,
+        password: hash.passwordHash,
+        salt: hash.salt,
+        department: data.department1,
+        faculty: data.faculty,
+        admin: false
+    });
+    return newUser;
+}
+
+function getUserInfo(req, res) {
+    var user = req.param.userID;
+    User.findOne({
+        _id: user
+    }, function(err, users) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(users);
+    });
 }
 
 
@@ -194,18 +268,31 @@ app.param('department', function(req, res, next, department) {
     next();
 });
 
-// API Endpoints
+app.param('courseCode', function(req, res, next, courseCode) {
+    req.courseCode = courseCode;
+    next();
+});
+
+app.param('userID', function(req, res, next, userID) {
+    req.userID = userID;
+    next();
+});
+
+/**
+ * API Endpoints
+ */
 
 //Department
 //app.get('/dept/:department', getDepartment);
 app.get('/api/dept/all', getAllDepartments);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
-app.get('/api/courses/:courseCode', getCourse);
 
 //Course
-
+app.get('/api/courses/:courseCode', getCourse);
+app.get('/api/dept/:department/suggested', getSuggestedCourses);
 
 //User
+app.get('/api/user/:userID', getUserInfo);
 app.post('/api/user/login', userLogin);
 app.post('/api/user/register', userRegister);
 
@@ -219,8 +306,21 @@ app.get('/api/faculties/all', getAllFaculties);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+app.get('/search', function(req, res) {
+    res.redirect('/');
+});
 app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-
-app.get('/courses', getCourses);
+app.get('/user/landing', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+app.get('/user/profile', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+app.get('/courses/:courseCode', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+app.get('/dept/:department', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+})
