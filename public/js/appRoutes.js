@@ -32,7 +32,7 @@ angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'Landi
     })
 
     // User landing page
-    .when('/landing', {
+    .when('/user/landing', {
         templateUrl: 'views/userlanding.html',
         controller: 'LandingController',
         css: 'css/userlanding.css'

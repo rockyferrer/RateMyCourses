@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
+var pw = require('./password.js');
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -199,28 +200,53 @@ function userLogin(req, res) {
 
 //TODO: Implement
 function validateUser(email, password) {
+    User.findOne({ "email": email }, function(err, user) {
+        if (err) {
+            console.log("Error finding user.");
+            return false;
+        } else if (user == undefined) {
+            return false;
+        } else {
+            console.log(user);
+            //TODO: Add to cookie
+            return (pw.validatePassphrase(password,
+                user.salt, user.password));
+        }
+    });
     return true;
+    //console.log(req.body);
+    //User.find({ "email": req.body.email, "password": req.body.email })
+    //res.end();
 }
 
+// TODO: Implement multiple departments
 function userRegister(req, res) {
     console.log(req.body);
-    var newUser = new User({
-        email: req.body.email,
-        password: req.body.password,
-        department: req.body.department1,
-        faculty: req.body.faculty,
-        admin: false
-    });
+    var newUser = createUser(req.body);
     console.log(newUser);
-    newUser.save(function(error) {
+    newUser.save(function(error, usr) {
         if (error) {
             console.log(error);
             res.send(error);
         } else {
             console.log("Created a new user.");
+            req.session.user = usr;
+            res.status(200).end();
         }
     });
-    res.end();
+}
+
+function createUser(data) {
+    var hash = pw.createNewHash(data.password);
+    var newUser = new User({
+        email: data.email,
+        password: hash.passwordHash,
+        salt: hash.salt,
+        department: data.department1,
+        faculty: data.faculty,
+        admin: false
+    });
+    return newUser;
 }
 
 function getUserInfo(req, res) {
@@ -252,7 +278,9 @@ app.param('userID', function(req, res, next, userID) {
     next();
 });
 
-// API Endpoints
+/**
+ * API Endpoints
+ */
 
 //Department
 //app.get('/dept/:department', getDepartment);
@@ -278,12 +306,22 @@ app.get('/api/faculties/all', getAllFaculties);
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+app.get('/search', function(req, res) {
+    res.redirect('/');
+});
 app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
-app.get('/landing', function(req, res) {
+app.get('/user/landing', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
+app.get('/user/profile', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 app.get('/courses/:courseCode', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
+
+app.get('/dept/:department', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+})

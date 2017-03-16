@@ -1,4 +1,4 @@
-angular.module('LoginService', []).factory('Login', ['$http', function($http) {
+angular.module('LoginService', []).factory('Login', ['$http', '$location', function($http, $location, $route) {
 
     return {
         //TODO: No longer needed
@@ -13,19 +13,22 @@ angular.module('LoginService', []).factory('Login', ['$http', function($http) {
             return $http.get('/api/faculties/all');
         },
 
-        processLogin: function($location, formData) {
-            return $http.post('/api/user/login', formData).then(
-                function(data) {
-                    if (data.status == 200) {
-                        console.log('success');
-                        $location = '/landing';
-                    }
-                }
-            );
+        processLogin: function(formData) {
+            return $http.post('/api/user/login', formData);
         },
 
         processRegistration: function(formData) {
-            return $http.post('/api/user/register', formData);
+            return $http.post('/api/user/register', formData).then(
+                function(data) {
+                    if (data.status == 200) {
+                        console.log('success');
+                        $location.path('/user/landing');
+                        $scope.apply();
+                    } else {
+                        console.log(data.status);
+                    }
+                }
+            );
         }
     }
 

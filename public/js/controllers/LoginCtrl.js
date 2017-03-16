@@ -9,7 +9,16 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
     }));
 
     $scope.submitLogin = function() {
-        Login.processLogin($scope.loginForm);
+        Login.processLogin($scope.loginForm).then(
+            function(data) {
+                console.log(data);
+                if (data.status == 200) {
+                    console.log('success');
+                    $location.path('/user/landing');
+
+                }
+            }
+        );
     };
 
     $scope.submitRegister = function() {
@@ -20,8 +29,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
             department1: $scope.loginForm.department1,
             department2: $scope.loginForm.department2,
             department3: $scope.loginForm.department3
-        }
+        };
         Login.processRegistration(data);
-    }
-
+    };
 });
