@@ -259,7 +259,7 @@ app.param('userID', function(req, res, next, userID) {
 app.param('query', function(req, res, next, query){
     req.query = query;
     next();
-}
+});
 
 /**
  * API Endpoints

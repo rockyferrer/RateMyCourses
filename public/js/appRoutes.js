@@ -39,6 +39,7 @@ angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'Landi
                 css: 'css/userlanding.css'
             })
 
+
             .otherwise({
                 redirectTo: '/'
             });
