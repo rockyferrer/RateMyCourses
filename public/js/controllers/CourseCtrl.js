@@ -20,6 +20,9 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $scope.currentTags = [];
 
+    /**
+     * Checks if the currentTags array contains any nulls, used in processTag
+      */
     $scope.tagsContainsNulls = function() {
         for (var i = 0; i < $scope.currentTags.length; i++) {
             if ($scope.currentTags[i] == null) {
@@ -29,16 +32,18 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         return false;
     }
 
-    //TODO: there is a bug when you select 3 tags, then deselect one and then
-    // try to reselect it again. Otherwise, it works perfectly if you stick with
-    // the first 3 tags u choose
-    $scope.chooseTag = function($event, $index) {
+    /**
+     * function for when a tag is selected or deselected
+     */
+    $scope.processTag = function($event, $index) {
         var chosenEl = angular.element($event.target);
         var chosenTag = $scope.tags[$index];
         console.log($scope.currentTags.indexOf(chosenTag));
-        //if the tag has not been chosen and less than three overall have been chosen
-        if ($scope.currentTags.indexOf(chosenTag) == -1 && $scope.currentTags.length < 3) {
+        //if the tag has not been chosen and
+        //less than three overall have been chosen or there are nulls in currentTags
+        if ($scope.currentTags.indexOf(chosenTag) == -1 && ($scope.currentTags.length < 3 || $scope.tagsContainsNulls)) {
             console.log('chose: ' + chosenTag);
+            //if there is a null in the array, replace it with the selected tag
             if ($scope.tagsContainsNulls()) {
                 for (var i = 0; i < $scope.currentTags.length; i++) {
                     if ($scope.currentTags[i] == null) {
@@ -46,24 +51,31 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
                         break;
                     }
                 }
-            } else {
+            } else { //no nulls, so just add it to the array
                 $scope.currentTags.push(chosenTag);
             }
+            //change css styles accordingly
             chosenEl.css('background-color', '#337ab7');
             console.log('stored: ' + chosenTag);
         } else if ($scope.currentTags.indexOf(chosenTag) != -1) {
             console.log("deselecting");
+            //replace deselected tags in currentTags array with null
             $scope.currentTags[$scope.currentTags.indexOf(chosenTag)] = null;
+            //change css styles accordingly
             chosenEl.css('background-color', 'rgba(55, 64, 70, 0.4)');
 
         }
     };
 
+    /**
+     * function for when a user wants to post their Rating
+     * ie. when the done button is clicked.
+     */
     $scope.postRating = function() {
         //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('the ' + i + 'th element is ' + $scope.currentTags[i]);
+                console.log('Element ' + i + ' is '  + $scope.currentTags[i]);
             }
         } else {
             console.log('no tags chosen');

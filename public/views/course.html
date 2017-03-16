@@ -10,7 +10,7 @@
 
         <article class="custom-article panel-body">
             <div class="description col-md-6">
-                Department: {{ course.department }} <br> Avg class size estimate: 300 students <br> Tags: <br>
+                Department: {{ course.department }} <br> Avg class size estimate: {{ course.classSize }} students <br> Tags: <br>
                 <div class="col-md-9">
                     <ul class="tags">
                         <li data-ng-repeat="tag in tags">{{tag}}</li>
@@ -91,7 +91,7 @@
         <label for="tags-selection" class="add-field">Select up to 3 tags that best describe this course:</label>
         <div id="tags-selection" class="row add-field">
             <ul class="tags">
-                <li data-ng-repeat="tag in tags" data-ng-click="chooseTag($event, $index)">{{tag}}</li>
+                <li data-ng-repeat="tag in tags" data-ng-click="processTag($event, $index)">{{tag}}</li>
             </ul>
         </div>
         <div class="row add-field">
