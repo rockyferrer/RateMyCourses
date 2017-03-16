@@ -13,16 +13,7 @@
                 Department: {{ course.department }} <br> Avg class size estimate: 300 students <br> Tags: <br>
                 <div class="col-md-9">
                     <ul class="tags">
-                        <li>Cool</li>
-                        <li>Fun</li>
-                        <li>Great TAs</li>
-                        <li>Exclusive Tag For Best Course Ever</li>
-                        <li>Fair</li>
-                        <li>Great Professor</li>
-                        <li>Lots of Smiles</li>
-                        <li>Spicy</li>
-                        <li>Kahoot</li>
-                        <li>Please Give Me a Good Mark</li>
+                        <li data-ng-repeat="tag in tags">{{tag}}</li>
                     </ul>
                 </div>
             </div>
@@ -100,30 +91,19 @@
         <label for="tags-selection" class="add-field">Select up to 3 tags that best describe this course:</label>
         <div id="tags-selection" class="row add-field">
             <ul class="tags">
-                <li class="tag">Cool</li>
-                <li>Fun</li>
-                <li>Great TAs</li>
-                <li>Exclusive Tag For Best Course Ever</li>
-                <li>Fair</li>
-                <li>Great Professor</li>
-                <li>Lots of Smiles</li>
-                <li>Spicy</li>
-                <li>Kahoot</li>
-                <li>Please Give Me a Good Mark</li>
+                <li data-ng-repeat="tag in tags" data-ng-click="chooseTag($event, $index)">{{tag}}</li>
             </ul>
         </div>
         <div class="row add-field">
             <div class="col-md-6 comment">
                 <h4>Comment:</h4>
                 <form>
-
                     <input type="text" name="comment" size="40" id="comment-box"><br>
-
                 </form>
             </div>
 
             <div class="col-md-6 done">
-                <button type="submit" id="done-btn" class="btn btn-def text-center">Done</button>
+                <button type="submit" id="done-btn" class="btn btn-def text-center" data-ng-click="postRating()">Done</button>
             </div>
         </div>
 
