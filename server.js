@@ -103,6 +103,35 @@ function getCourses(req, res) {
 
 };
 
+
+function searchResults(req, res) {
+    console.log(req.query);
+        Course.find({
+            courseCode: {$regex: '.*' + req.query + '.*'}
+        },function(err, course) {
+           if (err) {
+               console.log(err);
+               res.send(err);
+               return;
+            }
+            console.log("Success");
+            res.json(course);
+        });
+
+
+        Department.find({
+            name: {$regex: '.*' + req.query + '.*'}
+        },function(err, dept) {
+           if (err) {
+               console.log(err);
+               res.send(err);
+               return;
+            }
+            console.log("Success");
+            res.json(dept);
+        });
+};
+
 function getCourse(req, res) {
     console.log(new Date().toLocaleTimeString() + req.params.courseCode);
     var code = req.params.courseCode;
@@ -227,6 +256,11 @@ app.param('userID', function(req, res, next, userID) {
     next();
 });
 
+app.param('query', function(req, res, next, query){
+    req.query = query;
+    next();
+}
+
 /**
  * API Endpoints
  */
@@ -239,6 +273,9 @@ app.get('/api/dept/:department/courses', getDepartmentCourses);
 //Course
 app.get('/api/courses/:courseCode', getCourse);
 app.get('/api/dept/:department/suggested', getSuggestedCourses);
+
+//Search
+app.get('/api/search/:query', searchResults);
 
 //User
 app.get('/api/user/:userID', getUserInfo);
