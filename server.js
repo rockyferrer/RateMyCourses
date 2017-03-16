@@ -5,7 +5,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 var pw = require('./password.js');
-var nonEndPointFunctions = require('./nonEndPointFunctions.js');
+var nonEndPts = require('./nonEndPointFunctions.js');
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -55,7 +55,6 @@ app.use(session({
         secure: false
     }
 }));
-
 
 /**
  * Returns matching courses.
@@ -234,7 +233,7 @@ app.param('userID', function(req, res, next, userID) {
 
 //Department
 //app.get('/dept/:department', getDepartment);
-app.get('/api/dept/all', getAllDepartments);
+app.get('/api/dept/all', nonEndPts.getAllDepartments);
 app.get('/api/dept/:department/courses', getDepartmentCourses);
 
 //Course
@@ -243,11 +242,11 @@ app.get('/api/dept/:department/suggested', getSuggestedCourses);
 
 //User
 app.get('/api/user/:userID', getUserInfo);
-app.post('/api/user/login', userLogin);
-app.post('/api/user/register', userRegister);
+app.post('/api/user/login', nonEndPts.userLogin);
+app.post('/api/user/register', nonEndPts.userRegister);
 
 // Misc
-app.get('/api/faculties/all', getAllFaculties);
+app.get('/api/faculties/all', nonEndPts.getAllFaculties);
 
 // Angular (Normal) endpoints
 app.get('/', function(req, res) {
