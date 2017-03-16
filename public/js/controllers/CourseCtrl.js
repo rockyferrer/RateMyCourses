@@ -20,7 +20,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $scope.currentTags = [];
 
-    $scope.containsNulls = function() {
+    $scope.tagsContainsNulls = function() {
         for (var i = 0; i < $scope.currentTags.length; i++) {
             if ($scope.currentTags[i] == null) {
                 return true;
@@ -38,9 +38,8 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         console.log($scope.currentTags.indexOf(chosenTag));
         //if the tag has not been chosen and less than three overall have been chosen
         if ($scope.currentTags.indexOf(chosenTag) == -1 && $scope.currentTags.length < 3) {
-            chosenEl.css('background-color', '#337ab7');
             console.log('chose: ' + chosenTag);
-            if ($scope.containsNulls()) {
+            if ($scope.tagsContainsNulls()) {
                 for (var i = 0; i < $scope.currentTags.length; i++) {
                     if ($scope.currentTags[i] == null) {
                         $scope.currentTags[i] = chosenTag;
@@ -50,15 +49,18 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
             } else {
                 $scope.currentTags.push(chosenTag);
             }
+            chosenEl.css('background-color', '#337ab7');
             console.log('stored: ' + chosenTag);
         } else if ($scope.currentTags.indexOf(chosenTag) != -1) {
             console.log("deselecting");
             $scope.currentTags[$scope.currentTags.indexOf(chosenTag)] = null;
             chosenEl.css('background-color', 'rgba(55, 64, 70, 0.4)');
+
         }
     };
 
     $scope.postRating = function() {
+        //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
                 console.log('the ' + i + 'th element is ' + $scope.currentTags[i]);
