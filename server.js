@@ -119,9 +119,9 @@ function searchResults(req, res) {
         });
 
 
-        Department.find({
+ /**       Department.find({
             name: {$regex: '.*' + req.query + '.*'}
-        },function(err, dept) {
+       },function(err, dept) {
            if (err) {
                console.log(err);
                res.send(err);
@@ -129,7 +129,7 @@ function searchResults(req, res) {
             }
             console.log("Success");
             res.json(dept);
-        });
+        });**/
 };
 
 function getCourse(req, res) {
