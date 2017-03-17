@@ -1,7 +1,17 @@
+.error-msg {
+    display: block;
+    color: red;
+}
+
+.hidden-error-msg {
+    display: block;
+    color: red;
+    display: none;
+}
+
 .form-group {
     padding: 0 1rem;
 }
-
 
 .select-dept {
     color: black;
@@ -10,7 +20,6 @@
 .register-field {
     display: none;
 }
-
 
 .login-btn {
     background-color: #6b6a6a;
@@ -26,8 +35,8 @@
     color: black;
 }
 
-#create-account{
-	display: none;
+#create-account {
+    display: none;
 }
 
 @media(min-width:576px) {}

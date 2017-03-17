@@ -1,4 +1,4 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, Login) {
+angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location, Login) {
 
     $http.get('/api/faculties/all').then(function(data) {
         $scope.faculty_list = data.data;
@@ -16,6 +16,12 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
                     console.log('success');
                     $location.path('/user/landing');
 
+                } else {
+                    console.log('faliure');
+                    // Clear fields
+                    // Show error
+                    element(by.class("hidden-error-msg")).getAtrribute('class')
+                        .toBe('error-msg');
                 }
             }
         );
@@ -30,6 +36,16 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
             department2: $scope.loginForm.department2,
             department3: $scope.loginForm.department3
         };
-        Login.processRegistration(data);
+        Login.processRegistration(data).then(
+            function(data) {
+                if (data.status == 200) {
+                    console.log('success');
+                    $location.path('/user/landing');
+
+                } else {
+                    console.log(data.status);
+                }
+            }
+        );
     };
 });
