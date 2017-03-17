@@ -124,13 +124,13 @@ function getDepartment(req, res) {
             if (err) {
                 res.send(err);
             } else {
-                res.sendFile(__dirname + '/assets/department.html');
+                res.json(deparment)
             }
         }
     );
 }
 
-function getDepartmentCourses(req, res) {
+function getAllDepartmentCourses(req, res) {
     console.log(req.department);
     Course.find({
             department: req.department
@@ -264,7 +264,7 @@ module.exports = {
     getCourse,
     getSuggestedCourses,
     getDepartment,
-    getDepartmentCourses,
+    getAllDepartmentCourses,
     getUserInfo,
     userRegister,
     userLogin,
