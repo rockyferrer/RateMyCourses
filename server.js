@@ -231,6 +231,41 @@ function getUserInfo(req, res) {
     });
 }
 
+// TODO: Figure out how to add ids to the ratings
+function postRating(data) {
+    var newRating = new Rating({
+	user: data.user,
+	dateTaken: data.date,
+	difficulty: data.difficulty,
+	workload: data.workload,
+	learningExp: data.learningExp,
+	overall: data.overall,
+	prof: data.prof,
+	tags: data.tags,
+	helpfulness: 0,
+	comment: data.comment
+    });
+    var len = data.course.ratings.length;
+    data.course.ratings.push(data.user);
+    if(len == 0){
+	var overall = 0;
+    }
+    Course.update({
+	courseCode: data.course.courseCode
+    }, 
+    {
+	$set: { 
+	    overall: (data.course.overall * len + data.overall)/(len + 1),
+	    difficulty: (data.course.difficulty * len + data.difficulty)/(len + 1),
+	    workload: (data.course.workload * len + data.workload)/(len + 1),
+	    learningExp: (data.course.learningExp * len + data.learningExp)/(len + 1),
+	    ratings: data.course.ratings
+	}
+    });
+
+    return newRating;
+}
+
 // TODO: Add error checking
 app.param('department', function(req, res, next, department) {
     req.department = department;
