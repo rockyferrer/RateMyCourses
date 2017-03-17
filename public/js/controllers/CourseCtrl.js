@@ -1,10 +1,25 @@
 var app = angular.module('CourseCtrl', []);
 
 // Star rating code taken from http://www.angulartutorial.net/2014/03/rating-stars-in-angular-js-using.html
-var ratingCtrl = app.controller('RatingCtrl', function($scope) {
+var ratingCtrl = app.controller('RatingCtrl', function($scope, $http) {
     $scope.rating = 5;
-    $scope.rateFunction = function(rating) {
-        console.log('Rating selected - ' + rating);
+    $scope.changeRating = function(rating) {
+        $window.alert('Rating selected - ' + rating);
+        var data = {
+            rating: rating
+        };
+        console.log('data');
+
+        $http.post('/api/courses/courseCode', angular.toJson(data), {
+                cache: false
+            })
+            .success(function(data) {
+                success(data);
+            })
+            .error(function(data) {
+                error(data);
+            });
+
     };
 });
 
@@ -18,9 +33,9 @@ ratingCtrl.directive('starRating',
                 '</li>' +
                 '</ul>',
             scope: {
-                ratingValue: '=',
-                max: '=',
-                onRatingSelected: '&'
+                ratingValue: '=', //value set in html attr
+                max: '=', //value set in html attr
+                onRatingSelected: '&' //expects a function
             },
             link: function(scope, elem, attrs) {
                 var updateStars = function() {
@@ -33,6 +48,8 @@ ratingCtrl.directive('starRating',
                 };
 
                 scope.toggle = function(index) {
+                    // var ratedEl = angular.element(event.target);
+                    // console.log(ratedEl.parent().parent().className);
                     scope.ratingValue = index + 1;
                     scope.onRatingSelected({
                         rating: index + 1

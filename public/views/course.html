@@ -65,7 +65,7 @@
                 <div class="rating-container">
                     <!-- Star rating code taken from http://www.angulartutorial.net/2014/03/rating-stars-in-angular-js-using.html -->
                     <div data-ng-init="rating = star.rating + 1">
-                        <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)">
+                        <div star-rating class="star-rating" rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)">
                             <ul>
                                 <li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">
                             </ul>

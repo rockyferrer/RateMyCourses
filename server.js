@@ -120,7 +120,7 @@ function searchResults(req, res) {
             console.log("Success");
             res.json(course);
         });
-	
+
 };
 
 function getCourse(req, res) {
@@ -264,6 +264,7 @@ app.get('/api/dept/:department/courses', getDepartmentCourses);
 //Course
 app.get('/api/courses/:courseCode', getCourse);
 app.get('/api/dept/:department/suggested', getSuggestedCourses);
+app.post('/api/dept/:department/suggested', getSuggestedCourses);
 
 //Search
 app.get('/api/search/:query', searchResults);
@@ -271,10 +272,11 @@ app.get('/api/search/:query', searchResults);
 //User
 app.get('/api/user/:userID', getUserInfo);
 app.post('/api/user/login', nonEndPts.userLogin);
-app.post('/api/user/register', nonEndPts.userRegister);
+//app.post('/api/user/register', nonEndPts.userRegister); //may need this endpoint for posting ratings
 
 // Misc
 app.get('/api/faculties/all', nonEndPts.getAllFaculties);
+
 
 // Angular (Normal) endpoints
 app.get('/', function(req, res) {
