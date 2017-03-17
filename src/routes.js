@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var models = require('./model.js');
 var pw = require('./password.js');
+var utils = require('./utils.js');
 
 var db = mongoose.connection;
 
@@ -144,27 +145,6 @@ function getDepartmentCourses(req, res) {
     );
 }
 
-//TODO: Implement
-function validateUser(email, password) {
-    User.findOne({ "email": email }, function(err, user) {
-        if (err) {
-            console.log("Error finding user.");
-            return false;
-        } else if (user == undefined) {
-            return false;
-        } else {
-            console.log(user);
-            //TODO: Add to cookie
-            return (pw.validatePassphrase(password,
-                user.salt, user.password));
-        }
-    });
-    return true;
-    //console.log(req.body);
-    //User.find({ "email": req.body.email, "password": req.body.email })
-    //res.end();
-}
-
 function getUserInfo(req, res) {
     var user = req.param.userID;
     User.findOne({
@@ -180,7 +160,7 @@ function getUserInfo(req, res) {
 // TODO: Implement multiple departments
 function userRegister(req, res) {
     console.log(req.body);
-    var newUser = util.createUser(req.body);
+    var newUser = utils.createUser(req.body);
     console.log(newUser);
     newUser.save(function(error, usr) {
         if (error) {
@@ -194,14 +174,30 @@ function userRegister(req, res) {
     });
 }
 
+//TODO: Implement
 function userLogin(req, res) {
-    console.log(req.body.email + " - " + req.body.password);
-    if (validateUser(req.body.email, req.body.password)) {
-        res.status(200).end();
-    } else {
-        res.status(404).end();
-    }
+    User.findOne({ "email": req.body.email }, function(err, user) {
+        if (err) {
+            console.log("Error finding user.");
+            return false;
+        } else if (user == null) {
+            console.log("no user found");
+            res.status(404).end();
+        } else {
+            console.log(user);
+            //TODO: Add to cookie
+            if (pw.validatePassphrase(req.body.password,
+                    user.salt, user.password)) {
+                console.log("succesful login");
+                res.status(200).end();
+            } else {
+                console.log("bad password")
+            };
+        }
+    });
+
 }
+
 
 function getAllFaculties(req, res) {
     Course.find().distinct('faculty',
@@ -268,7 +264,6 @@ module.exports = {
     getSuggestedCourses,
     getDepartment,
     getDepartmentCourses,
-    validateUser,
     getUserInfo,
     userRegister,
     userLogin,

@@ -5,7 +5,6 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 var path = require('path');
-var pw = require('./password.js');
 var utils = require('./utils.js');
 var routes = require('./routes.js');
 
@@ -94,7 +93,7 @@ app.get('/api/search/:query', routes.searchResults);
 //User
 app.get('/api/user/:userID', routes.getUserInfo);
 app.post('/api/user/login', routes.userLogin);
-//app.post('/api/user/register', utils.userRegister); //may need this endpoint for posting ratings
+app.post('/api/user/register', routes.userRegister);
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);

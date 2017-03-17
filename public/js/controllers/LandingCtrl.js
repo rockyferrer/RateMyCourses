@@ -1,6 +1,6 @@
-angular.module('LandingCtrl', []).controller('LandingController', function($scope, LandingService) {
+angular.module('LandingCtrl', []).controller('LandingController', function($scope, Landing) {
 
-    $scope.suggestedCourses = LandingService.getSuggestedCourses();
-    $scope.courseHistory = LandingService.getUserHistory();
-    $scope.ratedCourses = LandingService.getCoursesRated();
+    $scope.suggestedCourses = Landing.getSuggestedCourses();
+    $scope.courseHistory = Landing.getUserHistory();
+    $scope.ratedCourses = Landing.getCoursesRated();
 });
