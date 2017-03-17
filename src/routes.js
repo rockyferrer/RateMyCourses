@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var models = require('./model.js');
+var pw = require('./password.js');
 
 var db = mongoose.connection;
 
@@ -275,3 +276,154 @@ module.exports = {
     getAllDepartments,
     postRating
 };
+
+/**
+ * Returns matching courses.
+ * Optional course code and department parameters.
+ */
+function getCourses(req, res) {
+    console.log(req.query);
+    var code = req.query.courseCode;
+    var dept = req.query.department;
+    if (code && dept) {
+        Course.find({
+            courseCode: req.query.courseCode,
+            department: req.query.department
+        }, function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    } else if (code) {
+        Course.find({
+            courseCode: code
+        }, function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    } else if (dept) {
+        Course.find({
+            department: dept
+        }, function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    } else {
+        Course.find(function(err, courses) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(courses);
+        });
+    }
+
+};
+
+
+function searchResults(req, res) {
+    console.log(req.query);
+    Course.find({
+        $or: [{ courseCode: { $regex: '.*' + req.query + '.*' } },
+            { title: { $regex: '.*' + req.query + '.*' } },
+            { department: { $regex: '.*' + req.query + '.*' } },
+            { description: { $regex: '.*' + req.query + '.*' } }
+        ]
+    }, function(err, course) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        console.log("Success");
+        res.json(course);
+    });
+
+};
+
+function getCourse(req, res) {
+    console.log(new Date().toLocaleTimeString() + req.params.courseCode);
+    var code = req.params.courseCode;
+
+    Course.findOne({
+        courseCode: code
+    }, function(err, course) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        console.log("Success");
+        res.json(course);
+    });
+};
+
+/**
+ * Responds with suggested courses based on department parameter
+ */
+function getSuggestedCourses(req, res) {
+    var dept = req.param.department;
+    Course.find({
+        department: dept
+    }, function(err, courses) {
+        if (err) {
+            res.send(err);
+            return;
+        }
+        res.json(courses);
+    });
+};
+
+function getDepartment(req, res) {
+    Department.findOne({
+            name: req.param.department
+        },
+        function(err, department) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.sendFile(__dirname + '/assets/department.html');
+            }
+        }
+    );
+}
+
+function getDepartmentCourses(req, res) {
+    console.log(req.department);
+    Course.find({
+            department: req.department
+        },
+        function(err, courses) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(courses);
+            }
+        }
+    );
+}
+
+//TODO: Implement
+function validateUser(email, password) {
+    User.findOne({ "email": email }, function(err, user) {
+        if (err) {
+            console.log("Error finding user.");
+            return false;
+        } else if (user == undefined) {
+            return false;
+        } else {
+            console.log(user);
+            //TODO: Add to cookie
+            return (pw.validatePassphrase(password,
+                user.salt, user.password));
+        }
+    });
+    return true;
+    //console.log(req.body);
+    //User.find({ "email": req.body.email, "password": req.body.email })
+    //res.end();
+}
