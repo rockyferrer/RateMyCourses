@@ -87,13 +87,13 @@ function searchResults(req, res) {
 	}
 	depts[dept]++;
 	});
-	var popular = {};
+	var popular = [];
 	if(depts.length <= 3){
 	    popular = deps;
 	}
 	for(var i= 0; i < 3; i++){
 	    var max = findmax(depts);
-	    popular[max] = depts[max];
+	    popular.push(max);
 	    delete depts[max];
 	}
 	var json = {courses: courses, depts: popular};
