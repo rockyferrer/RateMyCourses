@@ -6,7 +6,7 @@
     <!-- Suggested courses -->
     <section id="suggested-courses" class="row col-md-8 custom-section">
         <h2 class="section-header">Suggested Courses</h2>
-        <article data-ng-repeat="c in suggestedCourses | limitTo:getLimit()" class="btn course suggested-course custom-article">
+        <article data-ng-repeat="c in suggestedCourses | limitTo:getLimit()" class="btn course suggested-course custom-article" data-ng-click="gotoCourse(c)">
             <div class="row">
                 <h3 class="course-code">{{ c.courseCode }}</h3>
                 <h4>{{ c.title }}</h4>

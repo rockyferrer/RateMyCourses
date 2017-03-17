@@ -4,7 +4,7 @@
     <h2 class="section-header">Recommended Courses</h2>
 
     <!-- Format of a course in the suggested courses box -->
-    <article data-ng-repeat="c in suggestedCourses" class="btn course-result custom-article">
+    <article data-ng-repeat="c in suggestedCourses" class="btn course-result custom-article" data-ng-click="gotoCourse(c)">
         <!-- Course code and title -->
         <div class="row">
             <h3 class="course-code">{{ c.courseCode }}</h3>
@@ -28,7 +28,7 @@
         <h2 class="section-header">History</h2>
 
         <!-- Format of a course in the history box -->
-        <article data-ng-repeat="c in courseHistory" class="btn course-result-compact custom-article">
+        <article data-ng-repeat="c in courseHistory" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">
 
             <!-- Course code and title -->
             <div class="row">
@@ -49,7 +49,7 @@
         <h2 class="section-header">Courses You've Rated</h2>
 
         <!-- Format of a course in the rated courses box -->
-        <article data-ng-repeat="c in ratedCourses" class="btn course-result-compact custom-article">
+        <article data-ng-repeat="c in ratedCourses" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">
 
             <!-- Course code and title -->
             <div class="row">

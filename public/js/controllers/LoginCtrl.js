@@ -17,11 +17,10 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
                 console.log(data);
                 if (data.data == true) {
                     $rootScope.loggedIn = true;
-                    $rootScope.user = data.data.email;
+                    $rootScope.user = $scope.loginForm.email;
                     $location.path('/user/landing');
 
                 } else if (data.data == false) {
-                    console.log('faliure');
                     // Clear fields
                     $scope.error = "Invalid login.";
                 }
@@ -50,13 +49,11 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
         Login.processRegistration(data).then(
             function(data) {
                 if (data.status == 200) {
-                    console.log('success user:' + data.data.user);
                     $rootScope.loggedIn = true;
-                    $rootScope.user = data.data.email;
+                    $rootScope.user = $scope.loginForm.email;
                     $location.path('/user/landing');
 
                 } else {
-                    console.log(data.status);
                     $scope.error = "Error creating user. Relax, it's not your fault.";
                 }
             }
