@@ -64,7 +64,7 @@ CourseScraper.prototype.parseAndSave = function() {
             description: value.description,
             popularTags: [],
             classSize: size,
-            ratings: [],
+            ratingCount: 0,
 	    overall: 0.0,
 	    difficulty: 0.0,
 	    workload: 0.0,

@@ -5,7 +5,6 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var models = require('./model.js');
 var path = require('path');
-var pw = require('./password.js');
 var utils = require('./utils.js');
 var routes = require('./routes.js');
 
@@ -79,9 +78,8 @@ app.param('query', function(req, res, next, query) {
  */
 
 //Department
-//app.get('/dept/:department', getDepartment);
-app.get('/api/dept/all', routes.getAllDepartments);
-app.get('/api/dept/:department/courses', routes.getDepartmentCourses);
+app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
+app.get('/api/dept/:department/allCourses', routes.getAllDepartmentCourses);
 
 //Course
 app.get('/api/courses/:courseCode', routes.getCourse);
@@ -94,10 +92,11 @@ app.get('/api/search/:query', routes.searchResults);
 //User
 app.get('/api/user/:userID', routes.getUserInfo);
 app.post('/api/user/login', routes.userLogin);
-//app.post('/api/user/register', utils.userRegister); //may need this endpoint for posting ratings
+app.post('/api/user/register', routes.userRegister);
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);
+app.get('/api/dept/all', routes.getAllDepartments);
 
 /**
  * public Endpoints

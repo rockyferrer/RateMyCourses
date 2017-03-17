@@ -1,3 +1,9 @@
+var pw = require('./password.js');
+var mongoose = require('mongoose');
+var models = require('./model.js');
+var db = mongoose.connection;
+var User = db.model('User', models.userSchema);
+
 function createUser(data) {
     var hash = pw.createNewHash(data.password);
     var newUser = new User({
@@ -11,4 +17,12 @@ function createUser(data) {
     return newUser;
 }
 
-module.exports = { createUser };
+function loggedIn(req, res, next) {
+    if ('user' in req.session) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+module.exports = { createUser: createUser,loggedIn: loggedIn };

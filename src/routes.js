@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var models = require('./model.js');
+var pw = require('./password.js');
+var utils = require('./utils.js');
 
 var db = mongoose.connection;
 
@@ -64,6 +66,7 @@ function getCourses(req, res) {
 function searchResults(req, res) {
     console.log(req.query);
     Course.find({
+<<<<<<< HEAD
         $or: [{
                 courseCode: {
                     $regex: '.*' + req.query + '.*'
@@ -84,18 +87,55 @@ function searchResults(req, res) {
                     $regex: '.*' + req.query + '.*'
                 }
             }
+=======
+        $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
+            { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
+            { department: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
+            { description: { $regex: new RegExp('.*' + req.query + '.*', "i") } }
+>>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
         ]
-    }, function(err, course) {
+    }, function(err, courses) {
         if (err) {
             console.log(err);
             res.send(err);
             return;
         }
         console.log("Success");
-        res.json(course);
+	var depts = {};
+        courses.forEach(
+	function(course){
+	var dept = course.department;
+	if (!(dept in depts)){
+	     depts[dept] = 0;
+	}
+	depts[dept]++;
+	});
+	var popular = [];
+	if(depts.length <= 3){
+	    popular = deps;
+	}
+	for(var i= 0; i < 3; i++){
+	    var max = findmax(depts);
+	    popular.push(max);
+	    delete depts[max];
+	}
+	var json = {courses: courses, depts: popular};
+	res.json(json);
     });
 
 };
+
+function findmax(ls){
+    var max = -1;
+    var max_key = "";
+    for (item in ls){
+	if (ls[item] > max){
+	    max = ls[item];
+ 	    max_key = item;
+	}
+    }
+    return max_key;
+}
 
 function getCourse(req, res) {
     console.log(new Date().toLocaleTimeString() + req.params.courseCode);
@@ -142,13 +182,13 @@ function getDepartment(req, res) {
             if (err) {
                 res.send(err);
             } else {
-                res.sendFile(__dirname + '/assets/department.html');
+                res.json(deparment)
             }
         }
     );
 }
 
-function getDepartmentCourses(req, res) {
+function getAllDepartmentCourses(req, res) {
     console.log(req.department);
     Course.find({
             department: req.department
@@ -163,6 +203,7 @@ function getDepartmentCourses(req, res) {
     );
 }
 
+<<<<<<< HEAD
 //TODO: Implement
 function validateUser(email, password) {
     User.findOne({
@@ -186,6 +227,8 @@ function validateUser(email, password) {
     //res.end();
 }
 
+=======
+>>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
 function getUserInfo(req, res) {
     var user = req.param.userID;
     User.findOne({
@@ -201,28 +244,46 @@ function getUserInfo(req, res) {
 // TODO: Implement multiple departments
 function userRegister(req, res) {
     console.log(req.body);
-    var newUser = util.createUser(req.body);
+    var newUser = utils.createUser(req.body);
     console.log(newUser);
     newUser.save(function(error, usr) {
         if (error) {
             console.log(error);
             res.send(error);
         } else {
-            console.log("Created a new user.");
+            console.log("Created a new user. Password: " + req.body.password);
             req.session.user = usr;
             res.status(200).end();
         }
     });
 }
 
+//TODO: Implement
 function userLogin(req, res) {
-    console.log(req.body.email + " - " + req.body.password);
-    if (validateUser(req.body.email, req.body.password)) {
-        res.status(200).end();
-    } else {
-        res.status(404).end();
-    }
+    User.findOne({ "email": req.body.email }, function(err, user) {
+        if (err) {
+            console.log("Error finding user.");
+            return false;
+        } else if (user == null) {
+            console.log("no user found");
+            res.send(false);
+        } else {
+            console.log(user);
+            //TODO: Add to cookie
+            if (pw.validatePassphrase(req.body.password,
+                    user.salt, user.password)) {
+                console.log("succesful login");
+                req.session.user = user;
+                res.send(true);
+            } else {
+                console.log("bad password")
+                res.send(false);
+            };
+        }
+    });
+
 }
+
 
 function getAllFaculties(req, res) {
     Course.find().distinct('faculty',
@@ -283,6 +344,7 @@ function postRating(data) {
 }
 
 module.exports = {
+<<<<<<< HEAD
     getCourses,
     searchResults,
     getCourse,
@@ -296,4 +358,18 @@ module.exports = {
     getAllFaculties,
     getAllDepartments,
     postRating
+=======
+    getCourses: getCourses,
+    searchResults: searchResults,
+    getCourse: getCourse,
+    getSuggestedCourses: getSuggestedCourses,
+    getDepartment: getDepartment,
+    getAllDepartmentCourses: getAllDepartmentCourses,
+    getUserInfo: getUserInfo,
+    userRegister: userRegister,
+    userLogin: userLogin,
+    getAllFaculties: getAllFaculties,
+    getAllDepartments: getAllDepartments,
+    postRating: postRating
+>>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
 };

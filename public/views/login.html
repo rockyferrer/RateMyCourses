@@ -1,7 +1,13 @@
 <link rel="stylesheet" data-ng-href="css/login.css">
 <script src="js/login.js"></script>
 <form name="loginForm">
-    <h2>Login/Register</h2>
+    <div class="row">
+        <h2 class="col-md-4">Login/Register</h2>
+        <!--div class="error-msg"-->
+        <h3 class="error-msg" ng-hide="error == null">ERROR: {{error}}</h3>
+        <!--/div-->
+    </div>
+
     <div class="form-group row">
         <label>Email:</label>
         <input type="email" class="form-control input-lg" placeholder="person@mail.net" data-ng-model="loginForm.email" required>
@@ -12,7 +18,7 @@
     </div>
     <div class="form-group register-field row">
         <label>Confirm Password:</label>
-        <input type="password" class="form-control input-lg required-field" placeholder="******">
+        <input type="password" class="form-control input-lg required-field" placeholder="******" data-ng-model="loginForm.confirmPassword">
     </div>
     <div class="form-group register-field">
         <div class="row">

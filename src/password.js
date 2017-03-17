@@ -52,8 +52,8 @@ function createNewHash(password) {
  * Compare a hash value to the output of a password and salt.
  */
 function validatePassphrase(userInput, salt, expectedHash) {
-    var hash = (userInput, salt);
+    var hash = sha512(userInput, salt);
     return (expectedHash == hash.passwordHash);
 }
 
-module.exports = {createNewHash: createNewHash, validatePassphrase: validatePassphrase };
+module.exports = { createNewHash: createNewHash, validatePassphrase: validatePassphrase };

@@ -1,7 +1,16 @@
-angular.module('DepartmentCtrl', []).controller('DeartmentController', function($scope, $routeParams, DepartmentService) {
+angular.module('DepartmentCtrl', []).controller('DepartmentController', function($scope, $location, $routeParams, Department) {
 
-    $scope.allCourses = DepartmentService.getAllCourses($routeParams.department);
-    $scope.suggestedCourses = DepartmentService.getAllCourses($routeParams.department);
-    $scope.cssFilename = "department";
+    Department.getAllCourses($routeParams.department).then(function(data) {
+        console.log(data);
+        $scope.allCourses = data.data;
+    })
+
+    $scope.suggestedCourses = Department.getAllCourses($routeParams.department);
+    console.log($scope.allCourses);
+    $scope.title = $routeParams.department;
+
+    $scope.gotoCourse = function(c) {
+        $location.path('/courses/' + c.courseCode);
+    }
 
 });

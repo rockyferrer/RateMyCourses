@@ -20,11 +20,9 @@
     <!-- All courses -->
     <section id="all-courses" class="row col-md-4 custom-section">
         <h2 class="section-header">All Courses</h2>
-        <article data-ng-repeat="c in allCourses | orderBy:'courseCode'" class="btn course custom-article ">
-            <div>
-                <h4 class="course-code"> {{ c.courseCode }} </h4>
-                <h4> - {{ c.title }} </h4>
-            </div>
+        <article data-ng-repeat="c in allCourses | orderBy:'courseCode'" class="btn course custom-article " data-ng-click="gotoCourse(c)">
+            <h4 class=" course-code "> {{ c.courseCode }} </h4>
+            <h4> - {{ c.title }} </h4>
         </article>
     </section>
 </div>

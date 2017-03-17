@@ -3,7 +3,11 @@ angular.module('DepartmentService', []).factory('Department', ['$http', function
     return {
         // call to get all nerds
         getAllCourses: function(department) {
-            return $http.get('/api/dept/' + department + '/courses');
+            return $http.get('/api/dept/' + department + '/allCourses');
+        },
+
+        getSuggestedCourses: function(department) {
+            return $http.get('/api/dept/' + department + '/suggestedCourses');
         }
     }
 
