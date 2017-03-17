@@ -82,7 +82,7 @@ app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
 app.get('/api/dept/:department/allCourses', routes.getAllDepartmentCourses);
 
 //Course
-app.get('/api/course/:courseCode', routes.getCourse);
+app.get('/api/courses/:courseCode', routes.getCourse);
 app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
 //app.post('/api/dept/:department/suggested', routes.getSuggestedCourses);
 app.post('/api/course/:courseCode/addRating', routes.postRating);
