@@ -78,38 +78,38 @@ function searchResults(req, res) {
             return;
         }
         console.log("Success");
-	var depts = {};
+        var depts = {};
         courses.forEach(
-	function(course){
-	var dept = course.department;
-	if (!(dept in depts)){
-	     depts[dept] = 0;
-	}
-	depts[dept]++;
-	});
-	var popular = [];
-	if(depts.length <= 3){
-	    popular = deps;
-	}
-	for(var i= 0; i < 3; i++){
-	    var max = findmax(depts);
-	    popular.push(max);
-	    delete depts[max];
-	}
-	var json = {courses: courses, depts: popular};
-	res.json(json);
+            function(course) {
+                var dept = course.department;
+                if (!(dept in depts)) {
+                    depts[dept] = 0;
+                }
+                depts[dept]++;
+            });
+        var popular = [];
+        if (depts.length <= 3) {
+            popular = deps;
+        }
+        for (var i = 0; i < 3; i++) {
+            var max = findmax(depts);
+            popular.push(max);
+            delete depts[max];
+        }
+        var json = { courses: courses, depts: popular };
+        res.json(json);
     }).limit(50);
 
 };
 
-function findmax(ls){
+function findmax(ls) {
     var max = -1;
     var max_key = "";
-    for (item in ls){
-	if (ls[item] > max){
-	    max = ls[item];
- 	    max_key = item;
-	}
+    for (item in ls) {
+        if (ls[item] > max) {
+            max = ls[item];
+            max_key = item;
+        }
     }
     return max_key;
 }
@@ -200,9 +200,6 @@ function validateUser(email, password) {
         }
     });
     return true;
-    //console.log(req.body);
-    //User.find({ "email": req.body.email, "password": req.body.email })
-    //res.end();
 }
 
 function getUserInfo(req, res) {
@@ -272,20 +269,20 @@ function userLogin(req, res) {
 function updateUser(req, res) {
     data = req.body;
     var hash = pw.createNewHash(data.password);
-
-    User.update({__id: data.userID},
-	{$set : {
+    User.update({ "__id": userOld.__id }, {
+        $set: {
             email: data.email,
             password: hash.passwordHash,
             salt: hash.salt,
             department: data.department1,
             faculty: data.faculty,
             admin: false
-	}});
+        }
+    });
 }
 
 function deleteUser(req, res) {
-    User.remove({__id: req.userID});
+    User.remove({ __id: req.userID });
 }
 
 
@@ -327,7 +324,7 @@ function postRating(req, res) {
         tags: data.tags,
         helpfulness: 0,
         comment: data.comment,
-	course: req.courseCode
+        course: req.courseCode
     });
     
     user = req.session.user;
@@ -336,9 +333,9 @@ function postRating(req, res) {
     
     var course;
     Course.find({
-	courseCode: req.courseCode
-    }, function(err, crs){
-	course = crs;
+        courseCode: req.courseCode
+    }, function(err, crs) {
+        course = crs;
     });
     var len = course.ratingCount;
     Course.update({
@@ -353,16 +350,16 @@ function postRating(req, res) {
         }
     });
 
-   res.send(newRating);
+    res.send(newRating);
 }
 
 function deleteRating(req, res) {
     var data = req.body;
     var course;
     Course.find({
-	courseCode: req.courseCode
-    }, function(err, crs){
-	course = crs;
+        courseCode: req.courseCode
+    }, function(err, crs) {
+        course = crs;
     });
     var len = course.ratingCount;
     Course.update({
@@ -377,7 +374,7 @@ function deleteRating(req, res) {
         }
     });
 
-    Ratings.remove({__id: data.__id});
+    Ratings.remove({ __id: data.__id });
 }
 
 module.exports = {

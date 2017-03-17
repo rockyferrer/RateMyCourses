@@ -9,8 +9,4 @@ angular.module('DepartmentCtrl', []).controller('DepartmentController', function
     console.log($scope.allCourses);
     $scope.title = $routeParams.department;
 
-    $scope.gotoCourse = function(c) {
-        $location.path('/courses/' + c.courseCode);
-    }
-
 });

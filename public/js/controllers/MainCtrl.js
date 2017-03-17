@@ -7,4 +7,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
         console.log("Searching");
         $location.path("/search/" + $rootScope.searchField);
     }
+
+    $rootScope.gotoCourse = function(c) {
+        $location.path('/courses/' + c.courseCode);
+    }
 });
