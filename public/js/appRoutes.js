@@ -38,6 +38,12 @@ angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'Landi
                 controller: 'LandingController',
                 css: 'css/userlanding.css'
             })
+            
+	    .when('/search/:query', {
+                templateUrl: 'views/searchresults.html',
+                controller: 'SearchController',
+                css: 'css/searchresults.css'
+            })
 
 
             .otherwise({

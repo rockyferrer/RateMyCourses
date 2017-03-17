@@ -65,10 +65,10 @@ CourseScraper.prototype.parseAndSave = function() {
             popularTags: [],
             classSize: size,
             ratings: [],
-	    overall: ' ? ',
-	    difficulty: ' ? ',
-	    workload: ' ? ',
-	    learning: ' ? '
+	    overall: 0.0,
+	    difficulty: 0.0,
+	    workload: 0.0,
+	    learningExp: 0.0
         });
         c.save(function(err) {
             if (err) {
