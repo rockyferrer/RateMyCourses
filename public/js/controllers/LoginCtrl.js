@@ -1,4 +1,4 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location, Login) {
+angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location, $rootScope, Login) {
 
     $http.get('/api/faculties/all').then(function(data) {
         $scope.faculty_list = data.data;
@@ -13,7 +13,8 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
             function(data) {
                 console.log(data);
                 if (data.status == 200) {
-                    console.log('success');
+                    $rootScope.loggedIn = true;
+                    $rootScope.user = data.data.email;
                     $location.path('/user/landing');
 
                 } else {
@@ -39,7 +40,9 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
         Login.processRegistration(data).then(
             function(data) {
                 if (data.status == 200) {
-                    console.log('success');
+                    console.log('success user:' + data.data.user);
+                    $rootScope.loggedIn = true;
+                    $rootScope.user = data.data.email;
                     $location.path('/user/landing');
 
                 } else {

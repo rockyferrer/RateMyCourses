@@ -17,4 +17,12 @@ function createUser(data) {
     return newUser;
 }
 
-module.exports = { createUser };
+function loggedIn(req, res, next) {
+    if ('user' in req.session) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+module.exports = { createUser, loggedIn };

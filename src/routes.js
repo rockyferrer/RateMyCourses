@@ -71,7 +71,7 @@ function searchResults(req, res) {
             { department: { $regex: '.*' + req.query + '.*' } },
             { description: { $regex: '.*' + req.query + '.*' } }
         ]
-    }, function(err, course) {
+    }, function(err, courses) {
         if (err) {
             console.log(err);
             res.send(err);
@@ -167,7 +167,7 @@ function userRegister(req, res) {
             console.log(error);
             res.send(error);
         } else {
-            console.log("Created a new user.");
+            console.log("Created a new user. Password: " + req.body.password);
             req.session.user = usr;
             res.status(200).end();
         }
@@ -189,7 +189,8 @@ function userLogin(req, res) {
             if (pw.validatePassphrase(req.body.password,
                     user.salt, user.password)) {
                 console.log("succesful login");
-                res.status(200).end();
+                req.session.user = user;
+                res.status(200).json(user).end();
             } else {
                 console.log("bad password")
             };
