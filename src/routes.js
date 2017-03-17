@@ -66,33 +66,10 @@ function getCourses(req, res) {
 function searchResults(req, res) {
     console.log(req.query);
     Course.find({
-<<<<<<< HEAD
-        $or: [{
-                courseCode: {
-                    $regex: '.*' + req.query + '.*'
-                }
-            },
-            {
-                title: {
-                    $regex: '.*' + req.query + '.*'
-                }
-            },
-            {
-                department: {
-                    $regex: '.*' + req.query + '.*'
-                }
-            },
-            {
-                description: {
-                    $regex: '.*' + req.query + '.*'
-                }
-            }
-=======
         $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { department: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { description: { $regex: new RegExp('.*' + req.query + '.*', "i") } }
->>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
         ]
     }, function(err, courses) {
         if (err) {
@@ -203,7 +180,6 @@ function getAllDepartmentCourses(req, res) {
     );
 }
 
-<<<<<<< HEAD
 //TODO: Implement
 function validateUser(email, password) {
     User.findOne({
@@ -227,8 +203,6 @@ function validateUser(email, password) {
     //res.end();
 }
 
-=======
->>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
 function getUserInfo(req, res) {
     var user = req.param.userID;
     User.findOne({
@@ -344,21 +318,6 @@ function postRating(data) {
 }
 
 module.exports = {
-<<<<<<< HEAD
-    getCourses,
-    searchResults,
-    getCourse,
-    getSuggestedCourses,
-    getDepartment,
-    getDepartmentCourses,
-    validateUser,
-    getUserInfo,
-    userRegister,
-    userLogin,
-    getAllFaculties,
-    getAllDepartments,
-    postRating
-=======
     getCourses: getCourses,
     searchResults: searchResults,
     getCourse: getCourse,
@@ -371,5 +330,4 @@ module.exports = {
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
     postRating: postRating
->>>>>>> 270da8b862b7fb6633c807592291dbb7fc5a427d
 };
