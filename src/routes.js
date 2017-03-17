@@ -155,13 +155,13 @@ function getDepartment(req, res) {
             if (err) {
                 res.send(err);
             } else {
-                res.sendFile(__dirname + '/assets/department.html');
+                res.json(deparment)
             }
         }
     );
 }
 
-function getDepartmentCourses(req, res) {
+function getAllDepartmentCourses(req, res) {
     console.log(req.department);
     Course.find({
             department: req.department
@@ -198,7 +198,7 @@ function userRegister(req, res) {
             console.log(error);
             res.send(error);
         } else {
-            console.log("Created a new user.");
+            console.log("Created a new user. Password: " + req.body.password);
             req.session.user = usr;
             res.status(200).end();
         }
@@ -213,16 +213,18 @@ function userLogin(req, res) {
             return false;
         } else if (user == null) {
             console.log("no user found");
-            res.status(404).end();
+            res.send(false);
         } else {
             console.log(user);
             //TODO: Add to cookie
             if (pw.validatePassphrase(req.body.password,
                     user.salt, user.password)) {
                 console.log("succesful login");
-                res.status(200).end();
+                req.session.user = user;
+                res.send(true);
             } else {
                 console.log("bad password")
+                res.send(false);
             };
         }
     });
@@ -294,7 +296,7 @@ module.exports = {
     getCourse: getCourse,
     getSuggestedCourses: getSuggestedCourses,
     getDepartment: getDepartment,
-    getDepartmentCourses: getDepartmentCourses,
+    getAllDepartmentCourses: getAllDepartmentCourses,
     getUserInfo: getUserInfo,
     userRegister: userRegister,
     userLogin: userLogin,

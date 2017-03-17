@@ -78,14 +78,11 @@ app.param('query', function(req, res, next, query) {
  */
 
 //Department
-//app.get('/dept/:department', getDepartment);
-app.get('/api/dept/all', routes.getAllDepartments);
-app.get('/api/dept/:department/courses', routes.getDepartmentCourses);
+app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
+app.get('/api/dept/:department/allCourses', routes.getAllDepartmentCourses);
 
 //Course
 app.get('/api/courses/:courseCode', routes.getCourse);
-app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
-app.post('/api/dept/:department/suggested', routes.getSuggestedCourses);
 
 //Search
 app.get('/api/search/:query', routes.searchResults);
@@ -97,6 +94,7 @@ app.post('/api/user/register', routes.userRegister);
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);
+app.get('/api/dept/all', routes.getAllDepartments);
 
 /**
  * public Endpoints

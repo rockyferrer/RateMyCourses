@@ -70,7 +70,8 @@
                 </div>
 
                 <div class="col-md-2">
-                    <a href="/login" class="btn navbtn navbar-btn" id="login">Log in / Register</a>
+                    <a data-ng-hide="loggedIn" href="/login" class="btn navbtn navbar-btn ng-hide" id="login">Log in / Register</a>
+                    <a data-ng-show="loggedIn" href="/user/profile" class="btn navbtn navbar-btn ng-show" id="login">{{ user}}</a>
                 </div>
             </div>
         </nav>
