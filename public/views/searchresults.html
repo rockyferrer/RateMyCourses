@@ -2,7 +2,7 @@
 <!-- Department results -->
 <section id="department-results" class="row results col-md-12">
     <h2 class="section-header">Department results...</h2>
-    <article data-ng-repeat="d in allResults.depts" class="btn custom-article department-result col-xs-12 col-sm-4">
+    <article data-ng-repeat="d in allResults.depts" class="btn custom-article department-result col-xs-12 col-sm-4" ng-click="gotoDepartment(d)">
         <h3>{{ d }}</h3>
     </article>
 </section>

@@ -6,14 +6,11 @@ var utils = require('./utils.js');
 var db = mongoose.connection;
 
 // Create mongoose schemas
-// TODO: Add the other schemas once defined
 var Course = db.model('Course', models.courseSchema);
 var Department = db.model('Department', models.departmentSchema);
 var Tag = db.model('Tag', models.tagSchema);
 var Rating = db.model('Rating', models.ratingSchema);
 var User = db.model('User', models.userSchema);
-// TODO: Mongoose throws an error for user
-//var User = mongoose.connection.model('User', models.userSchema);
 
 /**
  * Returns matching courses.
@@ -180,8 +177,8 @@ function getAllDepartmentCourses(req, res) {
     );
 }
 
-//TODO: Implement
-function validateUser(email, password) {
+//TODO: Delete? This function should no longer be needed - David
+/*function validateUser(email, password) {
     User.findOne({
         "email": email
     }, function(err, user) {
@@ -198,7 +195,7 @@ function validateUser(email, password) {
         }
     });
     return true;
-}
+}*/
 
 function getUserInfo(req, res) {
     var user = req.param.userID;

@@ -11,4 +11,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
     $rootScope.gotoCourse = function(c) {
         $location.path('/courses/' + c.courseCode);
     }
+
+    $rootScope.gotoDepartment = function(d) {
+        $location.path('/dept/' + d);
+    }
 });
