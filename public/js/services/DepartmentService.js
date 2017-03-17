@@ -7,7 +7,7 @@ angular.module('DepartmentService', []).factory('Department', ['$http', function
         },
 
         getSuggestedCourses: function(department) {
-            return $http.get('/api/dept/' + department + '/suggestedCourses');
+            return $http.get('/api/dept/' + department + '/suggested');
         }
     }
 

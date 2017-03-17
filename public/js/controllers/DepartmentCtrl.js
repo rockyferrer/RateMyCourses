@@ -5,8 +5,10 @@ angular.module('DepartmentCtrl', []).controller('DepartmentController', function
         $scope.allCourses = data.data;
     })
 
-    $scope.suggestedCourses = Department.getAllCourses($routeParams.department);
-    console.log($scope.allCourses);
+    Department.getSuggestedCourses($routeParams.department).then(function(data) {
+        $scope.suggestedCourses = data.data;
+    });
+
     $scope.title = $routeParams.department;
 
 });
