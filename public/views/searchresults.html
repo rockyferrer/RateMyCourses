@@ -1,16 +1,16 @@
 <link rel="stylesheet" data-ng-href="css/searchresults.css">
 <!-- Department results -->
-<section data-ng-controller="departmentresults" id="department-results" class="row results col-md-12">
+<section id="department-results" class="row results col-md-12">
     <h2 class="section-header">Department results...</h2>
-    <article data-ng-repeat="d in departments" class="btn custom-article department-result col-xs-12 col-sm-4">
+    <article data-ng-repeat="d in allResults.depts" class="btn custom-article department-result col-xs-12 col-sm-4">
         <h3>{{ d }}</h3>
     </article>
 </section>
 
 <!-- Course results -->
-<section data-ng-controller="courseresults" id="course-results" class="row col-md-12 custom-section">
+<section id="course-results" class="row col-md-12 custom-section">
     <h2 class="section-header">Course results...</h2>
-    <article data-ng-repeat="c in courses" class="btn course-result custom-article">
+    <article data-ng-repeat="c in allResults.courses" class="btn course-result custom-article">
         <div class="row">
             <h3 class="course-code">{{ c.courseCode }}</h3>
             <h4>{{ c.courseTitle }}</h4>

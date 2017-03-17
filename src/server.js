@@ -109,7 +109,7 @@ app.get('/api/dept/all', routes.getAllDepartments);
 app.get('/', function(req, res) {
     res.sendFile(staticFilesPath + '/index.html');
 });
-app.get('/search', function(req, res) {
+app.get('/search/:query', function(req, res) {
     res.sendFile(staticFilesPath + '/index.html');
 });
 app.get('/login', function(req, res) {

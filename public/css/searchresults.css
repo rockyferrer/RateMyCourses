@@ -8,10 +8,16 @@
 
 .section-header {
     padding-left: 1rem;
+    font-size: 5rem;
 }
 
 
 /* Department Results Section */
+
+.department-result {
+    white-space: initial;
+    height: 10rem;
+}
 
 .department-result:hover {
     background-color: #ffffff;

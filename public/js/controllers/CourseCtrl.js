@@ -1,11 +1,16 @@
-var app = angular.module('CourseCtrl', []);
+angular.module('CourseCtrl', []).controller('CourseController', function($scope, $http, $routeParams, Course) {
 
-app.controller('CourseController', function($scope, $http, $routeParams, Course) {
-
-    $scope.cssFilename = "course";
     $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
         $scope.course = data.data;
+        $scope.difficulty = $scope.options[0];
+        $scope.workload = $scope.options[0];
+        $scope.learningExp = $scope.options[0];
+        $scope.overall = $scope.options[0];
+        $scope.comment = '';
+
     });
+
+    $scope.options = ['1', '2', '3','4','5'];
 
     $scope.tags = [
         'Cool',
@@ -18,13 +23,13 @@ app.controller('CourseController', function($scope, $http, $routeParams, Course)
         'Spicy',
         'Please Give Me a Good Mark',
         'Would Take Again'
-    ]
+    ];
 
     $scope.currentTags = [];
 
     /**
      * Checks if the currentTags array contains any nulls, used in processTag
-     */
+      */
     $scope.tagsContainsNulls = function() {
         for (var i = 0; i < $scope.currentTags.length; i++) {
             if ($scope.currentTags[i] == null) {
@@ -33,6 +38,7 @@ app.controller('CourseController', function($scope, $http, $routeParams, Course)
         }
         return false;
     }
+
 
     /**
      * function for when a tag is selected or deselected
@@ -43,7 +49,7 @@ app.controller('CourseController', function($scope, $http, $routeParams, Course)
         console.log($scope.currentTags.indexOf(chosenTag));
         //if the tag has not been chosen and
         //less than three overall have been chosen or there are nulls in currentTags
-        if ($scope.currentTags.indexOf(chosenTag) == -1 && ($scope.currentTags.length < 3 || $scope.tagsContainsNulls)) {
+        if ($scope.currentTags.indexOf(chosenTag) == -1 && ($scope.currentTags.length < 3 || $scope.tagsContainsNulls())) {
             console.log('chose: ' + chosenTag);
             //if there is a null in the array, replace it with the selected tag
             if ($scope.tagsContainsNulls()) {
@@ -77,11 +83,16 @@ app.controller('CourseController', function($scope, $http, $routeParams, Course)
         //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('Element ' + i + ' is ' + $scope.currentTags[i]);
+                console.log('Element ' + i + ' is '  + $scope.currentTags[i]);
             }
         } else {
             console.log('no tags chosen');
         }
+        console.log("difficulty rating is " + $scope.difficulty);
+        console.log("workload is " + $scope.workload);
+        console.log("learning experience is " + $scope.learningExp);
+        console.log("overall is " + $scope.overall);
+        console.log("comment is " + $scope.comment);
 
         // return $scope.currentTags;
     };

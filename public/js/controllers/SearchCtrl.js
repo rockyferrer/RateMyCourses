@@ -1,6 +1,7 @@
-angular.module('SearchCtrl', []).controller('SearchController', function($scope, $routeParams, SearchService) {
+angular.module('SearchCtrl', []).controller('SearchController', function($scope, $routeParams, $http, Search) {
 
-    $scope.courseResults = SearchService.searchResults($routeParams.query);
-    $scope.cssFilename = "searchresults";
-
+    $http.get('/api/search/' + $routeParams.query).then(function(data) {
+        $scope.allResults = data.data;
+        console.log($scope.allResults);
+    });
 });
