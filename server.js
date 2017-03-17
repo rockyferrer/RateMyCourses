@@ -140,6 +140,19 @@ function getCourse(req, res) {
     });
 };
 
+function getRatings(req, res){
+    var course = req.courseCode;
+    Ratings.find({
+	course: course
+    }, function(err, ratings) {
+	if(err) {
+	    res.send(err);
+	    return;
+	}
+	res.json(ratings);
+    });   
+}
+
 /**
  * Responds with suggested courses based on department parameter
  */
@@ -263,8 +276,8 @@ app.get('/api/dept/:department/courses', getDepartmentCourses);
 
 //Course
 app.get('/api/courses/:courseCode', getCourse);
-app.get('/api/dept/:department/suggested', getSuggestedCourses);
-app.post('/api/dept/:department/suggested', getSuggestedCourses);
+app.get('/api/dept/:courseCode/ratings', getRatings);
+app.post('/api/courses/:courseCode/ratings', nonEndPts.postRating);
 
 //Search
 app.get('/api/search/:query', searchResults);

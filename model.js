@@ -10,11 +10,11 @@ var courseSchema = new mongoose.Schema({
     description: { type: String },
     popularTags: [String],
     classSize: { type: Number },
-    ratings: [String],
     overall: {type : Number},
     difficulty: {type: Number},
     workload: {type: Number},
-    learningExp: {type: Number}
+    learningExp: {type: Number},
+    ratingCount: {tpye: Number}
 });
 
 var tagSchema = new mongoose.Schema({
@@ -32,7 +32,8 @@ var ratingSchema = new mongoose.Schema({
     prof: { type: String },
     tags: [String],
     helpfulness: { type: Number, required: true },
-    comment: { type: String, required: true }
+    comment: { type: String, required: true },
+    course: { type: String }
 });
 
 var departmentSchema = new mongoose.Schema({

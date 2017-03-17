@@ -60,13 +60,10 @@ function postRating(data) {
 	prof: data.prof,
 	tags: data.tags,
 	helpfulness: 0,
-	comment: data.comment
+	comment: data.comment,
+	course: data.course.courseCode
     });
-    var len = data.course.ratings.length;
-    data.course.ratings.push(data.user);
-    if(len == 0){
-	var overall = 0;
-    }
+    var len = data.course.rateCount;
     Course.update({
 	courseCode: data.course.courseCode
     }, 
@@ -76,7 +73,7 @@ function postRating(data) {
 	    difficulty: (data.course.difficulty * len + data.difficulty)/(len + 1),
 	    workload: (data.course.workload * len + data.workload)/(len + 1),
 	    learningExp: (data.course.learningExp * len + data.learningExp)/(len + 1),
-	    ratings: data.course.ratings
+	    rateCount: len + 1
 	}
     });
 
