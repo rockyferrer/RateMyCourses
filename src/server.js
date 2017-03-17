@@ -93,10 +93,12 @@ app.get('/api/search/:query', routes.searchResults);
 
 //User
 app.get('/api/user/:userID', routes.getUserInfo);
-app.post('/api/user/:userID/login', routes.userLogin);
-app.post('/api/user/:userID/register', routes.userRegister);
-app.put('/api/user/:userID/updateInfo', routes.updateUser);
-app.delete('/api/user/:userID/delete', routes.deleteUser);
+app.get('/api/user/history', routes.getUserHistory);
+app.get('/api/user/rated', routes.getUserRated);
+app.post('/api/user/login', routes.userLogin);
+app.post('/api/user/register', routes.userRegister);
+app.put('/api/user/updateInfo', routes.updateUser);
+app.delete('/api/user/delete', routes.deleteUser);
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);

@@ -117,7 +117,9 @@ function findmax(ls){
 function getCourse(req, res) {
     console.log(new Date().toLocaleTimeString() + req.params.courseCode);
     var code = req.params.courseCode;
-
+    user = req.session.user;
+    user.coursesViewed.push(code);
+    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -214,6 +216,15 @@ function getUserInfo(req, res) {
         res.json(users);
     });
 }
+
+function getUserHistory(req, res){
+    res.json(req.session.user.coursesViewed);
+}
+
+function getUserRated(req, res){
+    res.json(req.session.user.coursesRated);
+}
+
 
 // TODO: Implement multiple departments
 function userRegister(req, res) {
@@ -318,7 +329,11 @@ function postRating(req, res) {
         comment: data.comment,
 	course: req.courseCode
     });
-
+    
+    user = req.session.user;
+    user.coursesViewed.push(req.courseCode);
+    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
+    
     var course;
     Course.find({
 	courseCode: req.courseCode
@@ -373,6 +388,8 @@ module.exports = {
     getDepartment: getDepartment,
     getAllDepartmentCourses: getAllDepartmentCourses,
     getUserInfo: getUserInfo,
+    getUserHistory: getUserHistory,
+    getUserRated: getUserRated,
     userRegister: userRegister,
     userLogin: userLogin,
     updateUser: updateUser,
