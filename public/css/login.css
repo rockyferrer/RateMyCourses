@@ -3,12 +3,6 @@
     color: red;
 }
 
-.hidden-error-msg {
-    display: block;
-    color: red;
-    display: none;
-}
-
 .form-group {
     padding: 0 1rem;
 }

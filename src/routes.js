@@ -182,7 +182,7 @@ function userLogin(req, res) {
             return false;
         } else if (user == null) {
             console.log("no user found");
-            res.status(404).end();
+            res.send(false);
         } else {
             console.log(user);
             //TODO: Add to cookie
@@ -190,9 +190,10 @@ function userLogin(req, res) {
                     user.salt, user.password)) {
                 console.log("succesful login");
                 req.session.user = user;
-                res.status(200).json(user).end();
+                res.send(true);
             } else {
                 console.log("bad password")
+                res.send(false);
             };
         }
     });

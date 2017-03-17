@@ -4,7 +4,7 @@
     <div class="row">
         <h2 class="col-md-4">Login/Register</h2>
         <!--div class="error-msg"-->
-        <h3 class="hidden-error-msg">ERROR: INVALID LOGIN</h3>
+        <h3 class="error-msg" ng-hide="error == null">ERROR: {{error}}</h3>
         <!--/div-->
     </div>
 
@@ -18,7 +18,7 @@
     </div>
     <div class="form-group register-field row">
         <label>Confirm Password:</label>
-        <input type="password" class="form-control input-lg required-field" placeholder="******">
+        <input type="password" class="form-control input-lg required-field" placeholder="******" data-ng-model="loginForm.confirmPassword">
     </div>
     <div class="form-group register-field">
         <div class="row">

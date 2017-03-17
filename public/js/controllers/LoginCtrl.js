@@ -8,27 +8,37 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
         $scope.department_list = data.data;
     }));
 
+    $scope.error = null;
+
     $scope.submitLogin = function() {
+
         Login.processLogin($scope.loginForm).then(
             function(data) {
                 console.log(data);
-                if (data.status == 200) {
+                if (data.data == true) {
                     $rootScope.loggedIn = true;
                     $rootScope.user = data.data.email;
                     $location.path('/user/landing');
 
-                } else {
+                } else if (data.data == false) {
                     console.log('faliure');
                     // Clear fields
-                    // Show error
-                    element(by.class("hidden-error-msg")).getAtrribute('class')
-                        .toBe('error-msg');
+                    $scope.error = "Invalid login.";
                 }
             }
         );
     };
 
     $scope.submitRegister = function() {
+        if (loginForm.password != loginForm.confirmPassword) {
+            $scope.error = "Password do not match.";
+            return;
+        }
+        if (loginForm.department1 == '' || loginForm.faculty == '' || loginForm.confirmPassword == '' ||
+            loginForm.password == '' || loginForm.email == '') {
+            $scope.error = "Missing required field.";
+            return;
+        }
         var data = {
             email: $scope.loginForm.email,
             password: $scope.loginForm.password,
@@ -47,6 +57,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
 
                 } else {
                     console.log(data.status);
+                    $scope.error = "Error creating user. Relax, it's not your fault.";
                 }
             }
         );
