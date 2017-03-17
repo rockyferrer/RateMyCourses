@@ -277,7 +277,7 @@ app.get('/api/dept/:department/courses', getDepartmentCourses);
 //Course
 app.get('/api/courses/:courseCode', getCourse);
 app.get('/api/dept/:courseCode/ratings', getRatings);
-app.post('/api/courses/:courseCode/ratings', nonEndPts.postRating);
+//app.post('/api/courses/:courseCode/ratings', nonEndPts.postRating);
 
 //Search
 app.get('/api/search/:query', searchResults);

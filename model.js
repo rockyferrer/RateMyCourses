@@ -14,7 +14,7 @@ var courseSchema = new mongoose.Schema({
     difficulty: {type: Number},
     workload: {type: Number},
     learningExp: {type: Number},
-    ratingCount: {tpye: Number}
+    ratingCount: {type: Number}
 });
 
 var tagSchema = new mongoose.Schema({
