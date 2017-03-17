@@ -98,7 +98,7 @@ function searchResults(req, res) {
 	}
 	var json = {courses: courses, depts: popular};
 	res.json(json);
-    });
+    }).limit(50);
 
 };
 
@@ -259,11 +259,10 @@ function userLogin(req, res) {
 }
 
 function updateUser(req, res) {
-    userOld = req.session.user
     data = req.body;
     var hash = pw.createNewHash(data.password);
 
-    User.update({"__id": userOld.__id},
+    User.update({__id: data.userID},
 	{$set : {
             email: data.email,
             password: hash.passwordHash,
@@ -275,7 +274,7 @@ function updateUser(req, res) {
 }
 
 function deleteUser(req, res) {
-    User.delete({"__id": req.session.course.__id});
+    User.remove({__id: req.userID});
 }
 
 
@@ -302,8 +301,6 @@ function getAllDepartments(req, res) {
         }
     );
 }
-
-function
 
 //TODO: Figure out how to actually get all the data
 function postRating(req, res) {
@@ -344,6 +341,30 @@ function postRating(req, res) {
    res.send(newRating);
 }
 
+function deleteRating(req, res) {
+    var data = req.body;
+    var course;
+    Course.find({
+	courseCode: req.courseCode
+    }, function(err, crs){
+	course = crs;
+    });
+    var len = course.ratingCount;
+    Course.update({
+        courseCode: course.courseCode
+    }, {
+        $set: {
+            overall: (course.overall * len - data.overall) / (len - 1),
+            difficulty: (course.difficulty * len - data.difficulty) / (len - 1),
+            workload: (course.workload * len - data.workload) / (len - 1),
+            learningExp: (course.learningExp * len - data.learningExp) / (len - 1),
+            ratingCount: len - 1
+        }
+    });
+
+    Ratings.remove({__id: data.__id});
+}
+
 module.exports = {
     getCourses: getCourses,
     searchResults: searchResults,
@@ -354,7 +375,10 @@ module.exports = {
     getUserInfo: getUserInfo,
     userRegister: userRegister,
     userLogin: userLogin,
+    updateUser: updateUser,
+    deleteUser: deleteUser,
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
-    postRating: postRating
+    postRating: postRating,
+    deleteRating: deleteRating
 };
