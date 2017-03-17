@@ -258,6 +258,26 @@ function userLogin(req, res) {
 
 }
 
+function updateUser(req, res) {
+    userOld = req.session.user
+    data = req.body;
+    var hash = pw.createNewHash(data.password);
+
+    User.update({"__id": userOld.__id},
+	{$set : {
+            email: data.email,
+            password: hash.passwordHash,
+            salt: hash.salt,
+            department: data.department1,
+            faculty: data.faculty,
+            admin: false
+	}});
+}
+
+function deleteUser(req, res) {
+    User.delete({"__id": req.session.course.__id});
+}
+
 
 function getAllFaculties(req, res) {
     Course.find().distinct('faculty',
@@ -283,8 +303,11 @@ function getAllDepartments(req, res) {
     );
 }
 
-// TODO: Figure out how to add ids to the ratings
-function postRating(data) {
+function
+
+//TODO: Figure out how to actually get all the data
+function postRating(req, res) {
+    var data = req.body;
     var newRating = new Rating({
         user: data.user,
         dateTaken: data.date,
@@ -295,26 +318,30 @@ function postRating(data) {
         prof: data.prof,
         tags: data.tags,
         helpfulness: 0,
-        comment: data.comment
+        comment: data.comment,
+	course: req.courseCode
     });
-    var len = data.course.ratings.length;
-    data.course.ratings.push(data.user);
-    if (len == 0) {
-        var overall = 0;
-    }
+
+    var course;
+    Course.find({
+	courseCode: req.courseCode
+    }, function(err, crs){
+	course = crs;
+    });
+    var len = course.ratingCount;
     Course.update({
-        courseCode: data.course.courseCode
+        courseCode: course.courseCode
     }, {
         $set: {
-            overall: (data.course.overall * len + data.overall) / (len + 1),
-            difficulty: (data.course.difficulty * len + data.difficulty) / (len + 1),
-            workload: (data.course.workload * len + data.workload) / (len + 1),
-            learningExp: (data.course.learningExp * len + data.learningExp) / (len + 1),
-            ratings: data.course.ratings
+            overall: (course.overall * len + data.overall) / (len + 1),
+            difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
+            workload: (course.workload * len + data.workload) / (len + 1),
+            learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
+            ratingCount: len + 1
         }
     });
 
-    return newRating;
+   res.send(newRating);
 }
 
 module.exports = {
