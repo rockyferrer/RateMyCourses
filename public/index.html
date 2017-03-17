@@ -59,9 +59,9 @@
                 <div class="col-md-7 col-md-offset-1">
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" />
+                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" data-ng-model="$root.searchField" />
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
+                                <button class="btn btn-default" type="submit" ng-click="search()">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
