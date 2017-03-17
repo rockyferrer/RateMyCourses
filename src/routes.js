@@ -78,8 +78,9 @@ function searchResults(req, res) {
             return;
         }
         console.log("Success");
-	var depts = {};
+        var depts = {};
         courses.forEach(
+<<<<<<< Updated upstream
 	function(course){
 	var dept = course.department;
 	if (!(dept in depts)){
@@ -99,17 +100,38 @@ function searchResults(req, res) {
 	var json = {courses: courses, depts: popular};
 	res.json(json);
     }).limit(50);
+=======
+            function(course) {
+                var dept = course.department;
+                if (!(dept in depts)) {
+                    depts[dept] = 0;
+                }
+                depts[dept]++;
+            });
+        var popular = [];
+        if (depts.length <= 3) {
+            popular = deps;
+        }
+        for (var i = 0; i < 3; i++) {
+            var max = findmax(depts);
+            popular.push(max);
+            delete depts[max];
+        }
+        var json = { courses: courses, depts: popular };
+        res.json(json);
+    });
+>>>>>>> Stashed changes
 
 };
 
-function findmax(ls){
+function findmax(ls) {
     var max = -1;
     var max_key = "";
-    for (item in ls){
-	if (ls[item] > max){
-	    max = ls[item];
- 	    max_key = item;
-	}
+    for (item in ls) {
+        if (ls[item] > max) {
+            max = ls[item];
+            max_key = item;
+        }
     }
     return max_key;
 }
@@ -198,9 +220,6 @@ function validateUser(email, password) {
         }
     });
     return true;
-    //console.log(req.body);
-    //User.find({ "email": req.body.email, "password": req.body.email })
-    //res.end();
 }
 
 function getUserInfo(req, res) {
@@ -262,19 +281,29 @@ function updateUser(req, res) {
     data = req.body;
     var hash = pw.createNewHash(data.password);
 
+<<<<<<< Updated upstream
     User.update({__id: data.userID},
 	{$set : {
+=======
+    User.update({ "__id": userOld.__id }, {
+        $set: {
+>>>>>>> Stashed changes
             email: data.email,
             password: hash.passwordHash,
             salt: hash.salt,
             department: data.department1,
             faculty: data.faculty,
             admin: false
-	}});
+        }
+    });
 }
 
 function deleteUser(req, res) {
+<<<<<<< Updated upstream
     User.remove({__id: req.userID});
+=======
+    User.delete({ "__id": req.session.course.__id });
+>>>>>>> Stashed changes
 }
 
 
@@ -316,14 +345,14 @@ function postRating(req, res) {
         tags: data.tags,
         helpfulness: 0,
         comment: data.comment,
-	course: req.courseCode
+        course: req.courseCode
     });
 
     var course;
     Course.find({
-	courseCode: req.courseCode
-    }, function(err, crs){
-	course = crs;
+        courseCode: req.courseCode
+    }, function(err, crs) {
+        course = crs;
     });
     var len = course.ratingCount;
     Course.update({
@@ -338,7 +367,7 @@ function postRating(req, res) {
         }
     });
 
-   res.send(newRating);
+    res.send(newRating);
 }
 
 function deleteRating(req, res) {
@@ -379,6 +408,11 @@ module.exports = {
     deleteUser: deleteUser,
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
+<<<<<<< Updated upstream
     postRating: postRating,
     deleteRating: deleteRating
 };
+=======
+    postRating: postRating
+};
+>>>>>>> Stashed changes

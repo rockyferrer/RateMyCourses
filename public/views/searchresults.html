@@ -10,7 +10,7 @@
 <!-- Course results -->
 <section id="course-results" class="row col-md-12 custom-section">
     <h2 class="section-header">Course results...</h2>
-    <article data-ng-repeat="c in allResults.courses" class="btn course-result custom-article">
+    <article data-ng-repeat="c in allResults.courses" class="btn course-result custom-article" ng-click="gotoCourse(c)">
         <div class="row">
             <h3 class="course-code">{{ c.courseCode }}</h3>
             <h4>{{ c.courseTitle }}</h4>
