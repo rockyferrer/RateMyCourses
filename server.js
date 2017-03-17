@@ -107,9 +107,9 @@ function getCourses(req, res) {
 function searchResults(req, res) {
     console.log(req.query);
         Course.find(
-	{ $or: [{courseCode: {$regex: '.*' + req.query + '.*'}}
-		{title: {$regex: '.*' + req.query + '.*'}}
-		{department: {$regex: '.*' + req.query + '.*'}}
+	{ $or: [{courseCode: {$regex: '.*' + req.query + '.*'}},
+		{title: {$regex: '.*' + req.query + '.*'}},
+		{department: {$regex: '.*' + req.query + '.*'}},
 		{description: {$regex: '.*' + req.query + '.*'}}] }
 	,function(err, course) {
            if (err) {
