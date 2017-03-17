@@ -2,6 +2,12 @@
 
 ## Installation
 
+First make sure the database is established (see Scraper below).
+
+Run `npm install && bower install` from the root of the repository to grab all Node modules and front end dependencies.
+
+Now run `npm start` to start the server. Navigate to `localhost:8080/`.
+
 ### Scraper
 
 The scraper loads course data into the MongoDB instance from the Cobalt API.
