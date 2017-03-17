@@ -106,9 +106,12 @@ function getCourses(req, res) {
 
 function searchResults(req, res) {
     console.log(req.query);
-        Course.find({
-            courseCode: {$regex: '.*' + req.query + '.*'}
-        },function(err, course) {
+        Course.find(
+	{ $or: [{courseCode: {$regex: '.*' + req.query + '.*'}}
+		{title: {$regex: '.*' + req.query + '.*'}}
+		{department: {$regex: '.*' + req.query + '.*'}}
+		{description: {$regex: '.*' + req.query + '.*'}}] }
+	,function(err, course) {
            if (err) {
                console.log(err);
                res.send(err);
@@ -117,19 +120,7 @@ function searchResults(req, res) {
             console.log("Success");
             res.json(course);
         });
-
-
- /**       Department.find({
-            name: {$regex: '.*' + req.query + '.*'}
-       },function(err, dept) {
-           if (err) {
-               console.log(err);
-               res.send(err);
-               return;
-            }
-            console.log("Success");
-            res.json(dept);
-        });**/
+	
 };
 
 function getCourse(req, res) {
