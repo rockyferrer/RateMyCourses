@@ -56,4 +56,4 @@ function validatePassphrase(userInput, salt, expectedHash) {
     return (expectedHash == hash.passwordHash);
 }
 
-module.exports = { createNewHash, validatePassphrase };
+module.exports = {createNewHash: createNewHash, validatePassphrase: validatePassphrase };
