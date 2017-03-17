@@ -123,6 +123,7 @@
 
 .rating-container {
     display: inline-block;
+    color: blue;
 }
 
 #enrollment-date {
@@ -171,7 +172,6 @@
     margin-top: 6rem;
     margin-left: 20rem;
 }
-
 
 /**
  * Custom CSS rating symbol
