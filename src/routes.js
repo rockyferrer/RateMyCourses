@@ -80,27 +80,6 @@ function searchResults(req, res) {
         console.log("Success");
         var depts = {};
         courses.forEach(
-<<<<<<< Updated upstream
-	function(course){
-	var dept = course.department;
-	if (!(dept in depts)){
-	     depts[dept] = 0;
-	}
-	depts[dept]++;
-	});
-	var popular = [];
-	if(depts.length <= 3){
-	    popular = deps;
-	}
-	for(var i= 0; i < 3; i++){
-	    var max = findmax(depts);
-	    popular.push(max);
-	    delete depts[max];
-	}
-	var json = {courses: courses, depts: popular};
-	res.json(json);
-    }).limit(50);
-=======
             function(course) {
                 var dept = course.department;
                 if (!(dept in depts)) {
@@ -119,8 +98,7 @@ function searchResults(req, res) {
         }
         var json = { courses: courses, depts: popular };
         res.json(json);
-    });
->>>>>>> Stashed changes
+    }).limit(50);
 
 };
 
@@ -280,14 +258,8 @@ function userLogin(req, res) {
 function updateUser(req, res) {
     data = req.body;
     var hash = pw.createNewHash(data.password);
-
-<<<<<<< Updated upstream
-    User.update({__id: data.userID},
-	{$set : {
-=======
     User.update({ "__id": userOld.__id }, {
         $set: {
->>>>>>> Stashed changes
             email: data.email,
             password: hash.passwordHash,
             salt: hash.salt,
@@ -299,11 +271,7 @@ function updateUser(req, res) {
 }
 
 function deleteUser(req, res) {
-<<<<<<< Updated upstream
-    User.remove({__id: req.userID});
-=======
-    User.delete({ "__id": req.session.course.__id });
->>>>>>> Stashed changes
+    User.remove({ __id: req.userID });
 }
 
 
@@ -374,9 +342,9 @@ function deleteRating(req, res) {
     var data = req.body;
     var course;
     Course.find({
-	courseCode: req.courseCode
-    }, function(err, crs){
-	course = crs;
+        courseCode: req.courseCode
+    }, function(err, crs) {
+        course = crs;
     });
     var len = course.ratingCount;
     Course.update({
@@ -391,7 +359,7 @@ function deleteRating(req, res) {
         }
     });
 
-    Ratings.remove({__id: data.__id});
+    Ratings.remove({ __id: data.__id });
 }
 
 module.exports = {
@@ -408,11 +376,6 @@ module.exports = {
     deleteUser: deleteUser,
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
-<<<<<<< Updated upstream
     postRating: postRating,
     deleteRating: deleteRating
 };
-=======
-    postRating: postRating
-};
->>>>>>> Stashed changes
