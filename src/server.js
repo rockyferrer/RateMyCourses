@@ -86,7 +86,7 @@ app.get('/api/dept/:department/courses', routes.getDepartmentCourses);
 //Course
 app.get('/api/courses/:courseCode', routes.getCourse);
 app.get('/api/dept/:department/suggested', routes.getSuggestedCourses);
-app.post('/api/dept/:department/suggested', routes.getSuggestedCourses);
+//app.post('/api/dept/:department/suggested', routes.getSuggestedCourses);
 
 //Search
 app.get('/api/search/:query', routes.searchResults);

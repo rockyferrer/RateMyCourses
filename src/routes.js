@@ -64,10 +64,26 @@ function getCourses(req, res) {
 function searchResults(req, res) {
     console.log(req.query);
     Course.find({
-        $or: [{ courseCode: { $regex: '.*' + req.query + '.*' } },
-            { title: { $regex: '.*' + req.query + '.*' } },
-            { department: { $regex: '.*' + req.query + '.*' } },
-            { description: { $regex: '.*' + req.query + '.*' } }
+        $or: [{
+                courseCode: {
+                    $regex: '.*' + req.query + '.*'
+                }
+            },
+            {
+                title: {
+                    $regex: '.*' + req.query + '.*'
+                }
+            },
+            {
+                department: {
+                    $regex: '.*' + req.query + '.*'
+                }
+            },
+            {
+                description: {
+                    $regex: '.*' + req.query + '.*'
+                }
+            }
         ]
     }, function(err, course) {
         if (err) {
@@ -102,16 +118,20 @@ function getCourse(req, res) {
  * Responds with suggested courses based on department parameter
  */
 function getSuggestedCourses(req, res) {
-    var dept = req.param.department;
+    var dept = req.params.department;
+    console.log(dept);
     Course.find({
         department: dept
     }, function(err, courses) {
         if (err) {
             res.send(err);
+            console.log(err);
             return;
         }
+        console.log("success");
         res.json(courses);
-    });
+
+    }).limit(10);
 };
 
 function getDepartment(req, res) {
@@ -145,7 +165,9 @@ function getDepartmentCourses(req, res) {
 
 //TODO: Implement
 function validateUser(email, password) {
-    User.findOne({ "email": email }, function(err, user) {
+    User.findOne({
+        "email": email
+    }, function(err, user) {
         if (err) {
             console.log("Error finding user.");
             return false;

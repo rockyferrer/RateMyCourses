@@ -218,32 +218,6 @@
     background-color: white;
 }
 
-/* Styling for the star rating, taken from http://www.angulartutorial.net/2014/03/rating-stars-in-angular-js-using.html*/
-.rating{
-  color: #a9a9a9;
-  margin: 0;
-  padding: 0;
-}
-
-ul.rating {
-  display: inline-block;
-}
-
-.rating li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 1px;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.rating .filled {
-  color: #21568b;
-}
-/* end styling for star ratings*/
-
-
 @media(min-width:576px) {
     #enrollment-date {
         min-width: 260px;
