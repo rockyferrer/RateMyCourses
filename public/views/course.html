@@ -22,7 +22,7 @@
                 <div class="score overall-score col-md-8">
                     <p class="col-md-12 score-desc">Overall Experience:</p>
                     <div class="col-md-12 score-div">
-                        <h2 class="good-score overall score-value">5.0</h2>
+                        <h2 class="good-score overall score-value">{{ course.overall }}</h2>
                     </div>
                     <p class="col-md-12 score-desc">(54 ratings)</p>
                 </div>
@@ -30,19 +30,19 @@
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Difficulty:</p>
                         <div class="col-md-12 score-div">
-                            <h2 class="avg-score score-value">2.5</h2>
+                            <h2 class="avg-score score-value">{{ course.difficulty }}</h2>
                         </div>
                     </div>
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Workload:</p>
                         <div class="col-md-12">
-                            <h2 class="avg-score score-value">2.5</h2>
+                            <h2 class="avg-score score-value">{{ course.workload }}</h2>
                         </div>
                     </div>
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Learning Exp:</p>
                         <div class="col-md-12">
-                            <h2 class="good-score score-value">5.0</h2>
+                            <h2 class="good-score score-value">{{ course.learning }}</h2>
                         </div>
                     </div>
                 </div>

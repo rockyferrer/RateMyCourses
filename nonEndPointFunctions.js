@@ -48,4 +48,4 @@ function getAllDepartments(req, res) {
     );
 }
 
-module.exports = {getAllFaculties, userRegister, userLogin, getAllDepartments};
+module.exports = {getAllFaculties: getAllFaculties, userRegister: userRegister, userLogin: userLogin, getAllDepartments: getAllDepartments};

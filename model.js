@@ -10,7 +10,11 @@ var courseSchema = new mongoose.Schema({
     description: { type: String },
     popularTags: [String],
     classSize: { type: Number },
-    ratings: [String]
+    ratings: [String],
+    overall: {type : String},
+    difficulty: {type: String},
+    workload: {type: String},
+    learning: {type: String}
 });
 
 var tagSchema = new mongoose.Schema({
