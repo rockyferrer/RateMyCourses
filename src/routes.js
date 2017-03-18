@@ -13,53 +13,6 @@ var Rating = db.model('Rating', models.ratingSchema);
 var User = db.model('User', models.userSchema);
 
 /**
- * Returns matching courses.
- * Optional course code and department parameters.
- */
-function getCourses(req, res) {
-    console.log(req.query);
-    var code = req.query.courseCode;
-    var dept = req.query.department;
-    if (code && dept) {
-        Course.find({
-            courseCode: req.query.courseCode,
-            department: req.query.department
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else if (code) {
-        Course.find({
-            courseCode: code
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else if (dept) {
-        Course.find({
-            department: dept
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else {
-        Course.find(function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    }
-
-};
-
-/**
  * Executes a search query on the database. Query is used as a potential course code,
  * part of a description, a department, or course title.
  */
@@ -428,8 +381,15 @@ function deleteRating(req, res) {
     });
 }
 
+function updateHelpfulness(req, res){
+	var data = req.body;
+	var rating;
+	
+	Rating.update({__id: data.__id},
+	{$set: {helpfulness: data.helpfulness - data.vote}});
+}
+
 module.exports = {
-    getCourses: getCourses,
     searchResults: searchResults,
     getCourse: getCourse,
     getSuggestedCourses: getSuggestedCourses,
@@ -445,5 +405,6 @@ module.exports = {
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
     postRating: postRating,
-    deleteRating: deleteRating
+    deleteRating: deleteRating,
+	updateHelpfulness: updateHelpfulness
 };
