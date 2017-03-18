@@ -337,7 +337,7 @@ function updateCourseRating(data, res, course, newRating) {
 				course.popularTags.push(tag);
 		}
 	}
-	course.ratings.put(newRating);
+	course.ratings.push(newRating);
     course.update({
         $set: {
             overall: (course.overall * len + overall) / (len + 1),
