@@ -83,8 +83,8 @@ app.get('/api/dept/:department/allCourses', routes.getAllDepartmentCourses);
 
 //Course
 app.get('/api/courses/:courseCode', routes.getCourse);
-app.post('/api/course/:courseCode/addRating', routes.postRating);
-app.delete('/api/course/:courseCode/deleteRating', routes.deleteRating);
+app.post('/api/courses/:courseCode/addRating', routes.postRating);
+app.delete('/api/courses/:courseCode/deleteRating', routes.deleteRating);
 
 //Search
 app.get('/api/search/:query', routes.searchResults);

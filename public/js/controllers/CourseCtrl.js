@@ -2,15 +2,15 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
         $scope.course = data.data;
-        $scope.difficulty = $scope.options[0];
-        $scope.workload = $scope.options[0];
-        $scope.learningExp = $scope.options[0];
-        $scope.overall = $scope.options[0];
-        $scope.comment = '';
-
     });
 
     $scope.options = ['1', '2', '3','4','5'];
+
+    $scope.difficulty = $scope.options[0];
+    $scope.workload = $scope.options[0];
+    $scope.learningExp = $scope.options[0];
+    $scope.overall = $scope.options[0];
+    $scope.comment = '';
 
     $scope.tags = [
         'Cool',
@@ -71,7 +71,6 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
             $scope.currentTags[$scope.currentTags.indexOf(chosenTag)] = null;
             //change css styles accordingly
             chosenEl.css('background-color', 'rgba(55, 64, 70, 0.4)');
-
         }
     };
 
@@ -79,11 +78,11 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
      * function for when a user wants to post their Rating
      * ie. when the done button is clicked.
      */
-    $scope.postRating = function() {
+    $scope.submitRating = function() {
         //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('Element ' + i + ' is '  + $scope.currentTags[i]);
+                console.log('tag ' + i + ' is '  + $scope.currentTags[i]);
             }
         } else {
             console.log('no tags chosen');
@@ -94,6 +93,20 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         console.log("overall is " + $scope.overall);
         console.log("comment is " + $scope.comment);
 
+        Course.processRating($routeParams.courseCode, $scope.ratingForm).then(
+            function(data) {
+                console.log(data);
+                if (data.status == 200) {
+                    $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
+                        $scope.course = data.data;
+                    });
+                } else {
+                    console.log('failure');
+                }
+            }
+        );
+
+        console.log('done submitting rating');
         // return $scope.currentTags;
     };
 

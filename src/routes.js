@@ -61,10 +61,10 @@ function getCourses(req, res) {
 
 /**
  * Executes a search query on the database. Query is used as a potential course code,
- * part of a description, a department, or course title. 
+ * part of a description, a department, or course title.
  */
 function searchResults(req, res) {
-    //find courses that contain the query in one of its fields 
+    //find courses that contain the query in one of its fields
     Course.find({
         $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
@@ -112,7 +112,6 @@ function searchResults(req, res) {
 function getCourse(req, res) {
     console.log(new Date().toLocaleTimeString() + req.params.courseCode);
     var code = req.params.courseCode;
-
     if ("user" in req.session) {
         user = req.session.user;
         user.coursesViewed.push(code);
@@ -244,7 +243,6 @@ function userLogin(req, res) {
             };
         }
     });
-
 }
 
 
@@ -298,6 +296,7 @@ function getAllDepartments(req, res) {
 
 //post a new rating
 function postRating(req, res) {
+    console.log("post rating");
     var data = req.body;
     //create the rating
     var newRating = new Rating({
@@ -311,17 +310,17 @@ function postRating(req, res) {
         comment: data.comment,
         course: req.courseCode
     });
-
     //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
     User.update({ email: user.email }, { $set: { coursesRated: user.coursesRated } });
-
-    //find the course in the database so that it can be updated based on its currents values    
     var course;
-    Course.find({
+    Course.findOne({
         courseCode: req.courseCode
     }, function(err, crs) {
+        if (err) {
+            res.send(err);
+        }
         course = crs;
     });
     //update the course
@@ -346,7 +345,7 @@ function deleteRating(req, res) {
     var data = req.body;
     var course;
 
-    //find the course in the database so that it can be updated based on its currents values    
+    //find the course in the database so that it can be updated based on its currents values
     Course.find({
         courseCode: req.courseCode
     }, function(err, crs) {
