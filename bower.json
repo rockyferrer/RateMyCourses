@@ -20,6 +20,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "css": "https://fonts.googleapis.com/css?family=Lato",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "angular-cookies": "^1.6.3"
   }
 }
