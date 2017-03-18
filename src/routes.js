@@ -116,7 +116,9 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     user = req.session.user;
     user.coursesViewed.push(code);
-    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
+    console.log(user.coursesViewed);
+    console.log(user.email);
+    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}}).exec();   
     Course.findOne({
         courseCode: code
     }, function(err, course) {
