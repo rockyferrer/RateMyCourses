@@ -395,51 +395,42 @@ function deleteRating(req, res) {
     });
 }
 
-<<
-<< << < HEAD
 
 function updateHelpfulness(req, res) {
     var data = req.body;
     var rating;
+    var course;
 
-    Rating.update({ __id: data.__id }, { $set: { helpfulness: data.helpfulness - data.vote } }); ===
-    === =
-    function updateHelpfulness(req, res) {
-        var data = req.body;
-        var rating;
-        var course;
+    //find the course in the database so that it can be updated based on its currents values
+    Course.find({
+        courseCode: req.courseCode
+    }, function(err, crs) {
+        course = crs;
+    });
 
-        //find the course in the database so that it can be updated based on its currents values
-        Course.find({
-            courseCode: req.courseCode
-        }, function(err, crs) {
-            course = crs;
-        });
-
-        index = course.ratings.indexOf(req.rating);
-        if (index > -1) {
-            rating = req.course.ratings[index]
-        }
-        rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } }); >>>
-        >>> > e4ea9972ffa5a4bf985cd224bcd41734485cfa42
+    index = course.ratings.indexOf(req.rating);
+    if (index > -1) {
+        rating = req.course.ratings[index]
     }
+    rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } });
+}
 
-    module.exports = {
-        searchResults: searchResults,
-        getCourse: getCourse,
-        getSuggestedCourses: getSuggestedCourses,
-        getDepartment: getDepartment,
-        getAllDepartmentCourses: getAllDepartmentCourses,
-        getUserInfo: getUserInfo,
-        getUserHistory: getUserHistory,
-        getUserRated: getUserRated,
-        userRegister: userRegister,
-        userLogin: userLogin,
-        updateUser: updateUser,
-        deleteUser: deleteUser,
-        getAllFaculties: getAllFaculties,
-        getAllDepartments: getAllDepartments,
-        postRating: postRating,
-        deleteRating: deleteRating,
-        updateHelpfulness: updateHelpfulness
-    };
+module.exports = {
+    searchResults: searchResults,
+    getCourse: getCourse,
+    getSuggestedCourses: getSuggestedCourses,
+    getDepartment: getDepartment,
+    getAllDepartmentCourses: getAllDepartmentCourses,
+    getUserInfo: getUserInfo,
+    getUserHistory: getUserHistory,
+    getUserRated: getUserRated,
+    userRegister: userRegister,
+    userLogin: userLogin,
+    updateUser: updateUser,
+    deleteUser: deleteUser,
+    getAllFaculties: getAllFaculties,
+    getAllDepartments: getAllDepartments,
+    postRating: postRating,
+    deleteRating: deleteRating,
+    updateHelpfulness: updateHelpfulness
+};
