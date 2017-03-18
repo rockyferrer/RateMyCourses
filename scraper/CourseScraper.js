@@ -1,7 +1,7 @@
 var request = require('request');
 var EventEmitter = require('events').EventEmitter;
 var util = require('util');
-var models = require('../model.js');
+var models = require('../src/model.js');
 var courseSchema = models.courseSchema;
 var Course;
 
@@ -70,11 +70,11 @@ CourseScraper.prototype.parseAndSave = function() {
 	    workload: 0.0,
 	    learningExp: 0.0
         });
-        c.save(function(err) {
+        c.save(function(err, course) {
             if (err) {
                 console.log('Error saving to db:' + err);
             } else {
-                console.log(c.courseCode + ' - ' + c.title);
+                console.log(course.courseCode + ' - ' + course.title);
             }
         });
     });

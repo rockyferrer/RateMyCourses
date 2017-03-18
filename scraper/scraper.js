@@ -1,6 +1,6 @@
 var request = require('request');
 var mongoose = require('mongoose');
-var models = require('../model.js');
+var models = require('../src/model.js');
 
 var MONGODB = 'mongodb://localhost/Team23-RateMyCourses';
 
