@@ -266,7 +266,7 @@ function userLogin(req, res) {
 function updateUser(req, res) {
     data = req.body;
     var hash = pw.createNewHash(data.password);
-    User.update({ "__id": userOld.__id }, {
+    User.update({ "__id": req.session.user.__id }, {
         $set: {
             email: data.email,
             password: hash.passwordHash,
@@ -279,7 +279,7 @@ function updateUser(req, res) {
 }
 
 function deleteUser(req, res) {
-    User.remove({ __id: req.userID });
+    User.remove({ __id: req.session.user.__id });
 }
 
 
@@ -311,13 +311,11 @@ function getAllDepartments(req, res) {
 function postRating(req, res) {
     var data = req.body;
     var newRating = new Rating({
-        user: data.user,
         dateTaken: data.date,
         difficulty: data.difficulty,
         workload: data.workload,
         learningExp: data.learningExp,
         overall: data.overall,
-        prof: data.prof,
         tags: data.tags,
         helpfulness: 0,
         comment: data.comment,
