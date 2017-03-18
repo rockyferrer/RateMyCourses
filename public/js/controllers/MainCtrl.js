@@ -2,7 +2,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $lo
 
     $scope.title = "RateMyCourses - Because Knowledge Is Power"
     $scope.cssFilename = "home"
-    $rootScope.loggedIn = false;
+    if ($rootScope.loggedIn != true) $rootScope.loggedIn = false;
     $rootScope.search = function() {
         console.log("Searching");
         $location.path("/search/" + $rootScope.searchField);
