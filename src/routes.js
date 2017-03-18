@@ -82,8 +82,8 @@ function searchResults(req, res) {
 };
 
 function getCourse(req, res) {
-    console.log(new Date().toLocaleTimeString() + req.params.courseCode);
-    var code = req.params.courseCode;
+    console.log(new Date().toLocaleTimeString() + req.courseCode);
+    var code = req.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
         if (user.coursesViewed.indexOf(code) <= -1) {
@@ -99,7 +99,7 @@ function getCourse(req, res) {
             }).exec();
         }
     }
-
+	console.log(code);
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -109,6 +109,7 @@ function getCourse(req, res) {
             return;
         }
         console.log("Success");
+		console.log(course.courseCode);
         res.json(course);
     });
 };
@@ -117,7 +118,7 @@ function getCourse(req, res) {
  * Responds with suggested courses based on department parameter
  */
 function getSuggestedCourses(req, res) {
-    var dept = req.params.department;
+    var dept = req.department;
     console.log(dept);
     Course.find({
         department: dept
@@ -136,7 +137,7 @@ function getSuggestedCourses(req, res) {
 function getDepartment(req, res) {
     //find department and send its json
     Department.findOne({
-            name: req.param.department
+            name: req.department
         },
         function(err, department) {
             if (err) {
@@ -164,10 +165,11 @@ function getAllDepartmentCourses(req, res) {
 }
 
 function getUserInfo(req, res) {
-    var user = req.param.userID;
+    var user = req.userID;
+    console.log("looking for user: " + user);
     //find user and send its json
     User.findOne({
-        _id: user
+        email: user
     }, function(err, users) {
         if (err) {
             res.send(err);
@@ -286,15 +288,38 @@ function getAllDepartments(req, res) {
     );
 }
 
+function getRatings(req, res){
+	var crs;
+	Course.findOne({
+        courseCode: req.courseCode
+    }, function(err, course) {
+        if (err) {
+            res.send(err);
+        }
+	Rating.find({_id: {$in: course.ratings}},
+		function(err, ratings){
+			if (err) {
+				res.send(err);
+			}
+			else{
+				res.json(ratings);
+			}
+		});
+	
+    });
+	
+}
+
 //post a new rating
 function postRating(req, res) {
     var data = req.body;
-    //create the rating
+	user = req.session.user;
+	//create the rating
     var newRating = new Rating({
-        dateTaken: data.date,
+		user: req.session.user,
         difficulty: data.difficulty,
         workload: data.workload,
-        learningExp: data.learningExp,
+	   	learningExp: data.learningExp,
         overall: data.overall,
         tags: data.tags,
         helpfulness: 0,
@@ -302,13 +327,19 @@ function postRating(req, res) {
         course: req.courseCode
     });
     //update user parameters
-    user = req.session.user;
-    user.coursesViewed.push(req.courseCode);
-    User.update({
+    user.coursesRated.push(req.courseCode);
+ 	User.update({
         email: user.email
     }, {
         $set: {
             coursesRated: user.coursesRated
+        }
+    });
+    
+	newRating.save(function(error, rating) {
+        if (error) {
+            console.log(error);
+            res.send(error);
         }
     });
 
@@ -321,7 +352,9 @@ function postRating(req, res) {
         }
         courseToUpdate = course;
         updateCourseRating(data, res, courseToUpdate, newRating);
-    });
+	});
+	
+	
 }
 
 //update the course
@@ -337,7 +370,7 @@ function updateCourseRating(data, res, course, newRating) {
             course.popularTags.push(tag);
         }
     }
-    course.ratings.put(newRating);
+    course.ratings.push(newRating);
     course.update({
         $set: {
             overall: (course.overall * len + overall) / (len + 1),
@@ -387,6 +420,7 @@ function deleteRating(req, res) {
             ratings: course.ratings
         }
     });
+	Rating.remove({__id: req.rating});
 }
 
 
@@ -407,6 +441,7 @@ function updateHelpfulness(req, res) {
         rating = req.course.ratings[index]
     }
     rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } });
+
 }
 
 module.exports = {
@@ -426,5 +461,6 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
-    updateHelpfulness: updateHelpfulness
+    updateHelpfulness: updateHelpfulness,
+	getRatings: getRatings
 };

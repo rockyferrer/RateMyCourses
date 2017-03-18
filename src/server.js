@@ -86,18 +86,20 @@ app.get('/api/courses/:courseCode', routes.getCourse);
 app.post('/api/courses/:courseCode/addRating', routes.postRating);
 app.delete('/api/courses/:courseCode/deleteRating', routes.deleteRating);
 app.put('/api/courses/:courseCode/helpfulness', routes.updateHelpfulness);
+app.get('/api/courses/:courseCode/getRatings', routes.getRatings);
 
 //Search
 app.get('/api/search/:query', routes.searchResults);
 
 //User
-app.get('/api/user/:userID', utils.loggedIn, routes.getUserInfo);
 app.get('/api/user/history', utils.loggedIn, routes.getUserHistory);
 app.get('/api/user/rated', utils.loggedIn, routes.getUserRated);
 app.post('/api/user/login', routes.userLogin);
 app.post('/api/user/register', routes.userRegister);
 app.put('/api/user/updateInfo', utils.loggedIn, routes.updateUser);
 app.delete('/api/user/delete', utils.loggedIn, routes.deleteUser);
+app.get('/api/user/:userID', utils.loggedIn, routes.getUserInfo);
+
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);

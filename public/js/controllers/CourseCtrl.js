@@ -1,17 +1,14 @@
-angular.module('CourseCtrl', []).controller('CourseController', function($scope, $http, $routeParams, Course) {
+angular.module('CourseCtrl', []).controller('CourseController', function($scope, $http, $routeParams, $rootScope, Course) {
 
     $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
         $scope.course = data.data;
     });
-
+    
+	$http.get('/api/courses/' + $routeParams.courseCode + '/getRatings').then(function(data) {
+        $scope.ratings = data.data;
+    });
 
     $scope.options = ['1', '2', '3', '4', '5'];
-
-    // $scope.comment = 1;
-    // $scope.workload = 1;
-    // $scope.learningExp = 1;
-    // $scope.overall = 1;
-    // $scope.comment = '';
 
     $scope.tags = [
         'Cool',
@@ -34,7 +31,8 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         "learningExp": 0,
         "overall": 0,
         "tags": $scope.currentTags,
-        "comment": ""
+        "comment": "",
+		"user": $rootScope.user
     };
 
     /**
@@ -98,9 +96,9 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingForm).then(
             function(data) {
                 if (data.status == 200) {
-                    $http.get('/api/courses/' + $routeParams.courseCode)
+                    $http.get('/api/courses/' + $routeParams.courseCode + '/getRatings')
                         .then(function(data) {
-                            $scope.course = data.data;
+                            $scope.ratings = data.data;
                         });
                 } else {
                     console.log('failure');

@@ -1,10 +1,9 @@
 /** jQuery **/
 
 $(document).ready(function() {
-    
+
 	//Toggles registration fields
 	$('#register-btn').click(function(e) {
-	    console.log('its here');
 		e.preventDefault();
 	    $(".register-field").toggle();
 	    $("#login-btn").toggle();
@@ -21,7 +20,7 @@ $(document).ready(function() {
 		}else{
 			$(".required-field").css("required", "true");
 		}
-		
+
 	});
 
 	$('#nav-header').load('header.html');
