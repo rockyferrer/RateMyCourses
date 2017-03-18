@@ -5,13 +5,13 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
     });
 
 
-    /*$scope.options = ['1', '2', '3', '4', '5'];
+    $scope.options = ['1', '2', '3', '4', '5'];
 
     $scope.comment = 0;
     $scope.workload = 0;
-    $scope.learningExp = 0
+    $scope.learningExp = 0;
     $scope.overall = 0;
-    $scope.comment = '';*/
+    $scope.comment = '';
 
     $scope.tags = [
         'Cool',

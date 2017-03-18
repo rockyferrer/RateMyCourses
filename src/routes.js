@@ -66,10 +66,26 @@ function getCourses(req, res) {
 function searchResults(req, res) {
     //find courses that contain the query in one of its fields
     Course.find({
-        $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { department: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { description: { $regex: new RegExp('.*' + req.query + '.*', "i") } }
+        $or: [{
+                courseCode: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                title: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                department: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                description: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            }
         ]
     }, function(err, courses) {
         //error check
@@ -103,7 +119,10 @@ function searchResults(req, res) {
             delete depts[max];
         }
         //send the json response
-        var json = { courses: courses, depts: popular };
+        var json = {
+            courses: courses,
+            depts: popular
+        };
         res.json(json);
     }).limit(50); //match at most 50 courses
 
@@ -117,7 +136,13 @@ function getCourse(req, res) {
         user.coursesViewed.push(code);
         console.log(user.coursesViewed);
         console.log(user.email);
-        User.update({ email: user.email }, { $set: { coursesViewed: user.coursesViewed } }).exec();
+        User.update({
+            email: user.email
+        }, {
+            $set: {
+                coursesViewed: user.coursesViewed
+            }
+        }).exec();
     }
 
     Course.findOne({
@@ -224,7 +249,9 @@ function userRegister(req, res) {
 }
 
 function userLogin(req, res) {
-    User.findOne({ "email": req.body.email }, function(err, user) {
+    User.findOne({
+        "email": req.body.email
+    }, function(err, user) {
         if (err) {
             console.log("Error finding user.");
             return false;
@@ -251,7 +278,9 @@ function updateUser(req, res) {
     //hash password
     var hash = pw.createNewHash(data.password);
     //update the user with the new data
-    User.update({ "__id": req.session.user.__id }, {
+    User.update({
+        "__id": req.session.user.__id
+    }, {
         $set: {
             email: data.email,
             password: hash.passwordHash,
@@ -265,7 +294,9 @@ function updateUser(req, res) {
 
 //delete a user from the database
 function deleteUser(req, res) {
-    User.remove({ __id: req.session.user.__id });
+    User.remove({
+        __id: req.session.user.__id
+    });
 }
 
 //get all faculties in the database
@@ -314,7 +345,13 @@ function postRating(req, res) {
     //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
-    User.update({ email: user.email }, { $set: { coursesRated: user.coursesRated } });
+    User.update({
+        email: user.email
+    }, {
+        $set: {
+            coursesRated: user.coursesRated
+        }
+    });
     var course;
     Course.findOne({
         courseCode: req.courseCode
@@ -322,28 +359,27 @@ function postRating(req, res) {
         if (err) {
             res.send(err);
         }
-        updateRating(req, res, course);
+        updateRating(data, res, course);
     });
-    //update the course
-
-    function updateRating(req, res, course) {
-        var len = course.ratingCount;
-        Course.update({
-            courseCode: course.courseCode
-        }, {
-            $set: {
-                overall: (course.overall * len + data.overall) / (len + 1),
-                difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
-                workload: (course.workload * len + data.workload) / (len + 1),
-                learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
-                ratingCount: len + 1
-            }
-        });
-
-        //send the new rating
-        res.send(newRating);
-    }
 }
+
+//update the course
+function updateRating(data, res, course) {
+    var len = course.ratingCount;
+    course.update({
+        $set: {
+            overall: (course.overall * len + data.overall) / (len + 1),
+            difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
+            workload: (course.workload * len + data.workload) / (len + 1),
+            learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
+            ratingCount: len + 1
+        }
+    });
+
+    //send the new rating
+    res.send(newRating);
+}
+
 
 function deleteRating(req, res) {
     var data = req.body;
@@ -371,7 +407,9 @@ function deleteRating(req, res) {
     });
 
     //remove the rating from the database
-    Ratings.remove({ __id: data.__id });
+    Ratings.remove({
+        __id: data.__id
+    });
 }
 
 module.exports = {
