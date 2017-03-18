@@ -8,7 +8,11 @@ angular.module('rateMyCourses', [
     'LandingCtrl', 'LandingService',
     'SearchCtrl', 'SearchService',
     'ProfileCtrl'
-]);
+]).run(['$rootScope', "$cookies", function($rootScope, $cookies) {
+    $rootScope.user = $cookies.get("user");
+    $rootScope.loggedIn = ($rootScope.user != null);
+
+}]);
 /*.config(['$qProvider', function($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);*/

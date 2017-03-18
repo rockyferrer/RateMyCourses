@@ -1,4 +1,4 @@
-angular.module('LoginCtrl', []).controller('LoginController', function($scope, $http, $location, $rootScope, Login) {
+angular.module('LoginCtrl', ['ngCookies']).controller('LoginController', function($scope, $http, $location, $cookies, $rootScope, Login) {
 
     $http.get('/api/faculties/all').then(function(data) {
         $scope.faculty_list = data.data;
@@ -18,6 +18,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
                 if (data.data == true) {
                     $rootScope.loggedIn = true;
                     $rootScope.user = $scope.loginForm.email;
+                    $cookies.put('user', $scope.loginForm.email);
                     $location.path('/user/landing');
 
                 } else if (data.data == false) {
@@ -51,6 +52,7 @@ angular.module('LoginCtrl', []).controller('LoginController', function($scope, $
                 if (data.status == 200) {
                     $rootScope.loggedIn = true;
                     $rootScope.user = $scope.loginForm.email;
+                    $cookies.put('user', $scope.loginForm.email);
                     $location.path('/user/landing');
 
                 } else {

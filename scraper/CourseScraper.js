@@ -56,8 +56,14 @@ CourseScraper.prototype.parseAndSave = function() {
         if (value.meeting_sections && value.meeting_sections[0]) {
             size = value.meeting_sections[0].size;
         }
+        // Remove everything after CSCXXX
+        var pattern = /^(\w{3,4}\d+){1}/;
+        if (!pattern.test(value.code)) {
+            return;
+        }
+        var formattedCode = value.code.match(pattern)[0];
         c = new Course({
-            courseCode: value.code,
+            courseCode: formattedCode,
             title: value.name,
             department: value.department,
             faculty: value.division,
@@ -65,10 +71,10 @@ CourseScraper.prototype.parseAndSave = function() {
             popularTags: [],
             classSize: size,
             ratingCount: 0,
-	    overall: 0.0,
-	    difficulty: 0.0,
-	    workload: 0.0,
-	    learningExp: 0.0
+            overall: 0.0,
+            difficulty: 0.0,
+            workload: 0.0,
+            learningExp: 0.0
         });
         c.save(function(err, course) {
             if (err) {

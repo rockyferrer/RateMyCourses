@@ -1,7 +1,9 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $location, $rootScope) {
+angular.module('MainCtrl', ['ngCookies']).controller('MainController', function($scope, $cookies, $location, $rootScope) {
 
     $scope.title = "RateMyCourses - Because Knowledge Is Power"
     $scope.cssFilename = "home"
+    $rootScope.user = $cookies.get('user');
+    if ($rootScope.user == null) $rootScope.loggedIn = false;
     if ($rootScope.loggedIn != true) $rootScope.loggedIn = false;
     $rootScope.search = function() {
         console.log("Searching");
