@@ -90,13 +90,13 @@ app.delete('/api/course/:courseCode/deleteRating', routes.deleteRating);
 app.get('/api/search/:query', routes.searchResults);
 
 //User
-app.get('/api/user/:userID', routes.getUserInfo);
-app.get('/api/user/history', routes.getUserHistory);
-app.get('/api/user/rated', routes.getUserRated);
+app.get('/api/user/:userID', utils.loggedIn, routes.getUserInfo);
+app.get('/api/user/history', utils.loggedIn, routes.getUserHistory);
+app.get('/api/user/rated', utils.loggedIn, routes.getUserRated);
 app.post('/api/user/login', routes.userLogin);
 app.post('/api/user/register', routes.userRegister);
-app.put('/api/user/updateInfo', routes.updateUser);
-app.delete('/api/user/delete', routes.deleteUser);
+app.put('/api/user/updateInfo', utils.loggedIn, routes.updateUser);
+app.delete('/api/user/delete', utils.loggedIn, routes.deleteUser);
 
 // Misc
 app.get('/api/faculties/all', routes.getAllFaculties);

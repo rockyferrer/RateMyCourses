@@ -59,7 +59,10 @@ function getCourses(req, res) {
 
 };
 
-
+/**
+ * Executes a search query on the database. Query is used as a potential course code,
+ * part of a description, a department, or course title. 
+ */
 function searchResults(req, res) {
     console.log(req.query);
     Course.find({
@@ -116,7 +119,7 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     user = req.session.user;
     user.coursesViewed.push(code);
-    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
+    User.update({ email: user.email }, { $set: { coursesViewed: user.coursesViewed } });
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -211,11 +214,12 @@ function getUserInfo(req, res) {
     });
 }
 
-function getUserHistory(req, res){
+function getUserHistory(req, res) {
+    console.log('History');
     res.json(req.session.user.coursesViewed);
 }
 
-function getUserRated(req, res){
+function getUserRated(req, res) {
     res.json(req.session.user.coursesRated);
 }
 
@@ -237,7 +241,6 @@ function userRegister(req, res) {
     });
 }
 
-//TODO: Implement
 function userLogin(req, res) {
     User.findOne({ "email": req.body.email }, function(err, user) {
         if (err) {
@@ -247,8 +250,6 @@ function userLogin(req, res) {
             console.log("no user found");
             res.send(false);
         } else {
-            console.log(user);
-            //TODO: Add to cookie
             if (pw.validatePassphrase(req.body.password,
                     user.salt, user.password)) {
                 console.log("succesful login");
@@ -321,11 +322,11 @@ function postRating(req, res) {
         comment: data.comment,
         course: req.courseCode
     });
-    
+
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
-    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
-    
+    User.update({ email: user.email }, { $set: { coursesViewed: user.coursesViewed } });
+
     var course;
     Course.find({
         courseCode: req.courseCode

@@ -42,7 +42,7 @@
                 <!-- Faculty -->
                 <div class="row">
                     <label class="control-label col-sm-4">Faculty:</label>
-                    <select data-ng-controller="faculties" class="select-dept required-field">
+                    <select class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
@@ -51,7 +51,7 @@
                 <!-- Departments -->
                 <div class="row">
                     <label class="control-label col-sm-4">Department 1:</label>
-                    <select data-ng-controller="departments" class="select-dept required-field">
+                    <select class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="row">
                     <label class="control-label col-sm-4">Department 2:</label>
-                    <select data-ng-controller="departments" class="select-dept">
+                    <select class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="row">
                     <label class="control-label col-sm-4">Department 3:</label>
-                    <select data-ng-controller="departments" class="select-dept">
+                    <select class="select-dept">
 			   					<option selected>Optional</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>

@@ -6,7 +6,8 @@ angular.module('rateMyCourses', [
     'DepartmentCtrl', 'DepartmentService',
     'CourseCtrl', 'CourseService',
     'LandingCtrl', 'LandingService',
-    'SearchCtrl', 'SearchService'
+    'SearchCtrl', 'SearchService',
+    'ProfileCtrl'
 ]).config(['$qProvider', function($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);

@@ -6,6 +6,7 @@ angular.module('LandingCtrl', []).controller('LandingController', function($scop
 
     Landing.getUserHistory().then(function(data) {
         $scope.courseHistory = data.data;
+        console.log("History: " + data.data);
     });
 
     Landing.getCoursesRated().then(function(data) {
