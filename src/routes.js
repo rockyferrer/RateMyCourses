@@ -412,6 +412,14 @@ function deleteRating(req, res) {
     });
 }
 
+function updateHelpfulness(req, res){
+	var data = req.body;
+	var rating;
+	
+	Rating.update({__id: data.__id},
+	{$set: {helpfulness: data.helpfulness - data.vote}});
+}
+
 module.exports = {
     getCourses: getCourses,
     searchResults: searchResults,
@@ -429,5 +437,6 @@ module.exports = {
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
     postRating: postRating,
-    deleteRating: deleteRating
+    deleteRating: deleteRating,
+	updateHelpfulness: updateHelpfulness
 };
