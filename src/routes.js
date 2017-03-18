@@ -331,12 +331,6 @@ function updateCourseRating(data, res, course, newRating) {
     var difficulty = parseInt(data.difficulty);
     var workload = parseInt(data.workload);
     var learningExp = parseInt(data.learningExp);
-    // console.log(len);
-    // console.log('overall: ' + course.overall);
-    // console.log('new:' + overall)
-    // console.log('mult:' + (course.overall * len + overall))
-    // console.log('add:' + (len+1))
-    // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
 
     for (tag in data.tags) {
         if (course.popularTags.indexOf(tag) <= -1) {
