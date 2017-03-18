@@ -220,14 +220,14 @@ function userLogin(req, res) {
                 req.session.user = user;
                 if (user.admin) {
                     req.session.isAdmin = true;
-                    res.send(1);
+                    res.send("1");
                 } else {
-                    res.send(2);
+                    res.send("2");
                 }
 
             } else {
                 console.log("bad password")
-                res.send(3);
+                res.send("3");
             };
         }
     });
