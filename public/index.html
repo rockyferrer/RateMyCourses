@@ -69,8 +69,8 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="col-md-2">
+                    <a data-ng-show="loggedIn" href="/user/landing" class="btn navbtn navbar-btn ng-show" id="home-btn">Home</a>
                     <a data-ng-hide="loggedIn" href="/login" class="btn navbtn navbar-btn ng-hide" id="login">Log in / Register</a>
                     <a data-ng-show="loggedIn" href="/user/profile" class="btn navbtn navbar-btn ng-show" id="login">{{ user}}</a>
                 </div>
