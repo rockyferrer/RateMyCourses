@@ -86,8 +86,6 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
-		console.log("hi");
-		console.log(user.coursesViewed.indexOf(code));
 		if(user.coursesViewed.indexOf(code) <= -1){
 				user.coursesViewed.push(code);
 				console.log(user.coursesViewed);
@@ -284,9 +282,7 @@ function getAllDepartments(req, res) {
 
 //post a new rating
 function postRating(req, res) {
-    console.log("post rating");
     var data = req.body;
-    console.log(data);
     //create the rating
     var newRating = new Rating({
         dateTaken: data.date,
@@ -299,7 +295,6 @@ function postRating(req, res) {
         comment: data.comment,
         course: req.courseCode
     });
-    console.log(newRating);
     //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
@@ -310,6 +305,7 @@ function postRating(req, res) {
             coursesRated: user.coursesRated
         }
     });
+	
     var courseToUpdate;
     Course.findOne({
         courseCode: req.courseCode
@@ -335,6 +331,12 @@ function updateCourseRating(data, res, course, newRating) {
     // console.log('mult:' + (course.overall * len + overall))
     // console.log('add:' + (len+1))
     // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
+	
+	for(tag in data.tags){
+		if(course.popularTags.indexOf(tag) <= -1){
+				course.popularTags.push(tag);
+		}
+	}
 
     course.update({
         $set: {
@@ -342,7 +344,8 @@ function updateCourseRating(data, res, course, newRating) {
             difficulty: (course.difficulty * len + difficulty) / (len + 1),
             workload: (course.workload * len + workload) / (len + 1),
             learningExp: (course.learningExp * len + learningExp) / (len + 1),
-            ratingCount: len + 1
+            ratingCount: len + 1,
+			popularTags: course.popularTags
         }
     }, function (err, newRating) {
         if (err) {
