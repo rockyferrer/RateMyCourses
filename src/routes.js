@@ -86,18 +86,18 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
-		if(user.coursesViewed.indexOf(code) <= -1){
-				user.coursesViewed.push(code);
-				console.log(user.coursesViewed);
-				console.log(user.email);
-				User.update({
-					email: user.email
-				}, {
-					$set: {
-						coursesViewed: user.coursesViewed
-					}
-				}).exec();
-		}
+        if (user.coursesViewed.indexOf(code) <= -1) {
+            user.coursesViewed.push(code);
+            console.log(user.coursesViewed);
+            console.log(user.email);
+            User.update({
+                email: user.email
+            }, {
+                $set: {
+                    coursesViewed: user.coursesViewed
+                }
+            }).exec();
+        }
     }
 
     Course.findOne({
@@ -218,10 +218,16 @@ function userLogin(req, res) {
                     user.salt, user.password)) {
                 console.log("succesful login");
                 req.session.user = user;
-                res.send(true);
+                if (user.admin) {
+                    req.session.isAdmin = true;
+                    res.send(1);
+                } else {
+                    res.send(2);
+                }
+
             } else {
                 console.log("bad password")
-                res.send(false);
+                res.send(3);
             };
         }
     });
@@ -305,7 +311,7 @@ function postRating(req, res) {
             coursesRated: user.coursesRated
         }
     });
-	
+
     var courseToUpdate;
     Course.findOne({
         courseCode: req.courseCode
@@ -331,12 +337,12 @@ function updateCourseRating(data, res, course, newRating) {
     // console.log('mult:' + (course.overall * len + overall))
     // console.log('add:' + (len+1))
     // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
-	
-	for(tag in data.tags){
-		if(course.popularTags.indexOf(tag) <= -1){
-				course.popularTags.push(tag);
-		}
-	}
+
+    for (tag in data.tags) {
+        if (course.popularTags.indexOf(tag) <= -1) {
+            course.popularTags.push(tag);
+        }
+    }
 
     course.update({
         $set: {
@@ -345,9 +351,9 @@ function updateCourseRating(data, res, course, newRating) {
             workload: (course.workload * len + workload) / (len + 1),
             learningExp: (course.learningExp * len + learningExp) / (len + 1),
             ratingCount: len + 1,
-			popularTags: course.popularTags
+            popularTags: course.popularTags
         }
-    }, function (err, newRating) {
+    }, function(err, newRating) {
         if (err) {
             res.send(err);
         }
@@ -388,12 +394,11 @@ function deleteRating(req, res) {
     });
 }
 
-function updateHelpfulness(req, res){
-	var data = req.body;
-	var rating;
-	
-	Rating.update({__id: data.__id},
-	{$set: {helpfulness: data.helpfulness - data.vote}});
+function updateHelpfulness(req, res) {
+    var data = req.body;
+    var rating;
+
+    Rating.update({ __id: data.__id }, { $set: { helpfulness: data.helpfulness - data.vote } });
 }
 
 module.exports = {
@@ -413,5 +418,5 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
-	updateHelpfulness: updateHelpfulness
+    updateHelpfulness: updateHelpfulness
 };
