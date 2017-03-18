@@ -214,6 +214,8 @@ function getUserInfo(req, res) {
 }
 
 function getUserHistory(req, res){
+    console.log("hi");
+    console.log(req.session.user.coursesViewed);
     res.json(req.session.user.coursesViewed);
 }
 
