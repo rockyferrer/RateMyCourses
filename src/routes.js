@@ -99,7 +99,7 @@ function getCourse(req, res) {
             }).exec();
         }
     }
-
+	console.log(code);
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -109,6 +109,7 @@ function getCourse(req, res) {
             return;
         }
         console.log("Success");
+		console.log(course.courseCode);
         res.json(course);
     });
 };
@@ -286,15 +287,38 @@ function getAllDepartments(req, res) {
     );
 }
 
+function getRatings(req, res){
+	var crs;
+	Course.findOne({
+        courseCode: req.courseCode
+    }, function(err, course) {
+        if (err) {
+            res.send(err);
+        }
+	Rating.find({_id: {$in: course.ratings}},
+		function(err, ratings){
+			if (err) {
+				res.send(err);
+			}
+			else{
+				res.json(ratings);
+			}
+		});
+	
+    });
+	
+}
+
 //post a new rating
 function postRating(req, res) {
     var data = req.body;
-    //create the rating
+	user = req.session.user;
+	//create the rating
     var newRating = new Rating({
-        dateTaken: data.date,
+		user: req.session.user,
         difficulty: data.difficulty,
         workload: data.workload,
-        learningExp: data.learningExp,
+	   	learningExp: data.learningExp,
         overall: data.overall,
         tags: data.tags,
         helpfulness: 0,
@@ -302,13 +326,19 @@ function postRating(req, res) {
         course: req.courseCode
     });
     //update user parameters
-    user = req.session.user;
-    user.coursesViewed.push(req.courseCode);
-    User.update({
+    user.coursesRated.push(req.courseCode);
+ 	User.update({
         email: user.email
     }, {
         $set: {
             coursesRated: user.coursesRated
+        }
+    });
+    
+	newRating.save(function(error, rating) {
+        if (error) {
+            console.log(error);
+            res.send(error);
         }
     });
 
@@ -321,7 +351,9 @@ function postRating(req, res) {
         }
         courseToUpdate = course;
         updateCourseRating(data, res, courseToUpdate, newRating);
-    });
+	});
+	
+	
 }
 
 //update the course
@@ -337,7 +369,7 @@ function updateCourseRating(data, res, course, newRating) {
             course.popularTags.push(tag);
         }
     }
-    course.ratings.put(newRating);
+    course.ratings.push(newRating);
     course.update({
         $set: {
             overall: (course.overall * len + overall) / (len + 1),
@@ -387,6 +419,7 @@ function deleteRating(req, res) {
             ratings: course.ratings
         }
     });
+	Rating.remove({__id: req.rating});
 }
 
 
@@ -426,5 +459,6 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
-    updateHelpfulness: updateHelpfulness
+    updateHelpfulness: updateHelpfulness,
+	getRatings: getRatings
 };
