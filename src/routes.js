@@ -86,16 +86,20 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
-        user.coursesViewed.push(code);
-        console.log(user.coursesViewed);
-        console.log(user.email);
-        User.update({
-            email: user.email
-        }, {
-            $set: {
-                coursesViewed: user.coursesViewed
-            }
-        }).exec();
+		console.log("hi");
+		console.log(user.coursesViewed.indexOf(code));
+		if(user.coursesViewed.indexOf(code) <= -1){
+				user.coursesViewed.push(code);
+				console.log(user.coursesViewed);
+				console.log(user.email);
+				User.update({
+					email: user.email
+				}, {
+					$set: {
+						coursesViewed: user.coursesViewed
+					}
+				}).exec();
+		}
     }
 
     Course.findOne({
