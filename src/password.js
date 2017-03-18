@@ -52,6 +52,10 @@ function createNewHash(password) {
  * Compare a hash value to the output of a password and salt.
  */
 function validatePassphrase(userInput, salt, expectedHash) {
+    if (userInput == null || salt == null || expectedHash == null) {
+        console.log("Error verifying password.");
+        return false;
+    }
     var hash = sha512(userInput, salt);
     return (expectedHash == hash.passwordHash);
 }
