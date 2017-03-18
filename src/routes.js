@@ -13,63 +13,32 @@ var Rating = db.model('Rating', models.ratingSchema);
 var User = db.model('User', models.userSchema);
 
 /**
- * Returns matching courses.
- * Optional course code and department parameters.
- */
-function getCourses(req, res) {
-    console.log(req.query);
-    var code = req.query.courseCode;
-    var dept = req.query.department;
-    if (code && dept) {
-        Course.find({
-            courseCode: req.query.courseCode,
-            department: req.query.department
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else if (code) {
-        Course.find({
-            courseCode: code
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else if (dept) {
-        Course.find({
-            department: dept
-        }, function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    } else {
-        Course.find(function(err, courses) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(courses);
-        });
-    }
-
-};
-
-/**
  * Executes a search query on the database. Query is used as a potential course code,
  * part of a description, a department, or course title.
  */
 function searchResults(req, res) {
     //find courses that contain the query in one of its fields
     Course.find({
-        $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { department: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
-            { description: { $regex: new RegExp('.*' + req.query + '.*', "i") } }
+        $or: [{
+                courseCode: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                title: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                department: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            },
+            {
+                description: {
+                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                }
+            }
         ]
     }, function(err, courses) {
         //error check
@@ -103,7 +72,10 @@ function searchResults(req, res) {
             delete depts[max];
         }
         //send the json response
-        var json = { courses: courses, depts: popular };
+        var json = {
+            courses: courses,
+            depts: popular
+        };
         res.json(json);
     }).limit(50); //match at most 50 courses
 
@@ -114,10 +86,18 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
-        user.coursesViewed.push(code);
-        console.log(user.coursesViewed);
-        console.log(user.email);
-        User.update({ email: user.email }, { $set: { coursesViewed: user.coursesViewed } }).exec();
+		if(user.coursesViewed.indexOf(code) <= -1){
+				user.coursesViewed.push(code);
+				console.log(user.coursesViewed);
+				console.log(user.email);
+				User.update({
+					email: user.email
+				}, {
+					$set: {
+						coursesViewed: user.coursesViewed
+					}
+				}).exec();
+		}
     }
 
     Course.findOne({
@@ -224,7 +204,9 @@ function userRegister(req, res) {
 }
 
 function userLogin(req, res) {
-    User.findOne({ "email": req.body.email }, function(err, user) {
+    User.findOne({
+        "email": req.body.email
+    }, function(err, user) {
         if (err) {
             console.log("Error finding user.");
             return false;
@@ -251,7 +233,9 @@ function updateUser(req, res) {
     //hash password
     var hash = pw.createNewHash(data.password);
     //update the user with the new data
-    User.update({ "__id": req.session.user.__id }, {
+    User.update({
+        "__id": req.session.user.__id
+    }, {
         $set: {
             email: data.email,
             password: hash.passwordHash,
@@ -265,7 +249,9 @@ function updateUser(req, res) {
 
 //delete a user from the database
 function deleteUser(req, res) {
-    User.remove({ __id: req.session.user.__id });
+    User.remove({
+        __id: req.session.user.__id
+    });
 }
 
 //get all faculties in the database
@@ -296,9 +282,7 @@ function getAllDepartments(req, res) {
 
 //post a new rating
 function postRating(req, res) {
-    console.log("post rating");
     var data = req.body;
-    console.log(data);
     //create the rating
     var newRating = new Rating({
         dateTaken: data.date,
@@ -314,36 +298,64 @@ function postRating(req, res) {
     //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
-    User.update({ email: user.email }, { $set: { coursesRated: user.coursesRated } });
-    var course;
+    User.update({
+        email: user.email
+    }, {
+        $set: {
+            coursesRated: user.coursesRated
+        }
+    });
+	
+    var courseToUpdate;
     Course.findOne({
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
             res.send(err);
         }
-        updateRating(req, res, course);
+        courseToUpdate = course;
+        updateCourseRating(data, res, courseToUpdate, newRating);
     });
-    //update the course
+}
 
-    function updateRating(req, res, course) {
-        var len = course.ratingCount;
-        Course.update({
-            courseCode: course.courseCode
-        }, {
-            $set: {
-                overall: (course.overall * len + data.overall) / (len + 1),
-                difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
-                workload: (course.workload * len + data.workload) / (len + 1),
-                learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
-                ratingCount: len + 1
-            }
-        });
+//update the course
+function updateCourseRating(data, res, course, newRating) {
+    var len = parseInt(course.ratingCount);
+    var overall = parseInt(data.overall);
+    var difficulty = parseInt(data.difficulty);
+    var workload = parseInt(data.workload);
+    var learningExp = parseInt(data.learningExp);
+    // console.log(len);
+    // console.log('overall: ' + course.overall);
+    // console.log('new:' + overall)
+    // console.log('mult:' + (course.overall * len + overall))
+    // console.log('add:' + (len+1))
+    // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
+	
+	for(tag in data.tags){
+		if(course.popularTags.indexOf(tag) <= -1){
+				course.popularTags.push(tag);
+		}
+	}
 
+    course.update({
+        $set: {
+            overall: (course.overall * len + overall) / (len + 1),
+            difficulty: (course.difficulty * len + difficulty) / (len + 1),
+            workload: (course.workload * len + workload) / (len + 1),
+            learningExp: (course.learningExp * len + learningExp) / (len + 1),
+            ratingCount: len + 1,
+			popularTags: course.popularTags
+        }
+    }, function (err, newRating) {
+        if (err) {
+            res.send(err);
+        }
         //send the new rating
         res.send(newRating);
-    }
+    });
 }
+
 
 function deleteRating(req, res) {
     var data = req.body;
@@ -371,11 +383,20 @@ function deleteRating(req, res) {
     });
 
     //remove the rating from the database
-    Ratings.remove({ __id: data.__id });
+    Ratings.remove({
+        __id: data.__id
+    });
+}
+
+function updateHelpfulness(req, res){
+	var data = req.body;
+	var rating;
+	
+	Rating.update({__id: data.__id},
+	{$set: {helpfulness: data.helpfulness - data.vote}});
 }
 
 module.exports = {
-    getCourses: getCourses,
     searchResults: searchResults,
     getCourse: getCourse,
     getSuggestedCourses: getSuggestedCourses,
@@ -391,5 +412,6 @@ module.exports = {
     getAllFaculties: getAllFaculties,
     getAllDepartments: getAllDepartments,
     postRating: postRating,
-    deleteRating: deleteRating
+    deleteRating: deleteRating,
+	updateHelpfulness: updateHelpfulness
 };

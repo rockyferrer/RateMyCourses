@@ -1,14 +1,21 @@
 /** jQuery **/
 
 $(document).ready(function() {
-
+    
 	//Toggles registration fields
 	$('#register-btn').click(function(e) {
-	    e.preventDefault();
+	    console.log('its here');
+		e.preventDefault();
 	    $(".register-field").toggle();
 	    $("#login-btn").toggle();
 		$("#create-account").toggle();
 		$("#forgot-btn").toggle();
+		if ($('#register-btn').text() =="Register"){
+			$('#register-btn').text("Login");
+		}
+    	else{
+			$('#register-btn').text("Register");
+		}
 		if($(".required-field").css("required")){
 			$(".required-field").css("required", "false");
 		}else{
