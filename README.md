@@ -8,6 +8,8 @@ Run `npm install && bower install` from the root of the repository to grab all N
 
 Now run `npm start` to start the server. Navigate to `localhost:8080/`.
 
+Next you have two options, you could install the courses from `db/courses.json`, or run the scraper.
+
 ### Scraper
 
 The scraper loads course data into the MongoDB instance from the Cobalt API.
