@@ -4,13 +4,14 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         $scope.course = data.data;
     });
 
-    $scope.options = ['1', '2', '3', '4', '5'];
 
-    $scope.difficulty = $scope.options[0];
-    $scope.workload = $scope.options[0];
-    $scope.learningExp = $scope.options[0];
-    $scope.overall = $scope.options[0];
-    $scope.comment = '';
+    /*$scope.options = ['1', '2', '3', '4', '5'];
+
+    $scope.comment = 0;
+    $scope.workload = 0;
+    $scope.learningExp = 0
+    $scope.overall = 0;
+    $scope.comment = '';*/
 
     $scope.tags = [
         'Cool',
@@ -26,6 +27,16 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
     ];
 
     $scope.currentTags = [];
+
+    $scope.ratingForm = {
+        "difficulty": 0,
+        "workload": 0,
+        "learningExp": 0,
+        "overall": 0,
+        "tags": [],
+        "comment": ""
+
+    };
 
     /**
      * Checks if the currentTags array contains any nulls, used in processTag
@@ -79,27 +90,19 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
      * ie. when the done button is clicked.
      */
     $scope.submitRating = function() {
-        //debugging
-        if ($scope.currentTags.length > 0) {
-            for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('tag ' + i + ' is ' + $scope.currentTags[i]);
-            }
-        } else {
-            console.log('no tags chosen');
-        }
-        console.log("difficulty rating is " + $scope.difficulty);
+        /*console.log("difficulty rating is " + $scope.difficulty);
         console.log("workload is " + $scope.workload);
         console.log("learning experience is " + $scope.learningExp);
         console.log("overall is " + $scope.overall);
-        console.log("comment is " + $scope.comment);
+        console.log("comment is " + $scope.comment);*/
 
-        $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingData).then(
+        $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingForm).then(
             function(data) {
-                console.log(data);
                 if (data.status == 200) {
-                    $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
-                        $scope.course = data.data;
-                    });
+                    $http.get('/api/courses/' + $routeParams.courseCode)
+                        .then(function(data) {
+                            $scope.course = data.data;
+                        });
                 } else {
                     console.log('failure');
                 }

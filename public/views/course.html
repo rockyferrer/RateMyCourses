@@ -54,11 +54,11 @@
 
 
 <!-- Add rating and ratings-->
-<form name="ratingForm">
+<form>
     <section class="row custom-section">
 
         <article id="add-rating" class="row custom-article">
-            <button type="submit" id="add-rating-btn" class="btn btn-def col-md-12 text-center">Add Rating</button> <br></br>
+            <button type="submit" id="add-rating-btn" class="btn btn-def col-md-12 text-center" data-ng-show="loggedIn">Add Rating</button> <br></br>
 
             <div class="form-group add-field">
                 <div class="aspect-container">
@@ -66,7 +66,7 @@
                 </label>
                     <div class="rating-container">
                         <select id="difficulty" data-ng-model="ratingForm.difficulty">
-                        <option data-ng-repeat="option in options">{{option}}</option>
+                        <option data-ng-repeat="option in options" placeholder="0" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
                     </div>
@@ -76,7 +76,7 @@
                     <label for="aspects-workload">Workload: </label>
                     <div class="rating-container">
                         <select id="workload" data-ng-model="ratingForm.workload">
-                        <option data-ng-repeat="option in options">{{option}}</option>
+                        <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
                     </div>
@@ -86,7 +86,7 @@
                     <label for="aspects-experience">Learning experience: </label>
                     <div class="rating-container">
                         <select id="learningExp" data-ng-model="ratingForm.learningExp">
-                        <option data-ng-repeat="option in options">{{option}}</option>
+                        <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
                     </div>
@@ -96,7 +96,7 @@
                     <label for="aspects-overall">Overall: </label>
                     <div class="rating-container">
                         <select id="overall" data-ng-model="ratingForm.overall">
-                        <option data-ng-repeat="option in options">{{option}}</option>
+                        <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
                     </div>

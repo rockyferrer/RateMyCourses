@@ -298,6 +298,7 @@ function getAllDepartments(req, res) {
 function postRating(req, res) {
     console.log("post rating");
     var data = req.body;
+    console.log(data);
     //create the rating
     var newRating = new Rating({
         dateTaken: data.date,
@@ -325,23 +326,23 @@ function postRating(req, res) {
     });
     //update the course
 
-function updateRating(req, res, course) {
-    var len = course.ratingCount;
-    Course.update({
-        courseCode: course.courseCode
-    }, {
-        $set: {
-            overall: (course.overall * len + data.overall) / (len + 1),
-            difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
-            workload: (course.workload * len + data.workload) / (len + 1),
-            learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
-            ratingCount: len + 1
-        }
-    });
+    function updateRating(req, res, course) {
+        var len = course.ratingCount;
+        Course.update({
+            courseCode: course.courseCode
+        }, {
+            $set: {
+                overall: (course.overall * len + data.overall) / (len + 1),
+                difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
+                workload: (course.workload * len + data.workload) / (len + 1),
+                learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
+                ratingCount: len + 1
+            }
+        });
 
-    //send the new rating
-    res.send(newRating);
-}
+        //send the new rating
+        res.send(newRating);
+    }
 }
 
 function deleteRating(req, res) {
