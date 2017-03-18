@@ -10,6 +10,10 @@
     padding-left: 1rem;
 }
 
+.empty-msg {
+    text-align: center;
+}
+
 
 /* Course Results Section */
 
@@ -68,7 +72,7 @@
     margin: 0;
 }
 
-.course-result-compact .avg-score{
+.course-result-compact .avg-score {
     font-size: 2rem;
 }
 
