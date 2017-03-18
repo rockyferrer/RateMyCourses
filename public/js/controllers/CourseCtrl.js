@@ -4,7 +4,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         $scope.course = data.data;
     });
 
-    $scope.options = ['1', '2', '3','4','5'];
+    $scope.options = ['1', '2', '3', '4', '5'];
 
     $scope.difficulty = $scope.options[0];
     $scope.workload = $scope.options[0];
@@ -29,7 +29,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     /**
      * Checks if the currentTags array contains any nulls, used in processTag
-      */
+     */
     $scope.tagsContainsNulls = function() {
         for (var i = 0; i < $scope.currentTags.length; i++) {
             if ($scope.currentTags[i] == null) {
@@ -82,7 +82,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         //debugging
         if ($scope.currentTags.length > 0) {
             for (var i = 0; i < $scope.currentTags.length; i++) {
-                console.log('tag ' + i + ' is '  + $scope.currentTags[i]);
+                console.log('tag ' + i + ' is ' + $scope.currentTags[i]);
             }
         } else {
             console.log('no tags chosen');
@@ -93,7 +93,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         console.log("overall is " + $scope.overall);
         console.log("comment is " + $scope.comment);
 
-        Course.processRating($routeParams.courseCode, $scope.ratingForm).then(
+        $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingData).then(
             function(data) {
                 console.log(data);
                 if (data.status == 200) {
