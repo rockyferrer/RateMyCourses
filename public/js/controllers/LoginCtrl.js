@@ -15,12 +15,15 @@ angular.module('LoginCtrl', ['ngCookies']).controller('LoginController', functio
         Login.processLogin($scope.loginForm).then(
             function(data) {
                 console.log(data);
-                if (data.data == true) {
+                if (data.data < 3) {
                     $rootScope.loggedIn = true;
                     $rootScope.user = $scope.loginForm.email;
                     $cookies.put('user', $scope.loginForm.email);
                     $location.path('/user/landing');
-
+                    if (data.data == 1) {
+                        $cookies.put('admin', true);
+                        $rootScope.admin = true;
+                    }
                 } else if (data.data == false) {
                     // Clear fields
                     $scope.error = "Invalid login.";

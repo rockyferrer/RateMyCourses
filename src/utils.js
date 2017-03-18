@@ -40,4 +40,12 @@ function loggedIn(req, res, next) {
     }
 }
 
+function isAdmin(req, res, next) {
+    if (req.session.isAdmin) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 module.exports = { createUser: createUser, loggedIn: loggedIn, findMax: findMax };

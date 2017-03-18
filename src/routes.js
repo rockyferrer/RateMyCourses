@@ -86,18 +86,18 @@ function getCourse(req, res) {
     var code = req.params.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
-		if(user.coursesViewed.indexOf(code) <= -1){
-				user.coursesViewed.push(code);
-				console.log(user.coursesViewed);
-				console.log(user.email);
-				User.update({
-					email: user.email
-				}, {
-					$set: {
-						coursesViewed: user.coursesViewed
-					}
-				}).exec();
-		}
+        if (user.coursesViewed.indexOf(code) <= -1) {
+            user.coursesViewed.push(code);
+            console.log(user.coursesViewed);
+            console.log(user.email);
+            User.update({
+                email: user.email
+            }, {
+                $set: {
+                    coursesViewed: user.coursesViewed
+                }
+            }).exec();
+        }
     }
 
     Course.findOne({
@@ -218,10 +218,16 @@ function userLogin(req, res) {
                     user.salt, user.password)) {
                 console.log("succesful login");
                 req.session.user = user;
-                res.send(true);
+                if (user.admin) {
+                    req.session.isAdmin = true;
+                    res.send("1");
+                } else {
+                    res.send("2");
+                }
+
             } else {
                 console.log("bad password")
-                res.send(false);
+                res.send("3");
             };
         }
     });
@@ -305,7 +311,7 @@ function postRating(req, res) {
             coursesRated: user.coursesRated
         }
     });
-	
+
     var courseToUpdate;
     Course.findOne({
         courseCode: req.courseCode
@@ -325,19 +331,13 @@ function updateCourseRating(data, res, course, newRating) {
     var difficulty = parseInt(data.difficulty);
     var workload = parseInt(data.workload);
     var learningExp = parseInt(data.learningExp);
-    // console.log(len);
-    // console.log('overall: ' + course.overall);
-    // console.log('new:' + overall)
-    // console.log('mult:' + (course.overall * len + overall))
-    // console.log('add:' + (len+1))
-    // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
-	
-	for(tag in data.tags){
-		if(course.popularTags.indexOf(tag) <= -1){
-				course.popularTags.push(tag);
-		}
-	}
-	course.ratings.push(newRating);
+
+    for (tag in data.tags) {
+        if (course.popularTags.indexOf(tag) <= -1) {
+            course.popularTags.push(tag);
+        }
+    }
+    course.ratings.put(newRating);
     course.update({
         $set: {
             overall: (course.overall * len + overall) / (len + 1),
@@ -345,10 +345,10 @@ function updateCourseRating(data, res, course, newRating) {
             workload: (course.workload * len + workload) / (len + 1),
             learningExp: (course.learningExp * len + learningExp) / (len + 1),
             ratingCount: len + 1,
-			popularTags: course.popularTags,
-			ratings: course.ratings
+            popularTags: course.popularTags,
+            ratings: course.ratings
         }
-    }, function (err, newRating) {
+    }, function(err, newRating) {
         if (err) {
             res.send(err);
         }
@@ -369,11 +369,11 @@ function deleteRating(req, res) {
         course = crs;
     });
     var len = course.ratingCount;
-   	
-	index = course.ratings.indexOf(req.rating);
-	if (index > -1) {
-    	course.ratings.splice(index, 1);
-	}	
+
+    index = course.ratings.indexOf(req.rating);
+    if (index > -1) {
+        course.ratings.splice(index, 1);
+    }
     //update the course
     Course.update({
         courseCode: course.courseCode
@@ -384,14 +384,15 @@ function deleteRating(req, res) {
             workload: (course.workload * len - data.workload) / (len - 1),
             learningExp: (course.learningExp * len - data.learningExp) / (len - 1),
             ratingCount: len - 1,
-			ratings: course.ratings
+            ratings: course.ratings
         }
     });
 }
 
-function updateHelpfulness(req, res){
-	var data = req.body;
-	var rating;
+
+function updateHelpfulness(req, res) {
+    var data = req.body;
+    var rating;
     var course;
 
     //find the course in the database so that it can be updated based on its currents values
@@ -400,12 +401,12 @@ function updateHelpfulness(req, res){
     }, function(err, crs) {
         course = crs;
     });
-	
-	index = course.ratings.indexOf(req.rating);
-	if (index > -1){
-		rating = req.course.ratings[index]
-	}
-	rating.update({$set: {helpfulness: rating.helpfulness - data.vote}});
+
+    index = course.ratings.indexOf(req.rating);
+    if (index > -1) {
+        rating = req.course.ratings[index]
+    }
+    rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } });
 }
 
 module.exports = {
@@ -425,5 +426,5 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
-	updateHelpfulness: updateHelpfulness
+    updateHelpfulness: updateHelpfulness
 };
