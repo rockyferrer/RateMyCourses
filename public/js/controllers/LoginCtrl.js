@@ -24,7 +24,7 @@ angular.module('LoginCtrl', ['ngCookies']).controller('LoginController', functio
                         $cookies.put('admin', true);
                         $rootScope.admin = true;
                     }
-                } else if (data.data == false) {
+                } else if (data.data == 3) {
                     // Clear fields
                     $scope.error = "Invalid login.";
                 }
