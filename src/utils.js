@@ -17,6 +17,21 @@ function createUser(data) {
     return newUser;
 }
 
+//finds the key with the highest value in <dict>
+function findMax(dict) {
+    var max = -1;
+    var max_key = "";
+    for (item in ls) {
+        if (dict[item] > max) {
+            max = dict[item];
+            max_key = item;
+        }
+    }
+    return max_key;
+}
+
+
+
 function loggedIn(req, res, next) {
     if ('user' in req.session) {
         next();
@@ -25,4 +40,4 @@ function loggedIn(req, res, next) {
     }
 }
 
-module.exports = { createUser: createUser,loggedIn: loggedIn };
+module.exports = { createUser: createUser, loggedIn: loggedIn, findMax: findMax };

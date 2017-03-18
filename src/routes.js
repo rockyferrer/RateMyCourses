@@ -61,64 +61,60 @@ function getCourses(req, res) {
 
 
 function searchResults(req, res) {
-    console.log(req.query);
-    Course.find({
+   //find courses that contain the query in one of its fields 
+   Course.find({
         $or: [{ courseCode: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { title: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { department: { $regex: new RegExp('.*' + req.query + '.*', "i") } },
             { description: { $regex: new RegExp('.*' + req.query + '.*', "i") } }
         ]
     }, function(err, courses) {
-        if (err) {
+        //error check
+	if (err) {
             console.log(err);
             res.send(err);
             return;
         }
-        console.log("Success");
-        var depts = {};
+        //Store department results
+	var depts = {};
+	//Count the amount of courses that are a part of each department
         courses.forEach(
-            function(course) {
+	    function(course) {
                 var dept = course.department;
-                if (!(dept in depts)) {
+                //add the dept field if needed
+		if (!(dept in depts)) {
                     depts[dept] = 0;
                 }
+		//increment the count
                 depts[dept]++;
             });
+	
+	//find the 3 most common departments from the courses we found
         var popular = [];
         if (depts.length <= 3) {
             popular = deps;
         }
         for (var i = 0; i < 3; i++) {
-            var max = findmax(depts);
+            var max = utils.findMax(depts);
             popular.push(max);
             delete depts[max];
         }
+	//send the json response
         var json = { courses: courses, depts: popular };
         res.json(json);
-    }).limit(50);
+    }).limit(50);//match at most 50 courses
 
 };
-
-function findmax(ls) {
-    var max = -1;
-    var max_key = "";
-    for (item in ls) {
-        if (ls[item] > max) {
-            max = ls[item];
-            max_key = item;
-        }
-    }
-    return max_key;
-}
 
 function getCourse(req, res) {
     console.log(new Date().toLocaleTimeString() + req.params.courseCode);
     var code = req.params.courseCode;
-    user = req.session.user;
-    user.coursesViewed.push(code);
-    console.log(user.coursesViewed);
-    console.log(user.email);
-    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}}).exec();   
+    if("user" in req.session){
+	user = req.session.user;
+	user.coursesViewed.push(code);
+	console.log(user.coursesViewed);
+	console.log(user.email);
+    	User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}}).exec();}   
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -153,6 +149,7 @@ function getSuggestedCourses(req, res) {
 };
 
 function getDepartment(req, res) {
+    //find department and send its json
     Department.findOne({
             name: req.param.department
         },
@@ -167,7 +164,7 @@ function getDepartment(req, res) {
 }
 
 function getAllDepartmentCourses(req, res) {
-    console.log(req.department);
+    //find all the courses from a specific department
     Course.find({
             department: req.department
         },
@@ -181,28 +178,9 @@ function getAllDepartmentCourses(req, res) {
     );
 }
 
-//TODO: Delete? This function should no longer be needed - David
-/*function validateUser(email, password) {
-    User.findOne({
-        "email": email
-    }, function(err, user) {
-        if (err) {
-            console.log("Error finding user.");
-            return false;
-        } else if (user == undefined) {
-            return false;
-        } else {
-            console.log(user);
-            //TODO: Add to cookie
-            return (pw.validatePassphrase(password,
-                user.salt, user.password));
-        }
-    });
-    return true;
-}*/
-
 function getUserInfo(req, res) {
     var user = req.param.userID;
+    //find user and send its json
     User.findOne({
         _id: user
     }, function(err, users) {
@@ -213,12 +191,12 @@ function getUserInfo(req, res) {
     });
 }
 
+//send the user's course history
 function getUserHistory(req, res){
-    console.log("hi");
-    console.log(req.session.user.coursesViewed);
     res.json(req.session.user.coursesViewed);
 }
 
+//send the courses the user has visited
 function getUserRated(req, res){
     res.json(req.session.user.coursesRated);
 }
@@ -267,9 +245,12 @@ function userLogin(req, res) {
 
 }
 
+
 function updateUser(req, res) {
     data = req.body;
+    //hash password
     var hash = pw.createNewHash(data.password);
+    //update the user with the new data
     User.update({ "__id": req.session.user.__id }, {
         $set: {
             email: data.email,
@@ -282,11 +263,12 @@ function updateUser(req, res) {
     });
 }
 
+//delete a user from the database
 function deleteUser(req, res) {
     User.remove({ __id: req.session.user.__id });
 }
 
-
+//get all faculties in the database
 function getAllFaculties(req, res) {
     Course.find().distinct('faculty',
         function(err, faculties) {
@@ -299,6 +281,7 @@ function getAllFaculties(req, res) {
     );
 }
 
+//get all departments in the database
 function getAllDepartments(req, res) {
     Course.find().distinct('department',
         function(err, depts) {
@@ -311,9 +294,10 @@ function getAllDepartments(req, res) {
     );
 }
 
-//TODO: Figure out how to actually get all the data
+//post a new rating
 function postRating(req, res) {
     var data = req.body;
+    //create the rating
     var newRating = new Rating({
         dateTaken: data.date,
         difficulty: data.difficulty,
@@ -325,17 +309,20 @@ function postRating(req, res) {
         comment: data.comment,
         course: req.courseCode
     });
-    
+
+    //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
-    User.update({email: user.email}, {$set : {coursesViewed: user.coursesViewed}});   
+    User.update({email: user.email}, {$set : {coursesRated: user.coursesRated}});   
     
+    //find the course in the database so that it can be updated based on its currents values    
     var course;
     Course.find({
         courseCode: req.courseCode
     }, function(err, crs) {
         course = crs;
     });
+    //update the course
     var len = course.ratingCount;
     Course.update({
         courseCode: course.courseCode
@@ -349,18 +336,23 @@ function postRating(req, res) {
         }
     });
 
+    //send the new rating
     res.send(newRating);
 }
 
 function deleteRating(req, res) {
     var data = req.body;
     var course;
+
+    //find the course in the database so that it can be updated based on its currents values    
     Course.find({
         courseCode: req.courseCode
     }, function(err, crs) {
         course = crs;
     });
     var len = course.ratingCount;
+
+    //update the course
     Course.update({
         courseCode: course.courseCode
     }, {
@@ -372,7 +364,8 @@ function deleteRating(req, res) {
             ratingCount: len - 1
         }
     });
-
+    
+    //remove the rating from the database
     Ratings.remove({ __id: data.__id });
 }
 
