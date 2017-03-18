@@ -7,11 +7,11 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $scope.options = ['1', '2', '3', '4', '5'];
 
-    $scope.comment = 0;
-    $scope.workload = 0;
-    $scope.learningExp = 0;
-    $scope.overall = 0;
-    $scope.comment = '';
+    // $scope.comment = 1;
+    // $scope.workload = 1;
+    // $scope.learningExp = 1;
+    // $scope.overall = 1;
+    // $scope.comment = '';
 
     $scope.tags = [
         'Cool',
@@ -33,9 +33,8 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         "workload": 0,
         "learningExp": 0,
         "overall": 0,
-        "tags": [],
+        "tags": $scope.currentTags,
         "comment": ""
-
     };
 
     /**

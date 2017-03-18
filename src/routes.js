@@ -299,6 +299,7 @@ function postRating(req, res) {
         comment: data.comment,
         course: req.courseCode
     });
+    console.log(newRating);
     //update user parameters
     user = req.session.user;
     user.coursesViewed.push(req.courseCode);
@@ -309,32 +310,47 @@ function postRating(req, res) {
             coursesRated: user.coursesRated
         }
     });
-    var course;
+    var courseToUpdate;
     Course.findOne({
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
             res.send(err);
         }
-        updateRating(data, res, course);
+        courseToUpdate = course;
+        updateCourseRating(data, res, courseToUpdate, newRating);
     });
 }
 
 //update the course
-function updateRating(data, res, course) {
-    var len = course.ratingCount;
+function updateCourseRating(data, res, course, newRating) {
+    var len = parseInt(course.ratingCount);
+    var overall = parseInt(data.overall);
+    var difficulty = parseInt(data.difficulty);
+    var workload = parseInt(data.workload);
+    var learningExp = parseInt(data.learningExp);
+    // console.log(len);
+    // console.log('overall: ' + course.overall);
+    // console.log('new:' + overall)
+    // console.log('mult:' + (course.overall * len + overall))
+    // console.log('add:' + (len+1))
+    // console.log('result: ' + ((course.overall * len + overall) / (len+1)));
+
     course.update({
         $set: {
-            overall: (course.overall * len + data.overall) / (len + 1),
-            difficulty: (course.difficulty * len + data.difficulty) / (len + 1),
-            workload: (course.workload * len + data.workload) / (len + 1),
-            learningExp: (course.learningExp * len + data.learningExp) / (len + 1),
+            overall: (course.overall * len + overall) / (len + 1),
+            difficulty: (course.difficulty * len + difficulty) / (len + 1),
+            workload: (course.workload * len + workload) / (len + 1),
+            learningExp: (course.learningExp * len + learningExp) / (len + 1),
             ratingCount: len + 1
         }
+    }, function (err, newRating) {
+        if (err) {
+            res.send(err);
+        }
+        //send the new rating
+        res.send(newRating);
     });
-
-    //send the new rating
-    res.send(newRating);
 }
 
 
