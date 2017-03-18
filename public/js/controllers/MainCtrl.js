@@ -1,7 +1,7 @@
 angular.module('MainCtrl', ['ngCookies']).controller('MainController', function($scope, $cookies, $location, $rootScope) {
 
     $scope.title = "RateMyCourses - Because Knowledge Is Power"
-    $scope.cssFilename = "home"
+    $location.path("/");
     $rootScope.user = $cookies.get('user');
     if ($rootScope.user == null) $rootScope.loggedIn = false;
     if ($rootScope.loggedIn != true) $rootScope.loggedIn = false;
