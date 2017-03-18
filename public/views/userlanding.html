@@ -26,7 +26,9 @@
 <div class="col-md-4">
     <section id="history" class="row col-md-12 custom-section">
         <h2 class="section-header">History</h2>
-
+        <article data-ng-show="courseHistory == null">
+            <h3 class="empty-msg"> No rated courses.</h3>
+        </article>
         <!-- Format of a course in the history box -->
         <article data-ng-repeat="c in courseHistory" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">
 
@@ -47,6 +49,9 @@
 
     <section id="rated" class="row col-md-12 custom-section">
         <h2 class="section-header">Courses You've Rated</h2>
+        <article data-ng-show="ratedCourses == null">
+            <h3 class="empty-msg"> No history.</h3>
+        </article>
 
         <!-- Format of a course in the rated courses box -->
         <article data-ng-repeat="c in ratedCourses" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">

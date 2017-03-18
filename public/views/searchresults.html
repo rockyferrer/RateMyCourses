@@ -1,24 +1,30 @@
 <link rel="stylesheet" data-ng-href="css/searchresults.css">
 <!-- Department results -->
-<section id="department-results" class="row results col-md-12">
-    <h2 class="section-header">Department results...</h2>
-    <article data-ng-repeat="d in allResults.depts" class="btn custom-article department-result col-xs-12 col-sm-4" ng-click="gotoDepartment(d)">
+<section ng-show="allResults.depts[0].length == 0" class=" empty-msg ">
+    <h1>No Results Found.</h1>
+</section>
+<section ng-hide="allResults.depts[0].length == 0" id="department-results " class="row results col-md-12 ">
+    <h2 class="section-header ">Department results...</h2>
+    <article data-ng-repeat="d in allResults.depts track by $index " class="btn custom-article department-result col-xs-12 col-sm-4 " ng-click="gotoDepartment(d) ">
         <h3>{{ d }}</h3>
     </article>
 </section>
 
 <!-- Course results -->
-<section id="course-results" class="row col-md-12 custom-section">
-    <h2 class="section-header">Course results...</h2>
-    <article data-ng-repeat="c in allResults.courses" class="btn course-result custom-article" ng-click="gotoCourse(c)">
-        <div class="row">
-            <h3 class="course-code">{{ c.courseCode }}</h3>
+<section ng-show="allResults.courses[0].length==0" class="empty-msg custom-section ">
+    <h1>No Results Found.</h1>
+</section>
+<section ng-hide="allResults.courses.length==0" id=" course-results " class="row col-md-12 custom-section ">
+    <h2 class="section-header ">Course results...</h2>
+    <article data-ng-repeat="c in allResults.courses track by $index " class="btn course-result custom-article " ng-click="gotoCourse(c) ">
+        <div class="row ">
+            <h3 class="course-code ">{{ c.courseCode }}</h3>
             <h4>{{ c.courseTitle }}</h4>
         </div>
-        <div class="row">
-            <p class="department">Faculty: {{ c.faculty }}</p><br>
-            <p class="department">Department: {{ c.department }}</p>
-            <p class="avg-score text-right">{{ c.overall }}/5</p>
+        <div class="row ">
+            <p class="department ">Faculty: {{ c.faculty }}</p><br>
+            <p class="department ">Department: {{ c.department }}</p>
+            <p class="avg-score text-right ">{{ c.overall }}/5</p>
         </div>
     </article>
 

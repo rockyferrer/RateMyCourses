@@ -1,4 +1,4 @@
-angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'LandingCtrl'])
+angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'LandingCtrl', 'ProfileCtrl'])
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
         // home page
@@ -41,7 +41,7 @@ angular.module('appRoutes', ['LoginCtrl', 'DepartmentCtrl', 'CourseCtrl', 'Landi
 
         .when('/user/profile', {
             templateUrl: 'views/profile.html',
-            controller: 'ProfileController',
+            controller: 'ProfileController'
         })
 
         .when('/search/:query', {

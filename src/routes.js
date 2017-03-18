@@ -82,8 +82,8 @@ function searchResults(req, res) {
 };
 
 function getCourse(req, res) {
-    console.log(new Date().toLocaleTimeString() + req.params.courseCode);
-    var code = req.params.courseCode;
+    console.log(new Date().toLocaleTimeString() + req.courseCode);
+    var code = req.courseCode;
     if ("user" in req.session) {
         user = req.session.user;
         if (user.coursesViewed.indexOf(code) <= -1) {
@@ -118,7 +118,7 @@ function getCourse(req, res) {
  * Responds with suggested courses based on department parameter
  */
 function getSuggestedCourses(req, res) {
-    var dept = req.params.department;
+    var dept = req.department;
     console.log(dept);
     Course.find({
         department: dept
@@ -137,7 +137,7 @@ function getSuggestedCourses(req, res) {
 function getDepartment(req, res) {
     //find department and send its json
     Department.findOne({
-            name: req.param.department
+            name: req.department
         },
         function(err, department) {
             if (err) {
@@ -165,10 +165,11 @@ function getAllDepartmentCourses(req, res) {
 }
 
 function getUserInfo(req, res) {
-    var user = req.param.userID;
+    var user = req.userID;
+    console.log("looking for user: " + user);
     //find user and send its json
     User.findOne({
-        _id: user
+        email: user
     }, function(err, users) {
         if (err) {
             res.send(err);
@@ -440,6 +441,7 @@ function updateHelpfulness(req, res) {
         rating = req.course.ratings[index]
     }
     rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } });
+
 }
 
 module.exports = {

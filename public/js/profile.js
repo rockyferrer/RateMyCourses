@@ -1,5 +1,11 @@
 $(document).ready(function() {
     //functionality for the edit button
+    $('.save').hide();
+    $('.input').hide();
+    $('.pwd').hide();
+    $('.pwdInput').hide();
+    $('#savePwd').hide();
+
     $('.edit').click(function() {
         var inputSiblingEl = $(this).siblings("input.input");
         var spanSiblingEl = $(this).siblings("span");
@@ -37,26 +43,4 @@ $(document).ready(function() {
         $('#changePwd').show();
     });
 
-});
-
-var app = angular.module("profile", []);
-
-app.controller("departments", function($scope) {
-	$scope.department_list = [
-		"Computer Science",
-		"Mathematics",
-		"Business",
-		"Statistics",
-		"Life Sciences"
-	]
-});
-
-app.controller("faculties", function($scope) {
-	$scope.faculty_list = [
-		"Arts and Sciences",
-		"Applied Sciences and Engineering",
-		"Education",
-		"Law",
-		"Dentistry"
-	]
 });

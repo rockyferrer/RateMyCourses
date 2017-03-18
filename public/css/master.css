@@ -4,24 +4,28 @@ body {
     font-family: "Lato", Arial, Helvetica, sans-serif;
 }
 
-.custom-section{
-	background-color: #3e464c;
+.custom-section {
+    background-color: #3e464c;
     margin: 1rem 0 1rem 0;
-	padding: 0.1rem 0.5rem 1rem 0.5rem;
+    padding: 0.1rem 0.5rem 1rem 0.5rem;
 }
 
-.custom-article{
-	padding: 1rem 2rem;
+.custom-article {
+    padding: 1rem 2rem;
     background-color: #6b6a6a;
     border: solid 0.25rem;
     border-color: #374046;
     color: white;
     text-decoration: none;
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .navbar {
     background-color: #3e464c;
+}
+
+.empty-msg {
+    text-align: center;
 }
 
 #logo {
