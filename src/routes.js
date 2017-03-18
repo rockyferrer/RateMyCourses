@@ -343,7 +343,7 @@ function updateCourseRating(data, res, course, newRating) {
             course.popularTags.push(tag);
         }
     }
-
+    course.ratings.put(newRating);
     course.update({
         $set: {
             overall: (course.overall * len + overall) / (len + 1),
@@ -351,7 +351,8 @@ function updateCourseRating(data, res, course, newRating) {
             workload: (course.workload * len + workload) / (len + 1),
             learningExp: (course.learningExp * len + learningExp) / (len + 1),
             ratingCount: len + 1,
-            popularTags: course.popularTags
+            popularTags: course.popularTags,
+            ratings: course.ratings
         }
     }, function(err, newRating) {
         if (err) {
@@ -375,6 +376,10 @@ function deleteRating(req, res) {
     });
     var len = course.ratingCount;
 
+    index = course.ratings.indexOf(req.rating);
+    if (index > -1) {
+        course.ratings.splice(index, 1);
+    }
     //update the course
     Course.update({
         courseCode: course.courseCode
@@ -384,39 +389,57 @@ function deleteRating(req, res) {
             difficulty: (course.difficulty * len - data.difficulty) / (len - 1),
             workload: (course.workload * len - data.workload) / (len - 1),
             learningExp: (course.learningExp * len - data.learningExp) / (len - 1),
-            ratingCount: len - 1
+            ratingCount: len - 1,
+            ratings: course.ratings
         }
     });
-
-    //remove the rating from the database
-    Ratings.remove({
-        __id: data.__id
-    });
 }
+
+<<
+<< << < HEAD
 
 function updateHelpfulness(req, res) {
     var data = req.body;
     var rating;
 
-    Rating.update({ __id: data.__id }, { $set: { helpfulness: data.helpfulness - data.vote } });
-}
+    Rating.update({ __id: data.__id }, { $set: { helpfulness: data.helpfulness - data.vote } }); ===
+    === =
+    function updateHelpfulness(req, res) {
+        var data = req.body;
+        var rating;
+        var course;
 
-module.exports = {
-    searchResults: searchResults,
-    getCourse: getCourse,
-    getSuggestedCourses: getSuggestedCourses,
-    getDepartment: getDepartment,
-    getAllDepartmentCourses: getAllDepartmentCourses,
-    getUserInfo: getUserInfo,
-    getUserHistory: getUserHistory,
-    getUserRated: getUserRated,
-    userRegister: userRegister,
-    userLogin: userLogin,
-    updateUser: updateUser,
-    deleteUser: deleteUser,
-    getAllFaculties: getAllFaculties,
-    getAllDepartments: getAllDepartments,
-    postRating: postRating,
-    deleteRating: deleteRating,
-    updateHelpfulness: updateHelpfulness
-};
+        //find the course in the database so that it can be updated based on its currents values
+        Course.find({
+            courseCode: req.courseCode
+        }, function(err, crs) {
+            course = crs;
+        });
+
+        index = course.ratings.indexOf(req.rating);
+        if (index > -1) {
+            rating = req.course.ratings[index]
+        }
+        rating.update({ $set: { helpfulness: rating.helpfulness - data.vote } }); >>>
+        >>> > e4ea9972ffa5a4bf985cd224bcd41734485cfa42
+    }
+
+    module.exports = {
+        searchResults: searchResults,
+        getCourse: getCourse,
+        getSuggestedCourses: getSuggestedCourses,
+        getDepartment: getDepartment,
+        getAllDepartmentCourses: getAllDepartmentCourses,
+        getUserInfo: getUserInfo,
+        getUserHistory: getUserHistory,
+        getUserRated: getUserRated,
+        userRegister: userRegister,
+        userLogin: userLogin,
+        updateUser: updateUser,
+        deleteUser: deleteUser,
+        getAllFaculties: getAllFaculties,
+        getAllDepartments: getAllDepartments,
+        postRating: postRating,
+        deleteRating: deleteRating,
+        updateHelpfulness: updateHelpfulness
+    };

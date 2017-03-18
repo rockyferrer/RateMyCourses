@@ -123,60 +123,62 @@
             </div>
 
         </article>
+    </section>
 
-        <article data-ng-repeat="r in rating" class="custom-article">
-            <h2>Rating</h2>
-            <div class="form-group">
-                <div class="aspect-container">
-                    <label for="aspects-difficulty">Level of difficulty:</label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-workload">Workload: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-experience">Learning experience: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
-                </div>
-
-                <div class="aspect-container">
-                    <label for="aspects-overall">Overall: </label>
-                    <div class="rating-container">
-                        <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
-                    </div>
+    <article data-ng-repeat="r in rating" class="custom-article">
+        <h2>Rating</h2>
+        <div class="form-group">
+            <div class="aspect-container">
+                <label for="aspects-difficulty">Level of difficulty:</label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                 </div>
             </div>
 
-            <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
-            <div id="tags-selection" class="row">
-                <ul class="tags">
-                    <li>Cool</li>
-                    <li>Fun</li>
-                    <li>Great TAs</li>
-                    <li>Exclusive Tag For Best Course Ever</li>
-                    <li>Fair</li>
-                    <li>Great Professor</li>
-                    <li>Lots of Smiles</li>
-                    <li>Spicy</li>
-                    <li>Kahoot</li>
-                    <li>Please Give Me a Good Mark</li>
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col-md-6 comment">
-                    <h4>Comment:</h4>
-                    <p>{{ r.comment }}</p>
+            <div class="aspect-container">
+                <label for="aspects-workload">Workload: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
                 </div>
+            </div>
 
+            <div class="aspect-container">
+                <label for="aspects-experience">Learning experience: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+
+            <div class="aspect-container">
+                <label for="aspects-overall">Overall: </label>
+                <div class="rating-container">
+                    <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                </div>
+            </div>
+        </div>
+
+        <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
+        <div id="tags-selection" class="row">
+            <ul class="tags">
+                <li>Cool</li>
+                <li>Fun</li>
+                <li>Great TAs</li>
+                <li>Exclusive Tag For Best Course Ever</li>
+                <li>Fair</li>
+                <li>Great Professor</li>
+                <li>Lots of Smiles</li>
+                <li>Spicy</li>
+                <li>Kahoot</li>
+                <li>Please Give Me a Good Mark</li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6 comment">
+                <h4>Comment:</h4>
+                <p>{{ r.comment }}</p>
+            </div>
+
+<<<<<<< HEAD
                 <div class="col-md-6 helpful">
                     <h4>Helpful?</h4>
                     <a class="glyphicon glyphicon-thumbs-up btn helpful-btn"></a>
@@ -191,3 +193,14 @@
         </article>
     </section>
 </form>
+=======
+            <div class="col-md-6 helpful">
+                <h4>Helpful?</h4>
+                <a class="glyphicon glyphicon-thumbs-up btn helpful-btn"></a>
+                <a class="glyphicon glyphicon-thumbs-down btn helpful-btn"></a>
+            </div>
+        </div>
+    </article>
+
+</form>
+>>>>>>> e4ea9972ffa5a4bf985cd224bcd41734485cfa42
