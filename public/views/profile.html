@@ -1,4 +1,5 @@
 <link rel="stylesheet" data-ng-href="css/profile.css">
+<script src="js/profile.js"></script>
 <div class="col-md-3">
 </div>
 <div class="col-md-6">
@@ -12,16 +13,16 @@
                 <div class="col-sm-8">
                     <p class="form-control-static">
                         <input type="text" class="input">
-                        <span id="email">rocky.ferrer@mail.utoronto.ca</span>
+                        <span id="email" data-ng-model="userForm.userID">{{ user }}</span>
                         <a class="edit">Edit</a>
-                        <a class="save">Save</a>
+                        <a class="save" data-ng-click="saveUserInfo()">Save</a>
                     </p>
                 </div>
                 <!-- Password -->
                 <label class="control-label col-sm-4">Password:</label>
                 <div class="col-sm-8">
                     <p class="form-control-static">
-                        <input type="text" class="input">
+                        <input type="text" class="pwd">
                         <span id="password">********</span>
                         <a id="changePwd">Change Password</a>
                         <a id="savePwd">Save Password</a>

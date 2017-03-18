@@ -4,14 +4,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         $scope.course = data.data;
     });
 
-
     $scope.options = ['1', '2', '3', '4', '5'];
-
-    // $scope.comment = 1;
-    // $scope.workload = 1;
-    // $scope.learningExp = 1;
-    // $scope.overall = 1;
-    // $scope.comment = '';
 
     $scope.tags = [
         'Cool',
