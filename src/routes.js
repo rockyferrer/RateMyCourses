@@ -317,13 +317,15 @@ function postRating(req, res) {
     var course;
     Course.findOne({
         courseCode: req.courseCode
-    }, function(err, crs) {
+    }, function(err, course) {
         if (err) {
             res.send(err);
         }
-        course = crs;
+        updateRating(req, res, course);
     });
     //update the course
+
+function updateRating(req, res, course) {
     var len = course.ratingCount;
     Course.update({
         courseCode: course.courseCode
@@ -339,6 +341,7 @@ function postRating(req, res) {
 
     //send the new rating
     res.send(newRating);
+}
 }
 
 function deleteRating(req, res) {
