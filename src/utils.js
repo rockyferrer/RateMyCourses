@@ -21,7 +21,7 @@ function createUser(data) {
 function findMax(dict) {
     var max = -1;
     var max_key = "";
-    for (item in ls) {
+    for (item in dict) {
         if (dict[item] > max) {
             max = dict[item];
             max_key = item;
