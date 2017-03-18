@@ -22,7 +22,7 @@
                 <div class="score overall-score col-md-8">
                     <p class="col-md-12 score-desc">Overall Experience:</p>
                     <div class="col-md-12 score-div">
-                        <h2 class="good-score overall score-value">{{ course.overall }}</h2>
+                        <h2 class="good-score overall score-value">{{ course.overall | number: 1 }}</h2>
                     </div>
                     <p class="col-md-12 score-desc">({{ course.ratingCount }} ratings)</p>
                 </div>
@@ -30,19 +30,19 @@
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Difficulty:</p>
                         <div class="col-md-12 score-div">
-                            <h2 class="avg-score score-value">{{ course.difficulty }}</h2>
+                            <h2 class="avg-score score-value">{{ course.difficulty | number: 1 }}</h2>
                         </div>
                     </div>
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Workload:</p>
                         <div class="col-md-12">
-                            <h2 class="avg-score score-value">{{ course.workload }}</h2>
+                            <h2 class="avg-score score-value">{{ course.workload | number: 1 }}</h2>
                         </div>
                     </div>
                     <div class="score col-xs-4 col-md-12">
                         <p class="col-md-12 score-desc">Learning Exp:</p>
                         <div class="col-md-12">
-                            <h2 class="good-score score-value">{{ course.learningExp }}</h2>
+                            <h2 class="good-score score-value">{{ course.learningExp | number: 1 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <label for="aspects-difficulty">Level of difficulty:
                 </label>
                     <div class="rating-container">
-                        <select id="difficulty" data-ng-model="ratingForm.difficulty">
+                        <select class="form-control-lg" id="difficulty" data-ng-model="ratingForm.difficulty">
                         <option data-ng-repeat="option in options" placeholder="0" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
@@ -75,7 +75,7 @@
                 <div class="aspect-container">
                     <label for="aspects-workload">Workload: </label>
                     <div class="rating-container">
-                        <select id="workload" data-ng-model="ratingForm.workload">
+                        <select class="form-control-lg" id="workload" data-ng-model="ratingForm.workload">
                         <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
@@ -85,7 +85,7 @@
                 <div class="aspect-container">
                     <label for="aspects-experience">Learning experience: </label>
                     <div class="rating-container">
-                        <select id="learningExp" data-ng-model="ratingForm.learningExp">
+                        <select class="form-control-lg" id="learningExp" data-ng-model="ratingForm.learningExp">
                         <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->
@@ -95,7 +95,7 @@
                 <div class="aspect-container">
                     <label for="aspects-overall">Overall: </label>
                     <div class="rating-container">
-                        <select id="overall" data-ng-model="ratingForm.overall">
+                        <select class="form-control-lg" id="overall" data-ng-model="ratingForm.overall">
                         <option data-ng-repeat="option in options" required>{{option}}</option>
                     </select>
                         <!-- <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" /> -->

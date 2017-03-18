@@ -218,6 +218,9 @@
     background-color: white;
 }
 
+select {
+    font-size: 20px;
+}
 @media(min-width:576px) {
     #enrollment-date {
         min-width: 260px;
