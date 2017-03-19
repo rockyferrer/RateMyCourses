@@ -99,7 +99,7 @@ function getCourse(req, res) {
             }).exec();
         }
     }
-	console.log(code);
+    console.log(code);
     Course.findOne({
         courseCode: code
     }, function(err, course) {
@@ -109,7 +109,7 @@ function getCourse(req, res) {
             return;
         }
         console.log("Success");
-		console.log(course.courseCode);
+        console.log(course.courseCode);
         res.json(course);
     });
 };
@@ -288,38 +288,38 @@ function getAllDepartments(req, res) {
     );
 }
 
-function getRatings(req, res){
-	var crs;
-	Course.findOne({
+function getRatings(req, res) {
+    var crs;
+    Course.findOne({
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
             res.send(err);
         }
-	Rating.find({_id: {$in: course.ratings}},
-		function(err, ratings){
-			if (err) {
-				res.send(err);
-			}
-			else{
-				res.json(ratings);
-			}
-		});
-	
+        Rating.find({ _id: { $in: course.ratings } },
+            function(err, ratings) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(ratings);
+                }
+            });
+
     });
-	
+
 }
 
 //post a new rating
 function postRating(req, res) {
     var data = req.body;
-	user = req.session.user;
-	//create the rating
+    user = req.session.user;
+    console.log("THIS IS THE USER:" + user);
+    //create the rating
     var newRating = new Rating({
-		user: req.session.user,
+        user: req.session.user,
         difficulty: data.difficulty,
         workload: data.workload,
-	   	learningExp: data.learningExp,
+        learningExp: data.learningExp,
         overall: data.overall,
         tags: data.tags,
         helpfulness: 0,
@@ -328,18 +328,23 @@ function postRating(req, res) {
     });
     //update user parameters
     user.coursesRated.push(req.courseCode);
- 	User.update({
+    User.update({
         email: user.email
     }, {
         $set: {
             coursesRated: user.coursesRated
         }
+    }, function(err) {
+        if (err) {
+            console.log("Error updating user.");
+            console.log(err);
+        }
+
     });
-    
-	newRating.save(function(error, rating) {
+
+    newRating.save(function(error, rating) {
         if (error) {
             console.log(error);
-            res.send(error);
         }
     });
 
@@ -348,13 +353,14 @@ function postRating(req, res) {
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
-            res.send(err);
+            //res.send(err);
+            console.log("Error updating course.");
         }
         courseToUpdate = course;
         updateCourseRating(data, res, courseToUpdate, newRating);
-	});
-	
-	
+    });
+
+
 }
 
 //update the course
@@ -383,7 +389,7 @@ function updateCourseRating(data, res, course, newRating) {
         }
     }, function(err, newRating) {
         if (err) {
-            res.send(err);
+            console.log(err);
         }
         //send the new rating
         res.send(newRating);
@@ -420,7 +426,7 @@ function deleteRating(req, res) {
             ratings: course.ratings
         }
     });
-	Rating.remove({__id: req.rating});
+    Rating.remove({ __id: req.rating });
 }
 
 
@@ -462,5 +468,5 @@ module.exports = {
     postRating: postRating,
     deleteRating: deleteRating,
     updateHelpfulness: updateHelpfulness,
-	getRatings: getRatings
+    getRatings: getRatings
 };

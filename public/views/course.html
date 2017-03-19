@@ -125,51 +125,45 @@
         </article>
     </section>
 
-    <article data-ng-repeat="r in rating" class="custom-article">
+    <article data-ng-repeat="r in ratings" class="custom-article">
         <h2>Rating</h2>
         <div class="form-group">
             <div class="aspect-container">
                 <label for="aspects-difficulty">Level of difficulty:</label>
+
                 <div class="rating-container">
-                    <input type="hidden" class="rating" id="aspects-difficulty" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <h3>{{r.difficulty}}/5</h3>
                 </div>
             </div>
 
             <div class="aspect-container">
                 <label for="aspects-workload">Workload: </label>
+
                 <div class="rating-container">
-                    <input type="hidden" class="rating" id="aspects-workload" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <h3>{{r.workload}}/5</h3>
                 </div>
             </div>
 
             <div class="aspect-container">
                 <label for="aspects-experience">Learning experience: </label>
+
                 <div class="rating-container">
-                    <input type="hidden" class="rating" id="aspects-experience" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <h3>{{r.learningExp}}/5</h3>
                 </div>
             </div>
 
             <div class="aspect-container">
                 <label for="aspects-overall">Overall: </label>
                 <div class="rating-container">
-                    <input type="hidden" class="rating" id="aspects-overall" data-filled="symbol symbol-filled" data-empty="symbol symbol-empty" data-fractions="2" />
+                    <h3>{{r.overall}}/5</h3>
                 </div>
             </div>
         </div>
 
-        <label for="tags-selection">Select up to 3 tags that best describe this course:</label>
+        <label for="tags-selection">Tags:</label>
         <div id="tags-selection" class="row">
             <ul class="tags">
-                <li>Cool</li>
-                <li>Fun</li>
-                <li>Great TAs</li>
-                <li>Exclusive Tag For Best Course Ever</li>
-                <li>Fair</li>
-                <li>Great Professor</li>
-                <li>Lots of Smiles</li>
-                <li>Spicy</li>
-                <li>Kahoot</li>
-                <li>Please Give Me a Good Mark</li>
+                <li data-ng-reapeat="t in r.tags">{{ t }}</li>
             </ul>
         </div>
         <div class="row">
