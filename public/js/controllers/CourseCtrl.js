@@ -2,11 +2,10 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $http.get('/api/courses/' + $routeParams.courseCode).then(function(data) {
         $scope.course = data.data;
-    });
-
-    $http.get('/api/courses/' + $routeParams.courseCode + '/getRatings').then(function(data) {
+    }).then($http.get('/api/courses/' + $routeParams.courseCode + '/getRatings').then(function(data) {
         $scope.ratings = data.data;
-    });
+        console.log($scope.ratings);
+    }));
 
     $scope.options = ['1', '2', '3', '4', '5'];
 
@@ -99,7 +98,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
                     $http.get('/api/courses/' + $routeParams.courseCode + '/getRatings')
                         .then(function(data) {
                             $scope.ratings = data.data;
-                            $scope.$apply();
+                            //$scope.$apply();
                             console.log("updated ratings");
                         });
                 } else {
