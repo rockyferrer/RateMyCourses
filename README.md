@@ -2,7 +2,7 @@
 
 ## Installation
 
-First make sure the database is established (see Scraper below).
+First make sure the database is established (see Scraper below). A sample database is provided in `db/`
 
 Run `npm install && bower install` from the root of the repository to grab all Node modules and front end dependencies.
 
