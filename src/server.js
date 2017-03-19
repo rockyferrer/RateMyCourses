@@ -92,6 +92,7 @@ app.get('/api/courses/:courseCode/getRatings', routes.getRatings);
 app.get('/api/search/:query', routes.searchResults);
 
 //User
+app.get('/api/user/suggested', routes.getUserSuggested);
 app.get('/api/user/history', utils.loggedIn, routes.getUserHistory);
 app.get('/api/user/rated', utils.loggedIn, routes.getUserRated);
 app.post('/api/user/login', routes.userLogin);

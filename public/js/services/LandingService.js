@@ -3,7 +3,7 @@ angular.module('LandingService', []).factory('Landing', ['$http', '$routeParams'
     return {
         // Get suggested courses for user
         getSuggestedCourses: function() {
-            return $http.get('/api/dept/' + $routeParams.department + '/suggested');
+            return $http.get('/api/user/suggested');
         },
 
         // Get users viewing history

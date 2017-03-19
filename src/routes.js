@@ -109,7 +109,7 @@ function getCourse(req, res) {
             return;
         }
         console.log("Success");
-        console.log(course.courseCode);
+        if (course == null) res.status(404).end();
         res.json(course);
     });
 };
@@ -128,11 +128,25 @@ function getSuggestedCourses(req, res) {
             console.log(err);
             return;
         }
-        console.log("success");
+        console.log("success getting suggested courses");
         res.json(courses);
 
     }).limit(10);
 };
+
+function getUserSuggested(req, res) {
+    console.log("Looking for courses for: " + req.session.user + " in " + req.session.user.department);
+    Course.find({
+        department: req.session.user.department
+    }, function(err, courses) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(courses);
+            res.json(courses);
+        }
+    }).limit(10);
+}
 
 function getDepartment(req, res) {
     //find department and send its json
@@ -454,6 +468,7 @@ module.exports = {
     searchResults: searchResults,
     getCourse: getCourse,
     getSuggestedCourses: getSuggestedCourses,
+    getUserSuggested: getUserSuggested,
     getDepartment: getDepartment,
     getAllDepartmentCourses: getAllDepartmentCourses,
     getUserInfo: getUserInfo,

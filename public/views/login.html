@@ -28,23 +28,23 @@
 					</select>
         </div>
         <div class="row">
-            <label>Department 1 (Required):</label>
+            <label>Department (Required):</label>
             <select class="select-dept required-field" data-ng-model="loginForm.department1">
 						<option data-ng-repeat="d in department_list | orderBy: d">{{ d }}</option>
 					</select>
         </div>
-        <div class="row">
+        <!--div class="row">
             <label>Department 2 (Optional):</label>
             <select class="select-dept" data-ng-model="loginForm.department2">
 						<option data-ng-repeat="d in department_list | orderBy: d">{{ d }}</option>
 					</select>
         </div>
-        <div class="row">
+        <div-- class="row">
             <label>Department 3 (Optional):</label>
             <select class="select-dept" data-ng-model="loginForm.department3">
 						<option data-ng-repeat="d in department_list | orderBy: d">{{ d }}</option>
 					</select>
-        </div>
+        </div-->
     </div>
     <button type="submit" id="login-btn" class="btn btn-def btn-block login-btn row col-sm-4 text-center" data-ng-click="submitLogin()">Login</button>
     <button type="submit" id="forgot-btn" class="btn btn-def btn-block login-btn row col-sm-4 text-center">Forgot Password</button>

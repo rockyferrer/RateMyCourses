@@ -6,7 +6,6 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
 
     $http.get('/api/courses/' + $routeParams.courseCode + '/getRatings').then(function(data) {
         $scope.ratings = data.data;
-        console.log(data.data[0].tags[0]);
     });
 
     $scope.options = ['1', '2', '3', '4', '5'];
@@ -100,6 +99,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
                     $http.get('/api/courses/' + $routeParams.courseCode + '/getRatings')
                         .then(function(data) {
                             $scope.ratings = data.data;
+                            $scope.$apply();
                             console.log("updated ratings");
                         });
                 } else {
