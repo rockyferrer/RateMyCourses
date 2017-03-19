@@ -173,6 +173,7 @@
     margin-left: 20rem;
 }
 
+
 /**
  * Custom CSS rating symbol
  * https://github.com/dreyescat/bootstrap-rating
@@ -221,6 +222,7 @@
 select {
     font-size: 20px;
 }
+
 @media(min-width:576px) {
     #enrollment-date {
         min-width: 260px;
