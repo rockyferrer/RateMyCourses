@@ -36,8 +36,8 @@ db.on('disconnected', function() {
 var staticFilesPath = path.resolve(__dirname, '../public');
 app.use(express.static(staticFilesPath));
 // Use HTTP port
-app.listen(8080, function() {
-    console.log("Listening on port 8080.")
+app.listen(3000, function() {
+    console.log("Listening on port 3000.")
 });
 
 // Setup session and cookies

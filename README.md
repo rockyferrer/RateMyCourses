@@ -6,7 +6,7 @@ First make sure the database is established (see Scraper below). A sample databa
 
 Run `npm install && bower install` from the root of the repository to grab all Node modules and front end dependencies.
 
-Now run `npm start` to start the server. Navigate to `localhost:8080/`.
+Now run `npm start` to start the server. Navigate to `localhost:3000/`.
 
 Next you have two options, you could install the courses from `db/courses.json`, or run the scraper.
 
@@ -20,7 +20,7 @@ Make sure you have mongo running. You can change the MongoDB path inside of `scr
 
 Run `node scraper.js` (while inside `scraper/`) to scrape the data. See console for errors. 
 
-You will need to do `Ctrl-C` to exit the scraper once it is done.
+You will need to do `Ctrl-C` to exit the scraper once it is done. It may show errors depending on your network card/capabilites.
 
 Use `use Team23-RateMyCourses` and then `db.courses.find().pretty()` in the MongoDB console to confirm the data was loaded.
 
