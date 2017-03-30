@@ -237,28 +237,63 @@ function userLogin(req, res) {
 
 
 function updateUser(req, res) {
-    data = req.body;
-    //hash password
-    var hash = pw.createNewHash(data.password);
-    //update the user with the new data
+    var data = req.body;
+	var user = req.session.user;
+	
+	if(data.type == 'email'){
     User.update({
-        "__id": req.session.user.__id
+        _id: req.session.user._id
     }, {
         $set: {
-            email: data.email,
-            password: hash.passwordHash,
-            salt: hash.salt,
-            department: data.department1,
-            faculty: data.faculty,
-            admin: false
-        }
+            email: data.value
+ 		}	       
     });
+		
+	}
+	
+	else if (data.type == 'password'){
+		//hash password
+    	var hash = pw.createNewHash(data.value);
+		salt = hash.salt;
+		password = hash.passwordHash;
+    User.update({
+        _id: req.session.user._id
+    }, {
+        $set: {
+            password: password,
+			salt: salt
+ 		}	       
+    });
+
+	}
+	
+	else if(data.type == 'department1'){
+    User.update({
+        _id: req.session.user._id
+    }, {
+        $set: {
+            department1: data.value
+ 		}	       
+    });
+		
+	}
+
+	else if(data.type == 'faculty'){
+    User.update({
+        _id: req.session.user._id
+    }, {
+        $set: {
+            faculty: data.value
+ 		}	       
+    });
+		
+	}
 }
 
 //delete a user from the database
 function deleteUser(req, res) {
     User.remove({
-        __id: req.session.user.__id
+        _id: req.session.user._id
     });
 }
 
@@ -420,7 +455,7 @@ function deleteRating(req, res) {
             ratings: course.ratings
         }
     });
-	Rating.remove({__id: req.rating});
+	Rating.remove({_id: req.rating});
 }
 
 
