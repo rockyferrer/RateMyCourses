@@ -1,5 +1,6 @@
-angular.module('LandingCtrl', []).controller('LandingController', function($scope, Landing) {
+angular.module('LandingCtrl', []).controller('LandingController', function($scope, $rootScope, Landing) {
 
+    if ($rootScope.loggedIn == false) $location.path("/");
     Landing.getSuggestedCourses().then(function(data) {
         $scope.suggestedCourses = data.data;
     });

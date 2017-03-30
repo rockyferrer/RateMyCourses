@@ -16,7 +16,7 @@
             <p class="department">Department: {{ c.department }}</p>
             <p class="avg-score text-right">{{ c.overall }}/5</p>
             <br>
-            <p class="department">Avg class size estimate: {{c.size}}</p>
+            <p class="department">Avg class size estimate: {{c.classSize}}</p>
         </div>
 
     </article>
@@ -30,19 +30,23 @@
             <h3 class="empty-msg"> No rated courses.</h3>
         </article>
         <!-- Format of a course in the history box -->
-        <article data-ng-repeat="c in courseHistory" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">
+        <article data-ng-repeat="c in courseHistory track by $index" class="btn course-result-compact custom-article" data-ng-click="gotoCourseCode(c)">
 
             <!-- Course code and title -->
-            <div class="row">
+            <!--div class="row">
                 <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
-                <h4>{{ c.courseTitle }}</h4>
+                <h4>{{ c.title }}</h4>
             </div>
 
             <!-- Course details -->
-            <div class="row">
+            <!--div class="row">
                 <p class="department">Department: {{ c.department }}</p>
                 <p class="avg-score text-right">{{ c.overall }}/5</p>
+            </div-->
+            <div class="row">
+                <h3 class="course-code">{{ c }}</h3> <br> <br>
             </div>
+
         </article>
 
     </section>
@@ -54,18 +58,21 @@
         </article>
 
         <!-- Format of a course in the rated courses box -->
-        <article data-ng-repeat="c in ratedCourses" class="btn course-result-compact custom-article" data-ng-click="gotoCourse(c)">
+        <article data-ng-repeat="c in ratedCourses track by $index" class="btn course-result-compact custom-article" data-ng-click="gotoCourseCode(c)">
 
             <!-- Course code and title -->
-            <div class="row">
+            <!--div class="row">
                 <h3 class="course-code">{{ c.courseCode }}</h3> <br> <br>
                 <h4>{{ c.courseTitle }}</h4>
             </div>
 
             <!-- Course details -->
-            <div class="row">
+            <!--div class="row">
                 <p class="department">Department: {{ c.department }}</p>
                 <p class="avg-score text-right">{{ c.overall }}/5</p>
+            </div-->
+            <div class="row">
+                <h3 class="course-code">{{ c }}</h3> <br> <br>
             </div>
         </article>
 

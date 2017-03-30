@@ -8,6 +8,11 @@ $(document).ready(function() {
         $(".add-field").slideToggle(400, "linear");
     });
 
+    $('#done-btn').click(function(e) {
+        e.preventDefault();
+        $(".add-field").slideToggle(400, "linear");
+    });
+
     $('#nav-header').load('header.html');
 
 });

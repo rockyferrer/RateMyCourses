@@ -1,20 +1,18 @@
 angular.module('ProfileCtrl', []).controller('ProfileController', function($scope, $http, $routeParams, $rootScope) {
-    console.log($rootScope.user);
-
+    if ($routeScope.loggedIn == false) $location.path("/");
     $http.get('/api/user/' + $rootScope.user).then(function(data) {
         $scope.userID = data.data.email;
-        console.log($scope.userID);
     });
 
     $http.get('/api/faculties/all').then(function(data) {
-        $scope.faculty_list = data.data;
-    })
-    .then($http.get('/api/dept/all').then(function(data) {
-        $scope.department_list = data.data;
-    }));
+            $scope.faculty_list = data.data;
+        })
+        .then($http.get('/api/dept/all').then(function(data) {
+            $scope.department_list = data.data;
+        }));
 
     $scope.userForm = {
-        "userID" : $rootScope.user
+        "userID": $rootScope.user
     };
 
     $scope.saveUserInfo = function() {

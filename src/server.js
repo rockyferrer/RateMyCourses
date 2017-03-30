@@ -36,8 +36,8 @@ db.on('disconnected', function() {
 var staticFilesPath = path.resolve(__dirname, '../public');
 app.use(express.static(staticFilesPath));
 // Use HTTP port
-app.listen(8080, function() {
-    console.log("Listening on port 8080.")
+app.listen(3000, function() {
+    console.log("Listening on port 3000.")
 });
 
 // Setup session and cookies
@@ -89,6 +89,7 @@ app.get('/api/courses/:courseCode/getRatings', routes.getRatings);
 app.get('/api/search/:query', routes.searchResults);
 
 //User
+app.get('/api/user/suggested', routes.getUserSuggested);
 app.get('/api/user/history', utils.loggedIn, routes.getUserHistory);
 app.get('/api/user/rated', utils.loggedIn, routes.getUserRated);
 app.post('/api/user/login', routes.userLogin);

@@ -10,13 +10,15 @@ var courseSchema = new mongoose.Schema({
     description: { type: String },
     popularTags: [String],
     classSize: { type: Number },
-    overall: {type : Number},
-    difficulty: {type: Number},
-    workload: {type: Number},
-    learningExp: {type: Number},
-    ratingCount: {type: Number},
-	ratings: [{type: mongoose.Schema.Types.ObjectId,
-				ref: 'ratingSchema'}]
+    overall: { type: Number },
+    difficulty: { type: Number },
+    workload: { type: Number },
+    learningExp: { type: Number },
+    ratingCount: { type: Number },
+    ratings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ratingSchema'
+    }]
 });
 
 var tagSchema = new mongoose.Schema({
@@ -43,7 +45,7 @@ var departmentSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
-    department: { type: [String] },
+    department: { type: String },
     faculty: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },

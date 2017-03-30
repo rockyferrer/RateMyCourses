@@ -24,6 +24,10 @@ body {
     background-color: #3e464c;
 }
 
+#home-btn {
+    float: right;
+}
+
 .empty-msg {
     text-align: center;
 }
