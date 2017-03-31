@@ -30,6 +30,17 @@ function findMax(dict) {
     return max_key;
 }
 
+function findMaxTag(tags) {
+    var max = -1;
+    var max_key = "";
+    for (item in tags) {
+        if (tags[item].number > max) {
+            max = tags[item].number;
+            max_key = tags[item].name;
+        }
+    }
+    return max_key;
+}
 
 
 function loggedIn(req, res, next) {
@@ -48,4 +59,5 @@ function isAdmin(req, res, next) {
     }
 }
 
-module.exports = { createUser: createUser, loggedIn: loggedIn, findMax: findMax };
+module.exports = { createUser: createUser, loggedIn: loggedIn, findMax: findMax,
+findMaxTag: findMaxTag };
