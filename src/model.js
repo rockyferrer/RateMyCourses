@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 // TODO: Do we want faculty?
 
 var courseSchema = new mongoose.Schema({
-    courseCode: { type: String, required: true },
+    courseCode: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     department: { type: String, required: true },
     faculty: { type: String, required: true },
