@@ -33,4 +33,20 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
 
     };
 
+    $scope.logout = function() {
+        $rootScope.loggedIn = false;
+        $rootScope.user = null;
+        $cookies.getAll().forEach(function(cookie) {
+            $cookies.remove(cookie);
+        });
+    }
+
+    $scope.deleteAccount = function() {
+        $http.delete('/api/users/deleteUser/' + $scope.user).then(
+            function() {
+                $scope.logout();
+            }
+        );
+    }
+
 });

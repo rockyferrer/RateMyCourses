@@ -78,6 +78,11 @@ app.param('ratingID', function(req, res, next, ratingID) {
     next();
 });
 
+app.param('username', function(req, res, next, username) {
+    req.username = username;
+    next();
+})
+
 /**
  * API Endpoints
  */
@@ -103,7 +108,7 @@ app.get('/api/user/rated', utils.loggedIn, routes.getUserRated);
 app.post('/api/user/login', routes.userLogin);
 app.post('/api/user/register', routes.userRegister);
 app.put('/api/user/updateInfo', utils.loggedIn, routes.updateUser);
-app.delete('/api/user/delete', utils.loggedIn, routes.deleteUser);
+app.delete('/api/user/delete/:username', utils.loggedIn, routes.deleteUser);
 app.delete('/api/user/banUser/:userID', utils.loggedIn, utils.isAdmin, routes.banUser);
 app.get('/api/user/:userID', utils.loggedIn, routes.getUserInfo);
 

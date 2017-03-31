@@ -51,7 +51,7 @@
                 </div>
                 <!-- Departments -->
                 <div class="row">
-                    <label class="control-label col-sm-4">Department 1:</label>
+                    <label class="control-label col-sm-4">Department:</label>
                     <select class="select-dept required-field">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
@@ -61,7 +61,8 @@
             </div>
         </form>
         <div class="text-center">
-            <button class="btn btn-primary">Delete Account</button>
+            <button class="btn btn-primary" data-ng-click="deleteAccount()">Delete Account</button>
+            <button class="btn btn-primary" data-ng-click="logout()">Logout</button>
         </div>
     </section>
 </div>

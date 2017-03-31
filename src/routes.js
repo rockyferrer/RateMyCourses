@@ -302,7 +302,11 @@ function updateUser(req, res) {
 //delete a user from the database
 function deleteUser(req, res) {
     User.remove({
-        _id: req.session.user._id
+        email: req.username
+    }, function(err, usr) {
+        if (err) {
+            console.log(err);
+        }
     });
 }
 
