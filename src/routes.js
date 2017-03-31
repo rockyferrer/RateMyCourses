@@ -21,22 +21,22 @@ function searchResults(req, res) {
     Course.find({
         $or: [{
                 courseCode: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 title: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 department: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 description: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             }
         ]
@@ -253,18 +253,18 @@ function userLogin(req, res) {
 function updateUser(req, res) {
     var data = req.body;
 	var user = req.session.user;
-	
+
 	if(data.type == 'email'){
     User.update({
         _id: req.session.user._id
     }, {
         $set: {
             email: data.value
- 		}	       
+ 		}
     });
-		
+
 	}
-	
+
 	else if (data.type == 'password'){
 		//hash password
     	var hash = pw.createNewHash(data.value);
@@ -276,20 +276,20 @@ function updateUser(req, res) {
         $set: {
             password: password,
 			salt: salt
- 		}	       
+ 		}
     });
 
 	}
-	
+
 	else if(data.type == 'department1'){
     User.update({
         _id: req.session.user._id
     }, {
         $set: {
             department1: data.value
- 		}	       
+ 		}
     });
-		
+
 	}
 
 	else if(data.type == 'faculty'){
@@ -298,9 +298,9 @@ function updateUser(req, res) {
     }, {
         $set: {
             faculty: data.value
- 		}	       
+ 		}
     });
-		
+
 	}
 }
 
@@ -475,7 +475,7 @@ function deleteRating(req, res) {
             ratings: course.ratings
         }
     });
-    
+
 	Rating.remove({_id: req.rating});
 }
 

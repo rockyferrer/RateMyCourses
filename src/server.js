@@ -68,6 +68,11 @@ app.param('userID', function(req, res, next, userID) {
     next();
 });
 
+app.param('searchQuery', function(req, res, next, searchQuery) {
+    req.searchQuery = searchQuery;
+    next();
+});
+
 
 
 /**
@@ -86,7 +91,7 @@ app.put('/api/courses/:courseCode/helpfulness', routes.updateHelpfulness);
 app.get('/api/courses/:courseCode/getRatings', routes.getRatings);
 
 //Search
-app.get('/api/search/:query', routes.searchResults);
+app.get('/api/search/:searchQuery', routes.searchResults);
 
 //User
 app.get('/api/user/suggested', routes.getUserSuggested);
