@@ -18,18 +18,18 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
     $scope.saveUserInfo = function() {
         $rootScope.user = $scope.userForm.userID;
         console.log('username changed to ' + $rootScope.user);
-        // $http.put('/api/user/updateInfo').then(
-        //     function(data) {
-        //         if (data.status == 200) {
-        //             $http.get('/api/user/' + $scope.userForm.userID)
-        //                 .then(function(data) {
-        //                     $scope.userID = data.data;
-        //                 });
-        //         } else {
-        //             console.log('failure');
-        //         }
-        //     }
-        // );
+        $http.put('/api/user/updateInfo').then(
+            function(data) {
+                if (data.status == 200) {
+                    $http.get('/api/user/' + $scope.userForm.userID)
+                        .then(function(data) {
+                            $scope.userID = data.data;
+                        });
+                } else {
+                    console.log('failure');
+                }
+            }
+        );
 
     };
 
