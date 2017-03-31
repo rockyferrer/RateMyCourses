@@ -16,7 +16,11 @@
     padding: 2rem 0;
 }
 
+#header-search {
+	font-size: 1.5rem;
+}
+
 /* Search icon */
-.glyphicon-search {
+#home-search {
     font-size: 2.8rem;
 }
