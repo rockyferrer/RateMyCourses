@@ -126,7 +126,16 @@
     </section>
 
     <article data-ng-repeat="r in ratings" class="custom-article">
+        <div class="dropdown" id="admin-menu" data-ng-show="admin">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="#">Delete Rating</a></li>
+                <li><a href="#">Ban User</a></li>
+            </ul>
+        </div>
         <h2>Rating</h2>
+
         <div class="col-md-6">
             <div class="aspect-container">
                 <label for="aspects-difficulty">Level of difficulty:</label>

@@ -12,6 +12,7 @@ var Tag = db.model('Tag', models.tagSchema);
 var Rating = db.model('Rating', models.ratingSchema);
 var User = db.model('User', models.userSchema);
 
+
 /**
  * Executes a search query on the database. Query is used as a potential course code,
  * part of a description, a department, or course title.
@@ -252,56 +253,50 @@ function userLogin(req, res) {
 
 function updateUser(req, res) {
     var data = req.body;
-	var user = req.session.user;
+    var user = req.session.user;
 
-	if(data.type == 'email'){
-    User.update({
-        _id: req.session.user._id
-    }, {
-        $set: {
-            email: data.value
- 		}
-    });
+    if (data.type == 'email') {
+        User.update({
+            _id: req.session.user._id
+        }, {
+            $set: {
+                email: data.value
+            }
+        });
 
-	}
+    } else if (data.type == 'password') {
+        //hash password
+        var hash = pw.createNewHash(data.value);
+        salt = hash.salt;
+        password = hash.passwordHash;
+        User.update({
+            _id: req.session.user._id
+        }, {
+            $set: {
+                password: password,
+                salt: salt
+            }
+        });
 
-	else if (data.type == 'password'){
-		//hash password
-    	var hash = pw.createNewHash(data.value);
-		salt = hash.salt;
-		password = hash.passwordHash;
-    User.update({
-        _id: req.session.user._id
-    }, {
-        $set: {
-            password: password,
-			salt: salt
- 		}
-    });
+    } else if (data.type == 'department1') {
+        User.update({
+            _id: req.session.user._id
+        }, {
+            $set: {
+                department1: data.value
+            }
+        });
 
-	}
+    } else if (data.type == 'faculty') {
+        User.update({
+            _id: req.session.user._id
+        }, {
+            $set: {
+                faculty: data.value
+            }
+        });
 
-	else if(data.type == 'department1'){
-    User.update({
-        _id: req.session.user._id
-    }, {
-        $set: {
-            department1: data.value
- 		}
-    });
-
-	}
-
-	else if(data.type == 'faculty'){
-    User.update({
-        _id: req.session.user._id
-    }, {
-        $set: {
-            faculty: data.value
- 		}
-    });
-
-	}
+    }
 }
 
 //delete a user from the database
@@ -343,16 +338,22 @@ function getRatings(req, res) {
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
+            console.log(err);
             res.send(err);
-        }
-        Rating.find({ _id: { $in: course.ratings } },
-            function(err, ratings) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.json(ratings);
+        } else {
+            var ids = course.ratings.map(function(id) { return mongoose.Types.ObjectId(id); });
+            console.log(ids);
+            Rating.find({ "_id": { $in: ids } },
+                function(err, ratings) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        console.log(ratings);
+                        res.json(ratings);
+                    }
                 }
-            });
+            );
+        }
 
     });
 
@@ -476,7 +477,7 @@ function deleteRating(req, res) {
         }
     });
 
-	Rating.remove({_id: req.rating});
+    Rating.remove({ _id: req.rating });
 }
 
 
