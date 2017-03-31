@@ -297,7 +297,7 @@ function updateUser(req, res) {
     var data = req.body;
 	var user = req.session.user;
 
-	// if(data.type == 'email'){
+	if(data.type == 'email'){
     User.update({
         _id: user._id
     }, {
@@ -313,45 +313,45 @@ function updateUser(req, res) {
         console.log(user);
     });
 
-	// }
+	}
 
-	// else if (data.type == 'password'){
-	// 	//hash password
-    // 	var hash = pw.createNewHash(data.value);
-	// 	salt = hash.salt;
-	// 	password = hash.passwordHash;
-    // User.update({
-    //     _id: user._id
-    // }, {
-    //     $set: {
-    //         password: password,
-	// 		salt: salt
- // 		}
-    // });
-    //
-	// }
-    //
-	// else if(data.type == 'department1'){
-    // User.update({
-    //     _id: user._id
-    // }, {
-    //     $set: {
-    //         department1: data.value
- // 		}
-    // });
-    //
-	// }
-    //
-	// else if(data.type == 'faculty'){
-    // User.update({
-    //     _id: user._id
-    // }, {
-    //     $set: {
-    //         faculty: data.value
- // 		}
-    // });
-    //
-	// }
+	else if (data.type == 'password'){
+		//hash password
+    	var hash = pw.createNewHash(data.value);
+		salt = hash.salt;
+		password = hash.passwordHash;
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            password: password,
+			salt: salt
+ 		}
+    });
+
+	}
+
+	else if(data.type == 'department1'){
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            department1: data.value
+ 		}
+    });
+    
+	}
+
+	else if(data.type == 'faculty'){
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            faculty: data.value
+ 		}
+    });
+
+	}
 
 }
 
