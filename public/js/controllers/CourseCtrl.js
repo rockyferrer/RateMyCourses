@@ -95,6 +95,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         console.log("overall is " + $scope.overall);
         console.log("comment is " + $scope.comment);*/
 
+        console.log('submitting rating');
         $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingForm).then(
             function(data) {
                 if (data.status == 200) {

@@ -115,7 +115,7 @@ function getCourse(req, res) {
     });
 };
 
-function getPopularTags(req, res){
+function getPopularTags(req, res) {
     //find the 3 most common departments from the courses we found
     code = req.courseCode;
 
@@ -135,11 +135,10 @@ function getPopularTags(req, res){
         console.log(tags);
         console.log(course.popularTags);
         if (tags.length <= 3) {
-            for(var i=0; i<tags.length; i++){
+            for (var i = 0; i < tags.length; i++) {
                 popular.push(tags[i].name);
             }
-        }
-        else{
+        } else {
             for (var i = 0; i < 3; i++) {
                 var max = utils.findMaxTag(tags);
                 popular.push(tags[max].name);
@@ -179,7 +178,7 @@ function getUserSuggested(req, res) {
         if (err) {
             console.log(err)
         } else {
-            console.log(courses);
+            //console.log(courses);
             res.json(courses);
         }
     }).limit(10);
@@ -286,23 +285,31 @@ function userLogin(req, res) {
     });
 }
 
-function userLogout(req, res){
+function userLogout(req, res) {
     delete req.session.user;
     delete req.session.isAdmin;
-    res.status(200).end();
+    res.sendStatus(200);
 }
 
 function updateUser(req, res) {
+    console.log('updating user');
     var data = req.body;
     var user = req.session.user;
 
     if (data.type == 'email') {
         User.update({
-            _id: req.session.user._id
+            _id: user._id
         }, {
             $set: {
                 email: data.value
             }
+        }, function(err, user) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+                return;
+            }
+            console.log(user);
         });
 
     } else if (data.type == 'password') {
@@ -311,7 +318,7 @@ function updateUser(req, res) {
         salt = hash.salt;
         password = hash.passwordHash;
         User.update({
-            _id: req.session.user._id
+            _id: user._id
         }, {
             $set: {
                 password: password,
@@ -321,7 +328,7 @@ function updateUser(req, res) {
 
     } else if (data.type == 'department1') {
         User.update({
-            _id: req.session.user._id
+            _id: user._id
         }, {
             $set: {
                 department1: data.value
@@ -330,7 +337,7 @@ function updateUser(req, res) {
 
     } else if (data.type == 'faculty') {
         User.update({
-            _id: req.session.user._id
+            _id: user._id
         }, {
             $set: {
                 faculty: data.value
@@ -338,6 +345,7 @@ function updateUser(req, res) {
         });
 
     }
+
 }
 
 //delete a user from the database
@@ -473,7 +481,7 @@ function updateCourseRating(data, res, course, newRating) {
     for (var t = 0; t < data.tags.length; t++) {
         tag = data.tags[t];
         var flag = false;
-        for(i in popularTags){
+        for (i in popularTags) {
             if (tag == popularTags[i].name) {
                 console.log("here")
                 popularTags[i].number += 1;
@@ -481,8 +489,8 @@ function updateCourseRating(data, res, course, newRating) {
                 break;
             }
         }
-        if(!flag){
-            var newTag = {"name": tag, "number":1};
+        if (!flag) {
+            var newTag = { "name": tag, "number": 1 };
             console.log(newTag);
             popularTags.push(newTag);
         }
