@@ -12,6 +12,7 @@ var Tag = db.model('Tag', models.tagSchema);
 var Rating = db.model('Rating', models.ratingSchema);
 var User = db.model('User', models.userSchema);
 
+
 /**
  * Executes a search query on the database. Query is used as a potential course code,
  * part of a description, a department, or course title.
@@ -21,22 +22,22 @@ function searchResults(req, res) {
     Course.find({
         $or: [{
                 courseCode: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 title: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 department: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             },
             {
                 description: {
-                    $regex: new RegExp('.*' + req.query + '.*', "i")
+                    $regex: new RegExp('.*' + req.searchQuery + '.*', "i")
                 }
             }
         ]
@@ -134,12 +135,16 @@ function getPopularTags(req, res){
         console.log(tags);
         console.log(course.popularTags);
         if (tags.length <= 3) {
-            popular = tags;
+            for(var i=0; i<tags.length; i++){
+                popular.push(tags[i].name);
+            }
         }
-        for (var i = 0; i < 3; i++) {
-            var max = utils.findMaxTag(tags);
-            popular.push(max);
-            delete tags[max];
+        else{
+            for (var i = 0; i < 3; i++) {
+                var max = utils.findMaxTag(tags);
+                popular.push(tags[max].name);
+                tags.splice(max, 1);
+            }
         }
         res.json(popular);
     });
@@ -289,56 +294,50 @@ function userLogout(req, res){
 
 function updateUser(req, res) {
     var data = req.body;
-	var user = req.session.user;
+    var user = req.session.user;
 
-	if(data.type == 'email'){
+    if (data.type == 'email') {
         User.update({
             _id: req.session.user._id
         }, {
             $set: {
                 email: data.value
-     		}
+            }
         });
 
-	}
-
-	else if (data.type == 'password'){
-		//hash password
-    	var hash = pw.createNewHash(data.value);
-		salt = hash.salt;
-		password = hash.passwordHash;
+    } else if (data.type == 'password') {
+        //hash password
+        var hash = pw.createNewHash(data.value);
+        salt = hash.salt;
+        password = hash.passwordHash;
         User.update({
             _id: req.session.user._id
         }, {
             $set: {
                 password: password,
-    			salt: salt
-     		}
+                salt: salt
+            }
         });
 
-	}
-
-	else if(data.type == 'department1'){
+    } else if (data.type == 'department1') {
         User.update({
             _id: req.session.user._id
         }, {
             $set: {
                 department1: data.value
-     		}
+            }
         });
 
-	}
-
-	else if(data.type == 'faculty'){
+    } else if (data.type == 'faculty') {
         User.update({
             _id: req.session.user._id
         }, {
             $set: {
                 faculty: data.value
-     		}
+            }
         });
 
-	}
+    }
 }
 
 //delete a user from the database
@@ -380,16 +379,22 @@ function getRatings(req, res) {
         courseCode: req.courseCode
     }, function(err, course) {
         if (err) {
+            console.log(err);
             res.send(err);
-        }
-        Rating.find({ _id: { $in: course.ratings } },
-            function(err, ratings) {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.json(ratings);
+        } else {
+            var ids = course.ratings.map(function(id) { return mongoose.Types.ObjectId(id); });
+            console.log(ids);
+            Rating.find({ "_id": { $in: ids } },
+                function(err, ratings) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        console.log(ratings);
+                        res.json(ratings);
+                    }
                 }
-            });
+            );
+        }
 
     });
 
@@ -461,7 +466,7 @@ function updateCourseRating(data, res, course, newRating) {
     console.log(course._id);
     popularTags = course.popularTags;
     console.log(popularTags);
-    for (t in data.tags) {
+    for (var t = 0; t < data.tags.length; t++) {
         tag = data.tags[t];
         var flag = false;
         for(i in popularTags){
@@ -530,7 +535,31 @@ function deleteRating(req, res) {
         }
     });
 
-	Rating.remove({_id: req.rating});
+
+    Rating.remove({ _id: req.body.rating });
+}
+
+/**
+ * Deletes the user and all their ratings.
+ */
+function banUser(req, res) {
+    User.findOne({ '_id': req.userID }, function(err, usr) {
+        if (err) {
+            console.log(err);
+        } else {
+            Rating.remove({ "user": req.userID }, function(err, rats) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    User.remove({ '_id': req.userID }, function(err, rts) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            })
+        }
+    });
 }
 
 
@@ -572,6 +601,7 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
+    banUser: banUser,
     updateHelpfulness: updateHelpfulness,
     getRatings: getRatings,
     getPopularTags: getPopularTags,

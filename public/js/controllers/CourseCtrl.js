@@ -111,4 +111,21 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         // return $scope.currentTags;
     };
 
+    $scope.deleteRating = function(rating) {
+        $http.delete("/api/courses/" + $scope.courseCode + "/deleteRating/" + rating._id).then(
+            function() {
+                $http.get("/api/courses/" + $scope.courseCode + "/getRatings").then(function(data) {
+                    $scope.ratings = data.data
+                })
+            });
+    }
+
+    $scope.banUser = function() {
+        $http.delete('/api/users/banUser/' + rating.user).then(
+            function() {
+                $http.get("/api/courses/" + $scope.courseCode + "/getRatings").then(function(data) {
+                    $scope.ratings = data.data
+                })
+            });
+    }
 });

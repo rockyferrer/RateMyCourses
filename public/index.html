@@ -19,6 +19,7 @@
     <script src="libs/angular/angular.js"></script>
     <script src="libs/angular-route/angular-route.js"></script>
     <script src="libs/angular-cookies/angular-cookies.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
 
 
     <!-- ANGULAR CUSTOM -->
@@ -60,10 +61,10 @@
                 <div class="col-md-7 col-md-offset-1">
                     <form class="navbar-form navbar-left">
                         <div class="input-group">
-                            <input class="form-control input" type="text" placeholder="Enter a course here" size="60" data-ng-model="$root.searchField" />
+                            <input class="form-control" type="text" placeholder="Enter a course here" size="60" data-ng-model="$root.searchField" />
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit" ng-click="search()">
-                                    <i class="glyphicon glyphicon-search"></i>
+                                    <i id="header-search" class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>
                         </div>
@@ -72,7 +73,7 @@
                 <div class="col-md-2">
                     <a data-ng-show="loggedIn" href="/user/landing" class="btn navbtn navbar-btn ng-show" id="home-btn">Home</a>
                     <a data-ng-hide="loggedIn" href="/login" class="btn navbtn navbar-btn ng-hide" id="login">Log in / Register</a>
-                    <a data-ng-show="loggedIn" href="/user/profile" class="btn navbtn navbar-btn ng-show" id="login">{{ user}}</a>
+                    <a data-ng-show="loggedIn" href="/user/profile" class="btn navbtn navbar-btn ng-show" id="login">{{ user }}</a>
                 </div>
             </div>
         </nav>

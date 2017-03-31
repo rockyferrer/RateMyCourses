@@ -126,6 +126,19 @@
     color: blue;
 }
 
+#admin-menu {
+    float: right;
+}
+
+#admin-menu ul {
+    overflow: visible;
+    position: absolute;
+}
+
+#admin-menu .btn {
+    background-color: red;
+}
+
 #enrollment-date {
     display: inline-block;
     margin-bottom: 2rem;

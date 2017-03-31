@@ -68,7 +68,15 @@ app.param('userID', function(req, res, next, userID) {
     next();
 });
 
+app.param('searchQuery', function(req, res, next, searchQuery) {
+    req.searchQuery = searchQuery;
+    next();
+});
 
+app.param('ratingID', function(req, res, next, ratingID) {
+    req.ratingID = ratingID;
+    next();
+});
 
 /**
  * API Endpoints
@@ -81,13 +89,13 @@ app.get('/api/dept/:department/allCourses', routes.getAllDepartmentCourses);
 //Course
 app.get('/api/courses/:courseCode', routes.getCourse);
 app.post('/api/courses/:courseCode/addRating', routes.postRating);
-app.delete('/api/courses/:courseCode/deleteRating', routes.deleteRating);
+app.delete('/api/courses/:courseCode/deleteRating/:ratingID', utils.loggedIn, utils.isAdmin, routes.deleteRating);
 app.put('/api/courses/:courseCode/helpfulness', routes.updateHelpfulness);
 app.get('/api/courses/:courseCode/getRatings', routes.getRatings);
 app.get('/api/courses/:courseCode/getPopularTags', routes.getPopularTags);
 
 //Search
-app.get('/api/search/:query', routes.searchResults);
+app.get('/api/search/:searchQuery', routes.searchResults);
 
 //User
 app.get('/api/user/suggested', routes.getUserSuggested);
@@ -98,6 +106,7 @@ app.post('/api/user/register', routes.userRegister);
 app.post('/api/user/logout', routes.userLogout)
 app.put('/api/user/updateInfo', utils.loggedIn, routes.updateUser);
 app.delete('/api/user/delete', utils.loggedIn, routes.deleteUser);
+app.delete('/api/user/banUser/:userID', utils.loggedIn, utils.isAdmin, routes.banUser);
 app.get('/api/user/:userID', utils.loggedIn, routes.getUserInfo);
 
 
