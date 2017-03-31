@@ -11,6 +11,14 @@ angular.module('LoginCtrl', ['ngCookies']).controller('LoginController', functio
     $scope.error = null;
 
     $scope.submitLogin = function() {
+        if (loginForm.password == null) {
+            $scope.error = "Password missing.";
+            return;
+        }
+        if (loginForm.email == null || !loginForm.email.includes('@')) {
+            $scope.error = "Please enter valid email.";
+            return;
+        }
 
         Login.processLogin($scope.loginForm).then(
             function(data) {
