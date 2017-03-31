@@ -1,13 +1,13 @@
 $(document).ready(function() {
     //functionality for the edit button
     $('.save').hide();
-    $('.input').hide();
+    $('.userIDInput').hide();
     $('.pwd').hide();
     $('.pwdInput').hide();
     $('#savePwd').hide();
 
     $('.edit').click(function() {
-        var inputSiblingEl = $(this).siblings("input.input");
+        var inputSiblingEl = $(this).siblings("input.userIDInput");
         var spanSiblingEl = $(this).siblings("span");
         inputSiblingEl.val(spanSiblingEl.text());
         inputSiblingEl.show();
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
     //functionality for the save button
     $('.save').click(function() {
-        var inputSiblingEl = $(this).siblings("input.input");
+        var inputSiblingEl = $(this).siblings("input.userIDInput");
         var spanSiblingEl = $(this).siblings("span");
         spanSiblingEl.text(inputSiblingEl.val());
         inputSiblingEl.hide();

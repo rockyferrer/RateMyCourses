@@ -31,6 +31,6 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
         //     }
         // );
 
-    }
+    };
 
 });
