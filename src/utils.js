@@ -48,4 +48,4 @@ function isAdmin(req, res, next) {
     }
 }
 
-module.exports = { createUser: createUser, loggedIn: loggedIn, findMax: findMax };
+module.exports = { createUser: createUser, loggedIn: loggedIn, isAdmin: isAdmin, findMax: findMax };

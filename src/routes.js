@@ -477,7 +477,30 @@ function deleteRating(req, res) {
         }
     });
 
-    Rating.remove({ _id: req.rating });
+    Rating.remove({ _id: req.body.rating });
+}
+
+/** 
+ * Deletes the user and all their ratings.
+ */
+function banUser(req, res) {
+    User.findOne({ '_id': req.userID }, function(err, usr) {
+        if (err) {
+            console.log(err);
+        } else {
+            Rating.remove({ "user": req.userID }, function(err, rats) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    User.remove({ '_id': req.userID }, function(err, rts) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            })
+        }
+    });
 }
 
 
@@ -519,6 +542,7 @@ module.exports = {
     getAllDepartments: getAllDepartments,
     postRating: postRating,
     deleteRating: deleteRating,
+    banUser: banUser,
     updateHelpfulness: updateHelpfulness,
     getRatings: getRatings
 };
