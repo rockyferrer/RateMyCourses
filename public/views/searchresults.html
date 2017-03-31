@@ -16,14 +16,14 @@
 </section>
 <section ng-hide="allResults.courses.length==0" id=" course-results " class="row col-md-12 custom-section ">
     <h2 class="section-header ">Course results...</h2>
-    <article data-ng-repeat="c in allResults.courses track by $index " class="btn course-result custom-article " ng-click="gotoCourse(c) ">
+    <article data-ng-repeat="c in allResults.courses track by $index " class="btn course-result custom-article " data-ng-click="gotoCourse(c) ">
         <div class="row ">
             <h3 class="course-code ">{{ c.courseCode }}</h3>
             <h4>{{ c.courseTitle }}</h4>
         </div>
         <div class="row ">
-            <p class="department ">Faculty: {{ c.faculty }}</p><br>
-            <p class="department ">Department: {{ c.department }}</p>
+            <p class="department">Faculty: {{ c.faculty }}</p><br>
+            <p class="department">Department: {{ c.department }}</p>
             <p class="avg-score text-right ">{{ c.overall | number: 1}}/5</p>
         </div>
     </article>

@@ -65,7 +65,7 @@ function searchResults(req, res) {
         //find the 3 most common departments from the courses we found
         var popular = [];
         if (depts.length <= 3) {
-            popular = deps;
+            popular = depts;
         }
         for (var i = 0; i < 3; i++) {
             var max = utils.findMax(depts);
@@ -115,6 +115,42 @@ function getCourse(req, res) {
     });
 };
 
+function getPopularTags(req, res){
+    //find the 3 most common departments from the courses we found
+    code = req.courseCode;
+
+    Course.findOne({
+        courseCode: code
+    }, function(err, course) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        if (course == null) res.status(404).end();
+        var popular = [];
+        tags = course.popularTags;
+        console.log(course._id);
+        console.log("here");
+        console.log(tags);
+        console.log(course.popularTags);
+        if (tags.length <= 3) {
+            for(var i=0; i<tags.length; i++){
+                popular.push(tags[i].name);
+            }
+        }
+        else{
+            for (var i = 0; i < 3; i++) {
+                var max = utils.findMaxTag(tags);
+                popular.push(tags[max].name);
+                tags.splice(max, 1);
+            }
+        }
+        res.json(popular);
+    });
+
+}
+
 /**
  * Responds with suggested courses based on department parameter
  */
@@ -143,7 +179,7 @@ function getUserSuggested(req, res) {
         if (err) {
             console.log(err)
         } else {
-            console.log(courses);
+            //console.log(courses);
             res.json(courses);
         }
     }).limit(10);
@@ -250,53 +286,73 @@ function userLogin(req, res) {
     });
 }
 
+function userLogout(req, res){
+    delete req.session.user;
+    delete req.session.isAdmin;
+    res.status(200).end();
+}
 
 function updateUser(req, res) {
+    console.log('updating user');
     var data = req.body;
-    var user = req.session.user;
+	var user = req.session.user;
 
-    if (data.type == 'email') {
-        User.update({
-            _id: req.session.user._id
-        }, {
-            $set: {
-                email: data.value
-            }
-        });
+	if(data.type == 'email'){
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            email: data.value
+ 		}
+    }, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.send(err);
+            return;
+        }
+        console.log(user);
+    });
 
-    } else if (data.type == 'password') {
-        //hash password
-        var hash = pw.createNewHash(data.value);
-        salt = hash.salt;
-        password = hash.passwordHash;
-        User.update({
-            _id: req.session.user._id
-        }, {
-            $set: {
-                password: password,
-                salt: salt
-            }
-        });
+	}
 
-    } else if (data.type == 'department1') {
-        User.update({
-            _id: req.session.user._id
-        }, {
-            $set: {
-                department1: data.value
-            }
-        });
+	else if (data.type == 'password'){
+		//hash password
+    	var hash = pw.createNewHash(data.value);
+		salt = hash.salt;
+		password = hash.passwordHash;
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            password: password,
+			salt: salt
+ 		}
+    });
 
-    } else if (data.type == 'faculty') {
-        User.update({
-            _id: req.session.user._id
-        }, {
-            $set: {
-                faculty: data.value
-            }
-        });
+	}
 
-    }
+	else if(data.type == 'department1'){
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            department1: data.value
+ 		}
+    });
+    
+	}
+
+	else if(data.type == 'faculty'){
+    User.update({
+        _id: user._id
+    }, {
+        $set: {
+            faculty: data.value
+ 		}
+    });
+
+	}
+
 }
 
 //delete a user from the database
@@ -366,11 +422,12 @@ function getRatings(req, res) {
 //post a new rating
 function postRating(req, res) {
     var data = req.body;
-    user = req.session.user;
-    console.log("THIS IS THE USER:" + user);
+    //user = req.session.user;
+    //console.log("THIS IS THE USER:" + user);
     //create the rating
+
     var newRating = new Rating({
-        user: req.session.user,
+        user: 1,
         difficulty: data.difficulty,
         workload: data.workload,
         learningExp: data.learningExp,
@@ -381,7 +438,7 @@ function postRating(req, res) {
         course: req.courseCode
     });
     //update user parameters
-    user.coursesRated.push(req.courseCode);
+    /*user.coursesRated.push(req.courseCode);
     User.update({
         email: user.email
     }, {
@@ -394,7 +451,7 @@ function postRating(req, res) {
             console.log(err);
         }
 
-    });
+    });*/
 
     newRating.save(function(error, rating) {
         if (error) {
@@ -425,11 +482,27 @@ function updateCourseRating(data, res, course, newRating) {
     var workload = parseInt(data.workload);
     var learningExp = parseInt(data.learningExp);
 
-    for (tag in data.tags) {
-        if (course.popularTags.indexOf(tag) <= -1) {
-            course.popularTags.push(tag);
+    console.log(course._id);
+    popularTags = course.popularTags;
+    console.log(popularTags);
+    for (var t = 0; t < data.tags.length; t++) {
+        tag = data.tags[t];
+        var flag = false;
+        for(i in popularTags){
+            if (tag == popularTags[i].name) {
+                console.log("here")
+                popularTags[i].number += 1;
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            var newTag = {"name": tag, "number":1};
+            console.log(newTag);
+            popularTags.push(newTag);
         }
     }
+    console.log(popularTags);
     course.ratings.push(newRating);
     course.update({
         $set: {
@@ -438,10 +511,10 @@ function updateCourseRating(data, res, course, newRating) {
             workload: (course.workload * len + workload) / (len + 1),
             learningExp: (course.learningExp * len + learningExp) / (len + 1),
             ratingCount: len + 1,
-            popularTags: course.popularTags,
+            popularTags: popularTags,
             ratings: course.ratings
         }
-    }, function(err, newRating) {
+    }, function(err) {
         if (err) {
             console.log(err);
         }
@@ -481,10 +554,11 @@ function deleteRating(req, res) {
         }
     });
 
+
     Rating.remove({ _id: req.body.rating });
 }
 
-/** 
+/**
  * Deletes the user and all their ratings.
  */
 function banUser(req, res) {
@@ -548,5 +622,7 @@ module.exports = {
     deleteRating: deleteRating,
     banUser: banUser,
     updateHelpfulness: updateHelpfulness,
-    getRatings: getRatings
+    getRatings: getRatings,
+    getPopularTags: getPopularTags,
+    userLogout: userLogout
 };
