@@ -1,4 +1,4 @@
-angular.module('ProfileCtrl', []).controller('ProfileController', function($scope, $http, $routeParams, $rootScope) {
+angular.module('ProfileCtrl', []).controller('ProfileController', function($scope, $http, $routeParams, $rootScope, $cookies, $location) {
     if ($rootScope.loggedIn == false) $location.path("/");
     $http.get('/api/user/' + $rootScope.user).then(function(data) {
         $scope.userID = data.data.email;
@@ -36,9 +36,16 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
     $scope.logout = function() {
         $rootScope.loggedIn = false;
         $rootScope.user = null;
-        $cookies.getAll().forEach(function(cookie) {
-            $cookies.remove(cookie);
-        });
+        var cks = $cookies.getAll();
+        for (c in cks) {
+            console.log(c);
+            $cookies.remove(c);
+        }
+        $rootScope.admin = false;
+        $rootScope.user = '';
+        $rootScope.loggedIn = false;
+        $rootScope.admin - false;
+        $location.path("/");
     }
 
     $scope.deleteAccount = function() {
