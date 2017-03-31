@@ -1,5 +1,5 @@
 angular.module('ProfileCtrl', []).controller('ProfileController', function($scope, $http, $routeParams, $rootScope) {
-    if ($routeScope.loggedIn == false) $location.path("/");
+    if ($rootScope.loggedIn == false) $location.path("/");
     $http.get('/api/user/' + $rootScope.user).then(function(data) {
         $scope.userID = data.data.email;
     });
