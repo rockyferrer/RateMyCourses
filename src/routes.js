@@ -294,7 +294,6 @@ function userLogout(req, res) {
 function updateUser(req, res) {
     console.log('updating user');
     var data = req.body;
-<<<<<<< HEAD
     console.log('data.userID is ' + data.userID);
     console.log('data.department is ' + data.department);
     console.log('data.faculty is ' + data.faculty);
