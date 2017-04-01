@@ -292,14 +292,10 @@ function userLogout(req, res) {
 }
 
 function updateUser(req, res) {
-    console.log('updating user');
     var data = req.body;
-    console.log('data.userID is ' + data.userID);
-    console.log('data.department is ' + data.department);
-    console.log('data.faculty is ' + data.faculty);
 	var user = req.session.user;
 
-	// if(data.type == 'email'){
+    //update the users email
     User.update({
         _id: user._id
     }, {
@@ -316,20 +312,7 @@ function updateUser(req, res) {
         req.session.user = user;
     });
 
-	// else if (data.type == 'password'){
-	// 	//hash password
-    // 	var hash = pw.createNewHash(data.value);
-	// 	salt = hash.salt;
-	// 	password = hash.passwordHash;
-    // User.update({
-    //     _id: user._id
-    // }, {
-    //     $set: {
-    //         password: password,
-	// 		salt: salt
- // 		}
-    // });
-
+    //update the department as long as it has changed it
     if (data.department != null) {
         User.update({
             _id: user._id
@@ -348,6 +331,7 @@ function updateUser(req, res) {
         });
     }
 
+    //update the faculty as long as it has changed it
     if (data.faculty != null) {
         User.update({
             _id: user._id

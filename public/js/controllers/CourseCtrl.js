@@ -87,12 +87,6 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
      * ie. when the done button is clicked.
      */
     $scope.submitRating = function() {
-        /*console.log("difficulty rating is " + $scope.difficulty);
-        console.log("workload is " + $scope.workload);
-        console.log("learning experience is " + $scope.learningExp);
-        console.log("overall is " + $scope.overall);
-        console.log("comment is " + $scope.comment);*/
-
         console.log('submitting rating');
         $http.post('/api/courses/' + $routeParams.courseCode + '/addRating', $scope.ratingForm).then(
             function(data) {
@@ -113,6 +107,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         // return $scope.currentTags;
     };
 
+    /* admin controls for deleting a rating */
     $scope.deleteRating = function(rating) {
         $http.delete("/api/courses/" + $scope.courseCode + "/deleteRating/" + rating._id).then(
             function() {
@@ -122,6 +117,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
             });
     }
 
+    /* admin controls for banning a user */
     $scope.banUser = function() {
         $http.delete('/api/users/banUser/' + rating.user).then(
             function() {

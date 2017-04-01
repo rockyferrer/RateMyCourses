@@ -12,7 +12,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
         }));
 
 
-
+    /* Stores all user information */
     $scope.userForm = {
         "userID": $rootScope.user,
         "password": $scope.password,
@@ -20,15 +20,13 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
         "department": $scope.department
     };
 
-    
 
+    /* Saves the user info to the backend */
     $scope.saveUserInfo = function() {
         $rootScope.user = $scope.userForm.userID;
         $scope.userID = $scope.userForm.userID;
-        console.log('username changed to ' + $scope.userForm.userID);
-        console.log('department changed to ' + $scope.userForm.department);
-        console.log('faculty changed to ' + $scope.userForm.faculty);
-        //console.log('id is ' + $rootScope.userForm.userID);
+
+        /* make the request to update the info */
         $http.put('/api/user/updateInfo', $scope.userForm).then(
             function(data) {
                 if (data.status == 200) {
