@@ -4,7 +4,8 @@ angular.module('CourseCtrl', []).controller('CourseController', function($scope,
         $scope.course = data.data;
     }).then($http.get('/api/courses/' + $routeParams.courseCode + '/getRatings').then(function(data) {
         $scope.ratings = data.data;
-        console.log($scope.ratings);
+    })).then($http.get('/api/courses/' + $routeParams.courseCode + '/getPopularTags').then(function(data) {
+        $scope.popularTags = data.data;
     }));
 
     $scope.options = ['1', '2', '3', '4', '5'];

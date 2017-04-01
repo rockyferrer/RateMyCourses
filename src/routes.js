@@ -115,7 +115,7 @@ function getCourse(req, res) {
     });
 };
 
-function getPopularTags(req, res){
+function getPopularTags(req, res) {
     //find the 3 most common departments from the courses we found
     code = req.courseCode;
 
@@ -135,11 +135,10 @@ function getPopularTags(req, res){
         console.log(tags);
         console.log(course.popularTags);
         if (tags.length <= 3) {
-            for(var i=0; i<tags.length; i++){
+            for (var i = 0; i < tags.length; i++) {
                 popular.push(tags[i].name);
             }
-        }
-        else{
+        } else {
             for (var i = 0; i < 3; i++) {
                 var max = utils.findMaxTag(tags);
                 popular.push(tags[max].name);
@@ -286,15 +285,16 @@ function userLogin(req, res) {
     });
 }
 
-function userLogout(req, res){
+function userLogout(req, res) {
     delete req.session.user;
     delete req.session.isAdmin;
-    res.status(200).end();
+    res.sendStatus(200);
 }
 
 function updateUser(req, res) {
     console.log('updating user');
     var data = req.body;
+<<<<<<< HEAD
     console.log('data.userID is ' + data.userID);
     console.log('data.department is ' + data.department);
     console.log('data.faculty is ' + data.faculty);
@@ -366,7 +366,7 @@ function updateUser(req, res) {
             req.session.user = user;
         });
     }
-    
+
 }
 
 //delete a user from the database
@@ -502,7 +502,7 @@ function updateCourseRating(data, res, course, newRating) {
     for (var t = 0; t < data.tags.length; t++) {
         tag = data.tags[t];
         var flag = false;
-        for(i in popularTags){
+        for (i in popularTags) {
             if (tag == popularTags[i].name) {
                 console.log("here")
                 popularTags[i].number += 1;
@@ -510,8 +510,8 @@ function updateCourseRating(data, res, course, newRating) {
                 break;
             }
         }
-        if(!flag){
-            var newTag = {"name": tag, "number":1};
+        if (!flag) {
+            var newTag = { "name": tag, "number": 1 };
             console.log(newTag);
             popularTags.push(newTag);
         }

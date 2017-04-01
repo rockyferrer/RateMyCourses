@@ -11,9 +11,9 @@
         <article class="custom-article panel-body">
             <div class="description col-md-6">
                 Faculty: {{ course.faculty }} <br>Department: {{ course.department }} <br> Avg class size estimate: {{ course.classSize }} students <br> Tags: <br>
-                <div class="col-md-9">
+                <div class="col-md-9" data-ng-show="popularTags.length != 0">
                     <ul class="tags">
-                        <li data-ng-repeat="tag in tags">{{tag}}</li>
+                        <li data-ng-repeat="tag in popularTags track by $index">{{tag}}</li>
                     </ul>
                 </div>
             </div>
