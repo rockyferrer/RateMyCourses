@@ -12,7 +12,7 @@
                 <h4>{{ c.title }}</h4>
             </div>
             <div class="row">
-                <p class="avg-score text-right">{{ c.overall }}/5</p>
+                <p class="avg-score text-right">{{ c.overall | number: 1}}/5</p>
             </div>
         </article>
     </section>

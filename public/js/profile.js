@@ -2,7 +2,6 @@ $(document).ready(function() {
     //functionality for the edit button
     $('.save').hide();
     $('.userIDInput').hide();
-    $('.pwd').hide();
     $('.pwdInput').hide();
     $('#savePwd').hide();
 

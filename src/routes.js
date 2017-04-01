@@ -295,14 +295,17 @@ function userLogout(req, res){
 function updateUser(req, res) {
     console.log('updating user');
     var data = req.body;
+    console.log('data.userID is ' + data.userID);
+    console.log('data.department is ' + data.department);
+    console.log('data.faculty is ' + data.faculty);
 	var user = req.session.user;
 
-	if(data.type == 'email'){
+	// if(data.type == 'email'){
     User.update({
         _id: user._id
     }, {
         $set: {
-            email: data.value
+            email: data.userID
  		}
     }, function(err, user) {
         if (err) {
@@ -311,48 +314,59 @@ function updateUser(req, res) {
             return;
         }
         console.log(user);
+        req.session.user = user;
     });
 
-	}
+	// else if (data.type == 'password'){
+	// 	//hash password
+    // 	var hash = pw.createNewHash(data.value);
+	// 	salt = hash.salt;
+	// 	password = hash.passwordHash;
+    // User.update({
+    //     _id: user._id
+    // }, {
+    //     $set: {
+    //         password: password,
+	// 		salt: salt
+ // 		}
+    // });
 
-	else if (data.type == 'password'){
-		//hash password
-    	var hash = pw.createNewHash(data.value);
-		salt = hash.salt;
-		password = hash.passwordHash;
-    User.update({
-        _id: user._id
-    }, {
-        $set: {
-            password: password,
-			salt: salt
- 		}
-    });
+    if (data.department != null) {
+        User.update({
+            _id: user._id
+        }, {
+            $set: {
+                department: data.department
+     		}
+        }, function(err, user) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+                return;
+            }
+            console.log(user);
+            req.session.user = user;
+        });
+    }
 
-	}
-
-	else if(data.type == 'department1'){
-    User.update({
-        _id: user._id
-    }, {
-        $set: {
-            department1: data.value
- 		}
-    });
+    if (data.faculty != null) {
+        User.update({
+            _id: user._id
+        }, {
+            $set: {
+                faculty: data.faculty
+     		}
+        }, function(err, user) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+                return;
+            }
+            console.log(user);
+            req.session.user = user;
+        });
+    }
     
-	}
-
-	else if(data.type == 'faculty'){
-    User.update({
-        _id: user._id
-    }, {
-        $set: {
-            faculty: data.value
- 		}
-    });
-
-	}
-
 }
 
 //delete a user from the database

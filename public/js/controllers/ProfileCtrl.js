@@ -11,19 +11,34 @@ angular.module('ProfileCtrl', []).controller('ProfileController', function($scop
             $scope.department_list = data.data;
         }));
 
+
+
     $scope.userForm = {
-        "userID": $rootScope.user
+        "userID": $rootScope.user,
+        "password": $scope.password,
+        "faculty": $scope.faculty,
+        "department": $scope.department
     };
+
+    
 
     $scope.saveUserInfo = function() {
         $rootScope.user = $scope.userForm.userID;
-        console.log('username changed to ' + $rootScope.user);
-        $http.put('/api/user/updateInfo').then(
+        $scope.userID = $scope.userForm.userID;
+        console.log('username changed to ' + $scope.userForm.userID);
+        console.log('department changed to ' + $scope.userForm.department);
+        console.log('faculty changed to ' + $scope.userForm.faculty);
+        //console.log('id is ' + $rootScope.userForm.userID);
+        $http.put('/api/user/updateInfo', $scope.userForm).then(
             function(data) {
                 if (data.status == 200) {
                     $http.get('/api/user/' + $scope.userForm.userID)
                         .then(function(data) {
-                            $scope.userID = data.data;
+                            $scope.userID = data.data.email;
+                            $rootScope.user = data.data.email;
+                            $scope.department = data.data.department;
+                            $scope.faculty = data.data.faculty;
+
                         });
                 } else {
                     console.log('failure');

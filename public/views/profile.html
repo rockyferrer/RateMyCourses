@@ -21,7 +21,6 @@
                 <label class="control-label col-sm-4">Password:</label>
                 <div class="col-sm-8">
                     <p class="form-control-static">
-                        <input type="text" class="pwd">
                         <span id="password">********</span>
                         <a id="changePwd">Change Password</a>
                         <a id="savePwd">Save Password</a>
@@ -34,7 +33,7 @@
                         <input type="password" class="pwdInput" size="30" placeholder="Type your new password">
                     </div>
                     <div class="row">
-                        <input type="password" class="pwdInput" size="30" placeholder="Retype your new password">
+                        <input type="password" class="pwdInput" size="30" placeholder="Retype your new password" data-ng-model="userForm.password">
                     </div>
 
                 </div>
@@ -42,20 +41,20 @@
                 <!-- Faculty -->
                 <div class="row">
                     <label class="control-label col-sm-4">Faculty:</label>
-                    <select class="select-dept required-field">
+                    <select class="select-dept required-field" data-ng-init="" data-ng-model="userForm.faculty">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="f in faculty_list">{{ f }}</option>
 							</select>
-                    <a class="save-select">Save</a>
+                    <a class="save-select" data-ng-click="saveUserInfo()">Save</a>
                 </div>
                 <!-- Departments -->
                 <div class="row">
                     <label class="control-label col-sm-4">Department:</label>
-                    <select class="select-dept required-field">
+                    <select class="select-dept required-field" data-ng-model="userForm.department">
 			   					<option selected>Choose...</option>
 								<option data-ng-repeat="d in department_list">{{ d }}</option>
 							</select>
-                    <a class="save-select">Save</a>
+                    <a class="save-select" data-ng-click="saveUserInfo()">Save</a>
                 </div>
             </div>
         </form>
